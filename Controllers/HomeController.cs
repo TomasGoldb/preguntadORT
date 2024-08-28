@@ -17,7 +17,7 @@ public class HomeController : Controller
     {
         return View();
     }
-
+/*
     public IActionResult ConfigurarJuego()
     {
         Juego.InicializarJuego();
@@ -29,7 +29,7 @@ public class HomeController : Controller
     public IActionResult Comenzar(string username, int dificultad, int categoria)
     {
         Juego.CargarPartida(username, dificultad, categoria);
-    }
+    }*/
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
