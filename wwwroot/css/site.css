@@ -7,7 +7,13 @@ html {
     font-size: 16px;
   }
 }
-
+@font-face {
+  font-family: 'Mikado Bold DEMO';
+  src: url('/MikadoBold_DEMO.ttf') format('Truetype');
+  font-style: normal;
+  font-weight: normal;
+  
+}
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -19,4 +25,40 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: rgb(135, 3, 212);
+}
+h1{
+  font-family: 'Mikado Bold DEMO';
+}
+
+.parte-index{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.parte-index div{
+  width: 70%;
+  height: 50%;
+  background-color: white;
+  border-radius: 15px;
+}
+.parte-index div h1{
+  text-align: center;
+  font-size: 4vw;
+  margin-top: 2%
+}
+.parte-index div a{
+  font-family: 'Mikado Bold DEMO';
+  padding: 2%;
+  background-color: rgb(150, 33, 218);
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background-color 0.1s ease-in;
+}
+.parte-index div a:hover{
+  background-color: rgb(115, 16, 172);
 }
