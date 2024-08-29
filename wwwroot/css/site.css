@@ -240,3 +240,32 @@ h1{
 }
 
 /*FIN PARTE LOGIN Y REGISTRO*/
+
+
+
+.wheel-container {
+  position: relative;
+  width: 30%;
+  margin-bottom: 20px;
+}
+
+.wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transition: transform 4s ease-out;
+}
+
+#spin {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+#spin:active {
+  background-color: #45a049;
+}
