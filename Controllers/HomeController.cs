@@ -151,6 +151,9 @@ public class HomeController : Controller
         Sesion.LogOut();
         return View("Index");
     }
+    public IActionResult Ruleta(){
+        return View();
+    }
     private string FormatearError(string error)
     {
         string mensaje=error;
