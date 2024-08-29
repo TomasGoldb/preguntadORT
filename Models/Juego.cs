@@ -19,25 +19,25 @@ static class Juego
         List<Categorias> categorias = BD.ObtenerCategorias();
         return categorias;
     }
-    public static List<Categorias> ObtenerDificultades()
+    public static List<Dificultades> ObtenerDificultades()
     {
-        List<Categorias> dificultades = BD.ObtenerDificultades();
+        List<Dificultades> dificultades = BD.ObtenerDificultades();
         return dificultades;
     }
     public static void CargarPartida(string username, int dificultad, int categoria)
     {
         Preguntas = BD.ObtenerPreguntas(dificultad, categoria);
-        Respuestas = BD.ObtenerRespuestas(Preguntas);
     }
     public static Preguntas ObtenerProximaPregunta()
     {
         Random rd = new Random();
-        int numPregunta = rd.Next(0, Preguntas.Count);
-        Preguntas pregunta = Preguntas[numPregunta];
+        int idPregunta = rd.Next(0, Preguntas.Count);
+        Preguntas pregunta = Preguntas[idPregunta];
         return pregunta;
     }
     public static List<Respuestas> ObtenerProximasRespuestas(int idPregunta)
     {
-        
+        Preguntas pregunta = Preguntas[idPregunta];
+        return BD.ObtenerRespuestas(pregunta);
     }
 }
