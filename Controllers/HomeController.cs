@@ -46,9 +46,9 @@ public class HomeController : Controller
     public IActionResult recuperarContrasena(){
         return View();
     }
-    [HttpPost] public ViewResult recuperarContrasena(string direccion) {  
+    [HttpPost] public IActionResult recuperarContrasenaMail(string direccion) {  
         MailMessage mail = new MailMessage();  
-        mail.To.Add(direccion);  
+        mail.To.Add(new MailAddress(direccion));
         mail.From = new MailAddress("nehuentados.noresponder@gmail.com");  
         mail.Subject = "No responder";  //Probablemente se pueda cambiar
         string Body = "Holi, esto es un test";  //Probablemente se pueda cambiar

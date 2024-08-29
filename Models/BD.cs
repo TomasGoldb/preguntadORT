@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Data;
 class BD
 {
-    private static string _connectionString = @"Server = localhost; Database = PreguntadORT; Trusted_Connection = True;";
+    private static string _connectionString = @"Server = A-PHZ2-CIDI-23; Database = PreguntadORT; Trusted_Connection = True;";
     public static List<Categorias> ObtenerCategorias(){
         List<Categorias> categoriasList;
         using (SqlConnection db = new SqlConnection(_connectionString))
@@ -60,9 +60,9 @@ class BD
     }
 
     public static void UpdateFotoPerfil(Usuario objeto){
-            using(SqlConnection db = new SqlConnection(_connectionString)){
+        using(SqlConnection db = new SqlConnection(_connectionString)){
             string sql = $"UPDATE usuario SET FotoPerfil='{objeto.FotoPerfil}' where mail='{objeto.GetMail()}'";
             db.Execute(sql);
         }
-        }
+    }
 }

@@ -6,9 +6,9 @@
 <section class="seccion-login"> 
     <div class="container">
         <h1>Recuperar contraseña</h1>
-        <form action='@Url.Action("####", "Home")' method="post">
+        <form action='@Url.Action("recuperarContrasenaMail", "Home")' method="post">
             <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" autocomplete="off" placeholder="" name="mail">
+            <input type="email" class="form-control" id="floatingInput" autocomplete="off" placeholder="Direccion de correo" name="direccion">
             <label for="floatingInput">Mail</label>
             </div>
             @Html.Raw(ViewBag.error)
