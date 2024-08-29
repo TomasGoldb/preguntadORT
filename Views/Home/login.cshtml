@@ -3,6 +3,7 @@
 }
 
 <main class="pagina-login-register">
+<section class="seccion-login"> 
 <div class="container">
         <h1>Logearse</h1>
         <form action='@Url.Action("LogearUsuario", "Home")' method="post">
@@ -16,9 +17,10 @@
 </div>
 @Html.Raw(ViewBag.error)
             <button type="submit">Logearse</button>
+            <p>¿No tenés cuenta? <a href='@Url.Action("register","Home")'>Creá una</a>
         </form>
     </div>
-
+</section>
 </main>
   
 

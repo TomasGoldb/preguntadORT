@@ -7,6 +7,7 @@ namespace preguntadORT.Models{
         private string Contrasena {get;set;}
         public string Mail {set; private get;}
         public string FotoPerfil {get;set;}
+        private int CodigoRecuperacion {get;set;}
 
 
         public Usuario(string nombre, string nick,string contrasena, string mail){
@@ -14,6 +15,7 @@ namespace preguntadORT.Models{
             this.Nick=nick;
             this.Contrasena=contrasena;
             this.Mail=mail;
+            CodigoRecuperacion=-1;
         }
         public Usuario(){
             

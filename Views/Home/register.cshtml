@@ -4,6 +4,7 @@
 
 
 <main class="pagina-login-register">
+<section class="seccion-login"> 
 <div class="container">
         <h1>Registrarme</h1>
         <form action='@Url.Action("RegistrarUsuario", "Home")' method="post">
@@ -31,7 +32,9 @@
 @Html.Raw(ViewBag.error)
             <button type="submit">Registrarse</button>
         </form>
+        <p>¿Ya tenés cuenta? <a href='@Url.Action("login","Home")'>Iniciá sesión</a>
     </div>
+    </section>
     </main>
 
     <script>

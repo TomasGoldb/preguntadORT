@@ -35,9 +35,11 @@ static class Juego
         Preguntas pregunta = Preguntas[idPregunta];
         return pregunta;
     }
+    /*
     public static List<Respuestas> ObtenerProximasRespuestas(int idPregunta)
     {
         Preguntas pregunta = Preguntas[idPregunta];
         return BD.ObtenerRespuestas(pregunta);
     }
+    */
 }
