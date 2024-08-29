@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<main class="pagina-login-register">
+<section class="seccion-login"> 
+<div class="container">
+        <h1>Recuperar contraseña</h1>
+        <form action='@Url.Action("####", "Home")' method="post">
+            <div class="form-floating mb-3">
+  <input type="email" class="form-control" id="floatingInput" autocomplete="off" placeholder="" name="mail">
+  <label for="floatingInput">Mail</label>
+</div>
+@Html.Raw(ViewBag.error)
+            <button type="submit">Recuperar</button>
+        </form>
+    </div>
+</section>
+</main>
+  
+
+
+ 
+ 

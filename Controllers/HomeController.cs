@@ -19,6 +19,10 @@ public class HomeController : Controller
     {
         return View();
     }
+    public IActionResult Home()
+    {
+        return View();
+    }
 
     public IActionResult ConfigurarJuego()
     {
@@ -31,6 +35,7 @@ public class HomeController : Controller
     public IActionResult Comenzar(string username, int dificultad, int categoria)
     {
         Juego.CargarPartida(username, dificultad, categoria);
+        return View();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
