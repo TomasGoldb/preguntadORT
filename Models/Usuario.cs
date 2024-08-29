@@ -15,7 +15,7 @@ namespace preguntadORT.Models{
             this.Nick=nick;
             this.Contrasena=contrasena;
             this.Mail=mail;
-            this.FotoPerfil="\wwwroot\fotosPerfil\fotoDefault.png";
+            this.FotoPerfil="/fotosPerfil/fotoDefault.png";
             CodigoRecuperacion=-1;
         }
         public Usuario(){

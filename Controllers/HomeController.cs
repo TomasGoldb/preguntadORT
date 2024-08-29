@@ -60,7 +60,7 @@ public class HomeController : Controller
         smtp.UseDefaultCredentials = false;  
         smtp.Credentials = new System.Net.NetworkCredential("nehuentados.noresponder@gmail.com", "NehueGod123"); // Enter seders User name and password  
         smtp.EnableSsl = true;  
-        smtp.Send(mail);
+        
         return View("Index");
     }  
     
