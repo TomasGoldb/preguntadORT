@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Data;
 class BD
 {
-    private static string _connectionString = "";
+    private static string _connectionString = @"Server = localhost; Database = PreguntadORT; Trusted_Connection = True;";
     public static List<Categorias> ObtenerCategorias(){
         List<Categorias> categoriasList;
         using (SqlConnection db = new SqlConnection(_connectionString))
@@ -32,16 +32,13 @@ class BD
         }
         return preguntasList;
     }
-    public static List<Respuestas> ObtenerRespuestas(List<Preguntas> preguntas){
-        List<Respuestas> respuestasList = new List<Respuestas>();
-        foreach (Preguntas preg in preguntas)
+    public static Respuestas ObtenerRespuestas(Preguntas preguntas){
+        Respuestas respuesta;
+        using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            using (SqlConnection db = new SqlConnection(_connectionString))
-            {
-                string sql = "SP_ListarRespuestas";
-                respuestasList.AddRange(db.Query<Respuestas>(sql, new { preg.IdPregunta }).ToList());
-            }
+            string sql = "SP_ListarRespuestas";
+            respuesta = db.QueryFirstOrDefault<Respuestas>(sql, new { preguntas.IdPregunta });
         }
-        return respuestasList;
+        return respuesta;
     }
 }
