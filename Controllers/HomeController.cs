@@ -46,7 +46,7 @@ public class HomeController : Controller
     public IActionResult recuperarContrasena(){
         return View();
     }
-    [HttpPost] public IActionResult recuperarContrasenaMail(string direccion) {  
+    /*[HttpPost] public IActionResult recuperarContrasenaMail(string direccion) {  
         MailMessage mail = new MailMessage();  
         mail.To.Add(new MailAddress(direccion));
         mail.From = new MailAddress("nehuentados.noresponder@gmail.com");  
@@ -62,7 +62,41 @@ public class HomeController : Controller
         smtp.EnableSsl = true;  
         smtp.Send(mail);
         return View("Index");
-    }  
+    }  */
+
+    [HttpPost]
+public IActionResult RecuperarContrasenaMail(string direccion) 
+{
+    try
+    {
+        using (var mail = new MailMessage())
+        {
+            mail.To.Add(new MailAddress(direccion));
+            mail.From = new MailAddress("nehuentados.noresponder@gmail.com");
+            mail.Subject = "No responder";  // Se puede cambiar
+            mail.Body = "Holi, esto es un test";  // Se puede cambiar
+            mail.IsBodyHtml = true;
+
+            using (var smtp = new SmtpClient("smtp.gmail.com", 587))
+            {
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential("nehuentados.noresponder@gmail.com", "NehuGod123");
+                smtp.EnableSsl = true;
+
+                smtp.Send(mail);
+            }
+        }
+
+        return View("Index");
+    }
+    catch (Exception ex)
+    {
+        // Manejar el error y mostrar un mensaje adecuado
+        ViewBag.ErrorMessage = "Hubo un problema enviando el correo: " + ex.Message;
+        return View("Error"); // Asegúrate de tener una vista de error
+    }
+}
+
     
     public IActionResult Comenzar(string username, int dificultad, int categoria)
     {
