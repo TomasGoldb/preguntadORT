@@ -8,9 +8,9 @@ static class Juego
     private static List<Preguntas> Preguntas {get; set;}
     private static List<Respuestas> Respuestas {get; set;}
 
-    public static void InicializarJuego()
+    public static void InicializarJuego(/* string usuario */)
     {
-        Username = String.Empty;
+        Username = String.Empty; // Aca se puede referenciar a la BD
         PuntajeActual = 0;
         CantidadPreguntasCorrectas = 0;
     }
