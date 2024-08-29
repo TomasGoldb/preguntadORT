@@ -17,7 +17,9 @@ html {
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
-
+*{
+  border: 1px solid black;
+}
 html {
   position: relative;
   min-height: 100%;
@@ -50,6 +52,7 @@ h1{
   font-size: 4vw;
   margin-top: 2%
 }
+/*
 .parte-index div a{
   font-family: 'Mikado Bold DEMO';
   padding: 2%;
@@ -62,3 +65,138 @@ h1{
 .parte-index div a:hover{
   background-color: rgb(115, 16, 172);
 }
+*/
+
+.parte-index div a{
+  width: 50%;
+}
+.parte-index div a .logo{
+  width: 100%;
+}
+.base-logo{
+  position: absolute;
+}
+.adentro-logo{
+  position: absolute;
+  filter: opacity(0%);
+  transition: filter 0.1s ease-in;
+  transition: transform 0.05s ease-in;
+}
+.parte-index div a:hover .adentro-logo{
+  transform: scale(1.2);
+  filter: opacity(100%);
+}
+
+
+
+/*PARTE DE LOGIN Y REGISTRO*/
+
+.pagina-login-register{
+  width: 100%;
+}
+
+.pagina-login-register .container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.pagina-login-register h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.pagina-login-register .form-group {
+  margin-bottom: 15px;
+}
+
+.pagina-login-register .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.pagina-login-register .form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.pagina-login-register button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.pagina-login-register button:hover {
+  background-color: #0056b3;
+}
+
+
+.botones-reg-log{
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
+}
+.botones-reg-log a{
+  padding: 2%;
+  font-size: 4vw;
+  text-decoration: none;
+  color: white;
+  border-radius: 7px;
+  background-color: #1675db;
+  transition: background-color 0.2s ease-in;
+}
+
+.botones-reg-log a:hover{
+  background-color: #0056b3;;
+}
+
+.indexjeje{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.nombre-logeado{
+  margin-top: 4%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.nombre-logeado p{
+  font-size: 2vw;
+  text-align: center;
+}
+
+.boton-logout{
+  padding: 1%;
+  font-size: 1.5vw;
+  text-decoration: none;
+  color: white;
+  border-radius: 7px;
+  background-color: #1675db;
+  transition: background-color 0.2s ease-in;
+}
+
+.foto-perfil{
+  width: 10%;
+  border-radius: 50%;
+}
+
+/*FIN PARTE LOGIN Y REGISTRO*/
