@@ -37,13 +37,16 @@ public class HomeController : Controller
         return View();
     }
 
-    [HttpPost] IActionResult VerificarRespuesta(int idPregunta, int idRespuesta){
+    /*[HttpPost] IActionResult VerificarRespuesta(int idPregunta, int idRespuesta){
         ViewBag.IsCorrect = Juego.VerificarRespuesta(idPregunta, idRespuesta);
         ViewBag.Respuesta = BD.ObtenerRespuestas(idPregunta);
         return View("Respuesta");
-    }
+    }*/
 
-    [HttpPost] public ViewResult Index(string direccion) {  
+    public IActionResult recuperarContrasena(){
+        return View();
+    }
+    [HttpPost] public ViewResult recuperarContrasena(string direccion) {  
         MailMessage mail = new MailMessage();  
         mail.To.Add(direccion);  
         mail.From = new MailAddress("nehuentados.noresponder@gmail.com");  

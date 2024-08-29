@@ -55,7 +55,7 @@ class BD
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SP_CrearUsuario";
-            db.Query<Preguntas>(sql, new {contra=objeto.GetContrasena(),nick=objeto.Nick,nombre=objeto.Nombre,mail=objeto.GetMail()});
+            db.Execute(sql, new {contra=objeto.GetContrasena(),nick=objeto.Nick,nombre=objeto.Nombre,mail=objeto.GetMail()});
         }
     }
 
