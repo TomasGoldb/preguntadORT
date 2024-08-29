@@ -96,7 +96,7 @@ public class HomeController : Controller
             if (!coincide){
                 ViewBag.error="";
                 BD.CrearUsuario(user);
-                Sesion.SetearSesion(user);
+                Sesion.SetearSesion(user);  
                 return RedirectToAction("index");
             } else{
                 ViewBag.error=FormatearError("ERROR_001_YaExisteNickoMail");
