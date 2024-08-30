@@ -9,12 +9,13 @@ document.getElementById('spin').addEventListener('click', function() {
 
     // Definir los rangos de ángulos para cada sección
     const sections = [
-        { name: "pagina1.html", startAngle: 0, endAngle: 60 },
-        { name: "pagina2.html", startAngle: 60, endAngle: 120 },
-        { name: "pagina3.html", startAngle: 120, endAngle: 180 },
-        { name: "pagina4.html", startAngle: 180, endAngle: 240 },
-        { name: "pagina5.html", startAngle: 240, endAngle: 300 },
-        { name: "pagina6.html", startAngle: 300, endAngle: 360 },
+        { name: "ciencia.html", startAngle: 37, endAngle: 89 },
+        { name: "geografia.html", startAngle: 89, endAngle: 141 },
+        { name: "coronita.html", startAngle: 141, endAngle: 193 },
+        { name: "entretenimiento.html", startAngle: 193, endAngle: 245 },
+        { name: "artes.html", startAngle: 245, endAngle: 295},
+        { name: "deportes.html", startAngle: 295, endAngle: 347 },
+        { name: "sasa.html", startAngle: 347, endAngle: 37 }
     ];
 
     // Encontrar la sección correspondiente al ángulo final
@@ -24,6 +25,8 @@ document.getElementById('spin').addEventListener('click', function() {
 
     // Redirigir a la página correspondiente
     setTimeout(() => {
-        window.location.href = selectedSection.name;
+        if (selectedSection) {
+            window.location.href = selectedSection.name;
+        }
     }, 4000); // 4000ms para coincidir con la duración de la animación
 });
