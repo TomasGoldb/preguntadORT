@@ -37,11 +37,10 @@ public class HomeController : Controller
         return View();
     }
 
-    /*[HttpPost] IActionResult VerificarRespuesta(int idPregunta, int idRespuesta){
-        ViewBag.IsCorrect = Juego.VerificarRespuesta(idPregunta, idRespuesta);
-        ViewBag.Respuesta = BD.ObtenerRespuestas(idPregunta);
+    [HttpPost] IActionResult VerificarRespuesta(int idPregunta, int opcion){
+        ViewBag.IsCorrect = Juego.VerificarRespuesta(idPregunta, opcion);
         return View("Respuesta");
-    }*/
+    }
 
     public IActionResult recuperarContrasena(){
         return View();
@@ -111,6 +110,9 @@ public IActionResult RecuperarContrasenaMail(string direccion)
     }
 
 
+    public IActionResult Juego(int idCategoria){
+        return View();
+    }
     /// PARTE DE LOGIN Y REGISTRO
 
     public IActionResult register()

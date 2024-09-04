@@ -39,9 +39,9 @@ static class Juego
     {
         return BD.ObtenerRespuestas(idPregunta);
     }
-    public static bool VerificarRespuesta(int idPregunta, int idRespuesta)
+    public static bool VerificarRespuesta(int idPregunta, int opcion)
     {
-        bool correcta = respuestas[idRespuesta].Correcta;
+        bool correcta = respuestas[opcion].Correcta;
         if (correcta)
         {
             cantidadPreguntasCorrectas++;
