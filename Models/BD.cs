@@ -32,14 +32,14 @@ class BD
         }
         return preguntasList;
     }
-    public static Respuestas ObtenerRespuestas(int preguntaId){
-        Respuestas respuesta;
+    public static List<Respuestas> ObtenerRespuestas(int preguntaId){
+        List<Respuestas> respuestas;
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SP_ListarRespuestas";
-            respuesta = db.QueryFirstOrDefault<Respuestas>(sql, new { IdPregunta = preguntaId });
+            respuestas = db.Query<Respuestas>(sql, new { IdPregunta = preguntaId }).ToList();
         }
-        return respuesta;
+        return respuestas;
     }
     public static List<Usuario> Seleccionar(string sql){
         List<Usuario> listaUsuario = new List<Usuario>();

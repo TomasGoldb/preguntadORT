@@ -101,7 +101,7 @@ public IActionResult RecuperarContrasenaMail(string direccion)
     public IActionResult Comenzar(string username, int dificultad, int categoria)
     {
         Juego.CargarPartida(username, dificultad, categoria);
-        return View();
+        return View("Ruleta");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

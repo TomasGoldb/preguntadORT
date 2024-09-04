@@ -2,17 +2,17 @@ namespace preguntadORT.Models;
 
 static class Juego
 {
-    private static string Username {get; set;}
-    private static int PuntajeActual {get; set;}
-    private static int CantidadPreguntasCorrectas {get; set;}
-    private static List<Preguntas> Preguntas {get; set;}
-    private static List<Respuestas> Respuestas {get; set;}
+    private static string username {get; set;}
+    private static int cantidadPreguntasCorrectas {get; set;}
+    private static List<Preguntas> preguntas {get; set;}
+    private static List<Respuestas> respuestas {get; set;}
+    private static bool[] personajesConseguidos = new bool[6];
 
     public static void InicializarJuego(/* string usuario */)
     {
-        Username = String.Empty; // Aca se puede referenciar a la BD
-        PuntajeActual = 0;
-        CantidadPreguntasCorrectas = 0;
+        username = String.Empty; // Aca se puede referenciar a la BD
+        cantidadPreguntasCorrectas = 0;
+        for(int i = 0; i < personajesConseguidos.Length; i++) personajesConseguidos[i] = false;
     }
     public static List<Categorias> ObtenerCategorias()
     {
@@ -26,20 +26,28 @@ static class Juego
     }
     public static void CargarPartida(string username, int dificultad, int categoria)
     {
-        Preguntas = BD.ObtenerPreguntas(dificultad, categoria);
+        preguntas = BD.ObtenerPreguntas(dificultad, categoria);
     }
     public static Preguntas ObtenerProximaPregunta()
     {
         Random rd = new Random();
-        int idPregunta = rd.Next(0, Preguntas.Count);
-        Preguntas pregunta = Preguntas[idPregunta];
+        int idPregunta = rd.Next(0, preguntas.Count);
+        Preguntas pregunta = preguntas[idPregunta];
         return pregunta;
     }
-    /*
     public static List<Respuestas> ObtenerProximasRespuestas(int idPregunta)
     {
-        Preguntas pregunta = Preguntas[idPregunta];
-        return BD.ObtenerRespuestas(pregunta);
+        return BD.ObtenerRespuestas(idPregunta);
     }
-    */
+    public static bool VerificarRespuesta(int idPregunta, int idRespuesta)
+    {
+        bool correcta = respuestas[idRespuesta].Correcta;
+        if (correcta)
+        {
+            cantidadPreguntasCorrectas++;
+            /*Mas tarde vemos lo de los personajes*/
+        }
+        preguntas.Remove(preguntas[idPregunta]);
+        return correcta;
+    }
 }
