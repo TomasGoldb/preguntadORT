@@ -265,22 +265,49 @@ h1{
   position: absolute;
 }
 
-.pag-ruleta #spin {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
 
-.pag-ruleta #spin:active {
-  background-color: #45a049;
-}
+
 
 .pag-ruleta .ruleta-centro{
   z-index: 99;
   width: 60%;
   height: 60%;
+  cursor: pointer;
+}
+
+
+.parte-juego{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pag-ruleta .arriba-ruleta{
+  width: 100%;
+  height: 25%;
+  display: flex;
+  justify-content: space-between;
+}
+.pag-ruleta .arriba-ruleta .desc-pers{
+  background-color: white;
+  border-radius: 10px;
+  width: 35%;
+  height: 100%;
+  margin: 2%;
+}
+
+.pag-ruleta .arriba-ruleta .desc-pers .foto-nombre{
+  margin-top:1%;
+  display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+    margin-left:3%;
+}
+.pag-ruleta .arriba-ruleta .desc-pers .foto-nombre .foto-perfil{
+  width: 10%;
+  margin-right: 1%;
+  border-radius: 50%;
 }

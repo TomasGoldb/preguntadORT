@@ -15,7 +15,7 @@ document.getElementById('spin').addEventListener('click', function() {
         { name: "entretenimiento.html", startAngle: 193, endAngle: 245 },
         { name: "artes.html", startAngle: 245, endAngle: 295},
         { name: "deportes.html", startAngle: 295, endAngle: 347 },
-        { name: "sasa.html", startAngle: 347, endAngle: 37 }
+        { name: "historia.html", startAngle: 347, endAngle: 37 }
     ];
 
     // Encontrar la sección correspondiente al ángulo final
