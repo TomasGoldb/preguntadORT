@@ -5,10 +5,7 @@ using System.Data;
 class BD
 {
     private static string _connectionString = @"Server =A-PHZ2-CIDI-23; Database = PreguntadORT; Trusted_Connection = True;";
-<<<<<<< HEAD
-=======
 
->>>>>>> 4806eb4446fb3a0004f384854cf37f38dd0863a3
     public static List<Categorias> ObtenerCategorias(){
         List<Categorias> categoriasList;
         using (SqlConnection db = new SqlConnection(_connectionString))
