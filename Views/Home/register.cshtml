@@ -4,61 +4,54 @@
 
 
 <main class="pagina-login-register">
-<section class="seccion-login"> 
-<div class="container">
-        <h1>Registrarme</h1>
-        <form action='@Url.Action("RegistrarUsuario", "Home")' method="post">
-            <div class="form-floating mb-3">
-  <input type="text" class="form-control" id="floatingInput" autocomplete="off" placeholder="" name="nombre" required>
-  <label for="floatingInput">Nombre</label>
-</div>
-            <div class="form-floating mb-3">
-  <input type="text" class="form-control" id="floatingInput" autocomplete="off" placeholder="" name="nick" required>
-  <label for="floatingInput">Nick/Apodo</label>
-</div>
-            <div class="form-floating mb-3">
-  <input type="email" class="form-control" id="floatingInput" autocomplete="off" placeholder="" name="correo" required>
-  <label for="floatingInput">Correo electrónico</label>
-</div>
-            <div class="form-floating mb-3">
-  <input type="password" class="form-control" id="floatingInput" autocomplete="off" placeholder="" name="contra" required>
-  <label for="floatingInput">Contraseña</label>
-</div>
-            <div class="form-floating mb-3">
-  <input type="password" class="form-control" id="floatingInput" autocomplete="off" placeholder="" name="confirmaContra" required>
-  <label for="floatingInput">Repetir contraseña</label>
-</div>
-
-@Html.Raw(ViewBag.error)
-            <button type="submit" class="login-boton">Registrarse</button>
-        </form>
-        <p>¿Ya tenés cuenta? <a href='@Url.Action("login","Home")'>Iniciá sesión</a>
+  <section class="seccion-login"> 
+    <div class="container">
+      <h1>Registrarme</h1>
+      <form action='@Url.Action("RegistrarUsuario", "Home")' method="post">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" autocomplete="off" placeholder="" name="nombre" required>
+          <label for="floatingInput">Nombre</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" autocomplete="off" placeholder="" name="nick" required>
+          <label for="floatingInput">Nick/Apodo</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" id="floatingInput" autocomplete="off" placeholder="" name="correo" required>
+          <label for="floatingInput">Correo electrónico</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="floatingInput" autocomplete="off" placeholder="" name="contra" required>
+          <label for="floatingInput">Contraseña</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="floatingInput" autocomplete="off" placeholder="" name="confirmaContra" required>
+          <label for="floatingInput">Repetir contraseña</label>
+        </div>
+        @Html.Raw(ViewBag.error)
+        <button type="submit" class="login-boton">Registrarse</button>
+      </form>
+      <p>¿Ya tenés cuenta? <a href='@Url.Action("login","Home")'>Iniciá sesión</a>
     </div>
-    </section>
-    </main>
+  </section>
+</main>
 
-    <script>
-    const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
-const appendAlert = (message, type) => {
-  const wrapper = document.createElement('div')
-  wrapper.innerHTML = [
-    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-    `   <div>${message}</div>`,
-    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-    '</div>'
-  ].join('')
-
-  alertPlaceholder.append(wrapper)
-}
-
-const alertTrigger = document.getElementById('liveAlertBtn')
-if (alertTrigger) {
-  alertTrigger.addEventListener('click', () => {
-    appendAlert('@ViewBag.error', 'danger')
-  })
-}
-    </script>
-
-
- 
- 
+<script>
+  const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+  const appendAlert = (message, type) => {
+    const wrapper = document.createElement('div')
+    wrapper.innerHTML = [
+      `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+      `   <div>${message}</div>`,
+      '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+      '</div>'
+    ].join('')
+    alertPlaceholder.append(wrapper)
+  }
+  const alertTrigger = document.getElementById('liveAlertBtn')
+  if (alertTrigger) {
+    alertTrigger.addEventListener('click', () => {
+      appendAlert('@ViewBag.error', 'danger')
+    })
+  }
+</script>
