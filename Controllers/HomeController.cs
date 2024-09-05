@@ -85,18 +85,11 @@ public IActionResult RecuperarContrasenaMail(string direccion)
         return View("Ruleta");
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    public IActionResult Jugar(int idCategoria){
+        return View("Juego");
     }
 
-
-    public IActionResult Juegotastico(int idCategoria){
-        return View();
-    }
-    /// PARTE DE LOGIN Y REGISTRO
-
+    // PARTE DE LOGIN Y REGISTRO
     public IActionResult register()
     {
         return View();
@@ -189,7 +182,9 @@ public IActionResult RecuperarContrasenaMail(string direccion)
         return "<div class='alert alert-danger alert-dismissible' role='alert'><div>"+ mensaje + "</div>   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
     }
 
-
-
-
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
 }
