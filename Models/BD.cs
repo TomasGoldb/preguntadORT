@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Data;
 class BD
 {
-    private static string _connectionString = @"Server =A-NHFY-INFO-16; Database = PreguntadORT; Trusted_Connection = True;";
+    private static string _connectionString = @"Server =A-PHZ2-CIDI-23; Database = PreguntadORT; Trusted_Connection = True;";
     public static List<Categorias> ObtenerCategorias(){
         List<Categorias> categoriasList;
         using (SqlConnection db = new SqlConnection(_connectionString))
@@ -13,6 +13,15 @@ class BD
             categoriasList = db.Query<Categorias>(sql).ToList();
         }
         return categoriasList;
+    }
+    public static Categorias ObtenerCategoriaPorID(int id){
+        Categorias categoria= new Categorias();
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            string sql = "SP_CategoriaPorID";
+            categoria= db.QueryFirstOrDefault<Categorias>(sql,new { idCategoria = id });
+        }
+        return categoria;
     }
     public static List<Dificultades> ObtenerDificultades(){
         List<Dificultades> dificultadesList;

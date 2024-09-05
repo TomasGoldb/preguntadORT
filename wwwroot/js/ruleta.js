@@ -17,7 +17,8 @@ function handleClick() {
         { name: "entretenimiento.html", startAngle: 193, endAngle: 245 }, //entretenimiento
         { name: "artes.html", startAngle: 245, endAngle: 295}, //artes
         { name: "deportes.html", startAngle: 295, endAngle: 347 }, //deportes
-        { name: "historia.html", startAngle: 347, endAngle: 37 } //historia
+        { name: "historia.html", startAngle: 347, endAngle: 360 }, //historia
+        { name: "historia.html", startAngle: 0, endAngle: 37 } //historia
     ];
 
     // Encontrar la sección correspondiente al ángulo final

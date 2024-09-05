@@ -110,8 +110,11 @@ public IActionResult RecuperarContrasenaMail(string direccion)
     }
 
 
-    public IActionResult Juego(int idCategoria){
-        return View();
+    public IActionResult Pregunta(int idCategoria){
+        Categorias categoria = BD.ObtenerCategoriaPorID(idCategoria);
+        ViewBag.categoria=categoria;
+        ViewBag.fotoCategoria=$"/personajesCategorias/{categoria.Nombre.ToLower()}.png";
+        return View("Pregunta");
     }
     /// PARTE DE LOGIN Y REGISTRO
 
