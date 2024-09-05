@@ -106,7 +106,7 @@ public IActionResult RecuperarContrasenaMail(string direccion)
         bool coincide=false;
         if (contra==confirmaContra){
             Usuario user = new Usuario(nombre,nick,contra,correo);
-            List<Usuario> usuarios=BD.Seleccionar("select * from Usuario");
+            List<Usuario> usuarios=BD.Seleccionar("SP_ListarUsuarios");
             foreach(Usuario usu in usuarios){
                 if(usu.Nick==user.Nick||usu.GetMail()==user.GetMail()){
                     coincide=true;
@@ -129,17 +129,17 @@ public IActionResult RecuperarContrasenaMail(string direccion)
     }
     public IActionResult LogearUsuario(string mail, string contra){
         bool coincide=false;
-        List<Usuario> usuarios=BD.Seleccionar("select * from Usuario");
+        List<Usuario> usuarios=BD.Seleccionar("SP_ListarUsuarios");
         foreach(Usuario usu in usuarios){
             if(usu.GetMail()==mail){
                 coincide=true;
             } 
         }
         if(coincide){
-            if(contra==BD.Seleccionar($"select * from Usuario where mail='{mail}'")[0].GetContrasena()){
-                Sesion.SetearSesion(BD.Seleccionar($"select * from Usuario where mail='{mail}'")[0]);
+            if(contra==BD.SeleccionarXMail($"SP_ListarUsuariosXMail", mail)[0].GetContrasena()){
+                Sesion.SetearSesion(BD.SeleccionarXMail($"SP_ListarUsuariosXMail", mail)[0]);
                 ViewBag.estaLogeado=Sesion.EstaLogeado;
-                ViewBag.usuario=BD.Seleccionar($"select * from Usuario where mail='{mail}'")[0];
+                ViewBag.usuario=BD.SeleccionarXMail($"SP_ListarUsuariosXMail", mail)[0];
                 return RedirectToAction("Home");
             }else{
                 ViewBag.error=FormatearError("ERROR_003_ContraIncorrecta");

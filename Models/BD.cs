@@ -58,9 +58,13 @@ class BD
         }
         return listaUsuario;
     }
-
-
-
+    public static List<Usuario> SeleccionarXMail(string sql, string mail){
+        List<Usuario> listaUsuario = new List<Usuario>();
+        using(SqlConnection db = new SqlConnection(_connectionString)){
+            listaUsuario = db.Query<Usuario>(sql, new{ @Mail = mail }).ToList();
+        }
+        return listaUsuario;
+    }
         public static void CrearUsuario(Usuario objeto){
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
