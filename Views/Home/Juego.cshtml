@@ -3,11 +3,11 @@
 }
 
 <section class="parte-juego">
-<div>
-@{
-    for(int i=0;i<4;i++){
-    <a asp-action="VerificarRespuesta" asp-controller="Home" asp-route-opcion=@i>@ViewBag.</a>
-    }
-}
-</div>
+    <div>
+        @{
+            for(int i=0;i<4;i++){
+            <a asp-action="VerificarRespuesta" asp-controller="Home" asp-route-opcion=@i>@ViewBag.</a>
+            }
+        }
+    </div>
 </section>
