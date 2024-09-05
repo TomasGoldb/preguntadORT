@@ -22,6 +22,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        ViewBag.logeado = Sesion.EstaLogeado;
         return View();
     }
     public IActionResult Home()
@@ -92,6 +93,7 @@ public IActionResult RecuperarContrasenaMail(string direccion)
     // PARTE DE LOGIN Y REGISTRO
     public IActionResult register()
     {
+        ViewBag.logeado = Sesion.EstaLogeado;
         return View();
     }
     public IActionResult RegistrarUsuario(string nombre, string nick, string correo, string confirmaContra, string contra){
@@ -156,6 +158,7 @@ public IActionResult RecuperarContrasenaMail(string direccion)
     }
     public IActionResult login()
     {
+        ViewBag.logeado = Sesion.EstaLogeado;
         return View();
     }
     public IActionResult logout(){
