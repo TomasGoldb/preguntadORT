@@ -89,7 +89,15 @@ public IActionResult RecuperarContrasenaMail(string direccion)
         return View("Juego");
     }
 
-    // PARTE DE LOGIN Y REGISTRO
+
+    public IActionResult Pregunta(int idCategoria){
+        Categorias categoria = BD.ObtenerCategoriaPorID(idCategoria);
+        ViewBag.categoria=categoria;
+        ViewBag.fotoCategoria=$"/personajesCategorias/{categoria.Nombre.ToLower()}.png";
+        return View("Pregunta");
+    }
+    /// PARTE DE LOGIN Y REGISTRO
+
     public IActionResult register()
     {
         return View();

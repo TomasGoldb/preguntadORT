@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section class="parte-juego">
+<<<<<<< HEAD:Views/Home/Pregunta.cshtml
+<div>
+@{
+    for(int i=0;i<4;i++){
+    <a asp-action="VerificarRespuesta" asp-controller="Home" asp-route-opcion=@i>@ViewBag.</a>
+    }
+}
+<img src='@ViewBag.fotoCategoria'>
+</div>
+=======
+    <div>
+        @{
+            for(int i=0;i<4;i++){
+            <a asp-action="VerificarRespuesta" asp-controller="Home" asp-route-opcion=@i>@ViewBag.</a>
+            }
+        }
+    </div>
+>>>>>>> d1cc405803c7593e3d94783e6fa36282d538a298:Views/Home/Juego.cshtml
+</section>
