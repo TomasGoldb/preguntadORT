@@ -110,7 +110,7 @@ h1{
   box-sizing: border-box;
 }
 
-.pagina-login-register button {
+.pagina-login-register .login-boton {
   width: 100%;
   padding: 10px;
   background-color: rgb(135, 3, 212);
@@ -122,8 +122,8 @@ h1{
   margin-top: 10px;
 }
 
-.pagina-login-register button:hover {
-  background-color: rgb(135, 3, 212);
+.pagina-login-register .login-boton:hover {
+  background-color: rgb(115, 16, 172);
 }
 
 
