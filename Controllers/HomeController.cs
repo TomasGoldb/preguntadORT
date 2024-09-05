@@ -28,7 +28,7 @@ public class HomeController : Controller
     {
         return View();
     }
-
+    
     public IActionResult ConfigurarJuego()
     {
         Juego.InicializarJuego();
@@ -41,28 +41,10 @@ public class HomeController : Controller
         ViewBag.IsCorrect = Juego.VerificarRespuesta(idPregunta, opcion);
         return View("Respuesta");
     }
-
+    
     public IActionResult recuperarContrasena(){
         return View();
     }
-    /*[HttpPost] public IActionResult recuperarContrasenaMail(string direccion) {  
-        MailMessage mail = new MailMessage();  
-        mail.To.Add(new MailAddress(direccion));
-        mail.From = new MailAddress("nehuentados.noresponder@gmail.com");  
-        mail.Subject = "No responder";  //Probablemente se pueda cambiar
-        string Body = "Holi, esto es un test";  //Probablemente se pueda cambiar
-        mail.Body = Body;  //Probablemente se pueda cambiar
-        mail.IsBodyHtml = true;
-        SmtpClient smtp = new SmtpClient();  
-        smtp.Host = "smtp.gmail.com";  
-        smtp.Port = 587;  
-        smtp.UseDefaultCredentials = false;  
-        smtp.Credentials = new System.Net.NetworkCredential("nehuentados.noresponder@gmail.com", "NehueGod123"); // Enter seders User name and password  
-        smtp.EnableSsl = true;  
-        
-        return View("Index");
-    }  */
-
     [HttpPost]
 public IActionResult RecuperarContrasenaMail(string direccion) 
 {
@@ -92,7 +74,7 @@ public IActionResult RecuperarContrasenaMail(string direccion)
     {
         // Manejar el error y mostrar un mensaje adecuado
         ViewBag.ErrorMessage = "Hubo un problema enviando el correo: " + ex.Message;
-        return View("Error"); // Asegúrate de tener una vista de error
+        return View("Home"); // Asegúrate de tener una vista de error
     }
 }
 
@@ -110,7 +92,7 @@ public IActionResult RecuperarContrasenaMail(string direccion)
     }
 
 
-    public IActionResult Juego(int idCategoria){
+    public IActionResult Juegotastico(int idCategoria){
         return View();
     }
     /// PARTE DE LOGIN Y REGISTRO
