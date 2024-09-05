@@ -4,11 +4,8 @@ using System.Data.SqlClient;
 using System.Data;
 class BD
 {
-<<<<<<< HEAD
     private static string _connectionString = @"Server =A-PHZ2-CIDI-23; Database = PreguntadORT; Trusted_Connection = True;";
-=======
-    private static string _connectionString = @"Server = A-PHZ2-CIDI-23; Database = PreguntadORT; Trusted_Connection = True;";
->>>>>>> 5e42ad5a82bdd80d5c164a5e0d7c39543f429589
+
     public static List<Categorias> ObtenerCategorias(){
         List<Categorias> categoriasList;
         using (SqlConnection db = new SqlConnection(_connectionString))

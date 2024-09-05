@@ -2,23 +2,30 @@
     ViewData["Title"] = "Home Page";
 }
 
-<section class="parte-juego">
-<<<<<<< HEAD:Views/Home/Pregunta.cshtml
-<div>
+<main class="parte-juego" >
+<section class="pregunta-respuesta">
+
+<div class="contenedor-tiempo">
+    <div id="barra-tiempo" ></div> <!---barra tiempo--->
+    <p id="timer"></p>
+</div>
+<h1 class="titulo-pregunta">Esta es una pregunta que preguntea a los preguntados de este juego</h1>
+<img class="foto-pregunta" src="">
+<div class="respuestas">
 @{
     for(int i=0;i<4;i++){
-    <a asp-action="VerificarRespuesta" asp-controller="Home" asp-route-opcion=@i>@ViewBag.</a>
+    <a asp-action="VerificarRespuesta" asp-controller="Home" asp-route-opcion=@i>Respuesta @i</a>
     }
 }
-<img src='@ViewBag.fotoCategoria'>
 </div>
-=======
-    <div>
-        @{
-            for(int i=0;i<4;i++){
-            <a asp-action="VerificarRespuesta" asp-controller="Home" asp-route-opcion=@i>@ViewBag.</a>
-            }
-        }
-    </div>
->>>>>>> d1cc405803c7593e3d94783e6fa36282d538a298:Views/Home/Juego.cshtml
-</section>
+
+<div class="contenedor-ftcategoria">
+    <img src='@ViewBag.fotoCategoria'>
+</div>
+
+<section>
+
+</main>
+
+
+<script src="/js/pregunta.js" onload="setearTiempo(9999)">
