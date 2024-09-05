@@ -1,15 +1,20 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
+    if(ViewBag.logeado)
+    {
+        <meta http-equiv="refresh" content='0; url=@Url.Action("Home", "Home")'/>
+    }
 }
 
 <section class="index-secction">
-<img class="foto-index" src="/img/fotoindex.png">
-<div>
-<img  class="logo-index" src="/img/logo.png">
-<h1>Nehuentados</h1>
-<div class="botones-sesion">
-<a href='@Url.Action("login","Home")'>Iniciar Sesion</a>
-<a href='@Url.Action("register","Home")'>Registrarse</a>
-</div>
-</div>
+    <img class="foto-index" src="/img/fotoindex.png">
+    <div>
+        <img class="logo-index" src="/img/logo.png">
+        <h1>Nehuentados</h1>
+        <div class="botones-sesion">
+            <a href='@Url.Action("login","Home")'>Iniciar Sesion</a>
+            <a href='@Url.Action("register","Home")'>Registrarse</a>
+        </div>
+    </div>
 </section>

@@ -14,6 +14,15 @@ class BD
         }
         return categoriasList;
     }
+    public static Categorias ObtenerCategoriaPorID(int id){
+        Categorias categoria= new Categorias();
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            string sql = "SP_CategoriaPorID";
+            categoria= db.QueryFirstOrDefault<Categorias>(sql,new { idCategoria = id });
+        }
+        return categoria;
+    }
     public static List<Dificultades> ObtenerDificultades(){
         List<Dificultades> dificultadesList;
         using (SqlConnection db = new SqlConnection(_connectionString))

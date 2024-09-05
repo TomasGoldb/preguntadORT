@@ -90,13 +90,22 @@ public IActionResult RecuperarContrasenaMail(string direccion)
         return View("Juego");
     }
 
-    // PARTE DE LOGIN Y REGISTRO
+
+    public IActionResult Pregunta(int idCategoria){
+        Categorias categoria = BD.ObtenerCategoriaPorID(idCategoria);
+        ViewBag.categoria=categoria;
+        ViewBag.fotoCategoria=$"/personajesCategorias/{categoria.Nombre.ToLower()}.png";
+        return View("Pregunta");
+    }
+    /// PARTE DE LOGIN Y REGISTRO
+
     public IActionResult register()
     {
         ViewBag.logeado = Sesion.EstaLogeado;
         return View();
     }
     public IActionResult RegistrarUsuario(string nombre, string nick, string correo, string confirmaContra, string contra){
+        ViewBag.logeado = Sesion.EstaLogeado;
         bool coincide=false;
         if (contra==confirmaContra){
             Usuario user = new Usuario(nombre,nick,contra,correo);
@@ -110,7 +119,7 @@ public IActionResult RecuperarContrasenaMail(string direccion)
                 ViewBag.error="";
                 BD.CrearUsuario(user);
                 Sesion.SetearSesion(user);  
-                return RedirectToAction("index");
+                return RedirectToAction("Home");
             } else{
                 ViewBag.error=FormatearError("ERROR_001_YaExisteNickoMail");
                 return View("register");
@@ -122,27 +131,28 @@ public IActionResult RecuperarContrasenaMail(string direccion)
         
     }
     public IActionResult LogearUsuario(string mail, string contra){
+        ViewBag.logeado = Sesion.EstaLogeado;
         bool coincide=false;
         List<Usuario> usuarios=BD.Seleccionar("select * from Usuario");
         foreach(Usuario usu in usuarios){
-                if(usu.GetMail()==mail){
-                    coincide=true;
-                } 
-            }
-            if(coincide){
-                if(contra==BD.Seleccionar($"select * from Usuario where mail='{mail}'")[0].GetContrasena()){
-                    Sesion.SetearSesion(BD.Seleccionar($"select * from Usuario where mail='{mail}'")[0]);
-                    ViewBag.estaLogeado=Sesion.EstaLogeado;
-                    ViewBag.usuario=BD.Seleccionar($"select * from Usuario where mail='{mail}'")[0];
-                    return RedirectToAction("index");
-                }else{
-                    ViewBag.error=FormatearError("ERROR_003_ContraIncorrecta");
-                    return View("login");
-                }
-            } else{
-                ViewBag.error=FormatearError("ERROR_005_MailIncorrecto");
+            if(usu.GetMail()==mail){
+                coincide=true;
+            } 
+        }
+        if(coincide){
+            if(contra==BD.Seleccionar($"select * from Usuario where mail='{mail}'")[0].GetContrasena()){
+                Sesion.SetearSesion(BD.Seleccionar($"select * from Usuario where mail='{mail}'")[0]);
+                ViewBag.estaLogeado=Sesion.EstaLogeado;
+                ViewBag.usuario=BD.Seleccionar($"select * from Usuario where mail='{mail}'")[0];
+                return RedirectToAction("Home");
+            }else{
+                ViewBag.error=FormatearError("ERROR_003_ContraIncorrecta");
                 return View("login");
             }
+        } else{
+            ViewBag.error=FormatearError("ERROR_005_MailIncorrecto");
+            return View("login");
+        }
     }
 
     public IActionResult ActualizarFotoPerfil(IFormFile archivo){
@@ -162,6 +172,7 @@ public IActionResult RecuperarContrasenaMail(string direccion)
         return View();
     }
     public IActionResult logout(){
+        ViewBag.logeado = Sesion.EstaLogeado;
         Sesion.LogOut();
         return View("Index");
     }

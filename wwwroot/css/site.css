@@ -337,4 +337,29 @@ h1{
   font-family: 'Mikado Bold DEMO';
 }
 
+.seccion-configurar{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  margin-left: 25%;
+  margin-right: 25%;
+}
 
+.input-codigo::-webkit-inner-spin-button, .input-codigo::-webkit-outer-spin-button{
+  -webkit-appearance: none;
+}
+
+.select-tiempo{
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.switch-secreto{
+  position: absolute;
+  left: 20%;
+  margin-top: 1%;
+}
+
+.switch-secreto input:not(:checked){
+  opacity: 0%;
+}
