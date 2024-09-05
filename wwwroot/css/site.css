@@ -17,6 +17,9 @@ html {
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
+*{
+  border: 1px solid black;
+}
 html {
   position: relative;
   min-height: 100%;
@@ -362,4 +365,86 @@ h1{
 
 .switch-secreto input:not(:checked){
   opacity: 0%;
+}
+
+.respuestas{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+.respuestas a{
+  font-family: 'Mikado Bold DEMO';
+  text-decoration: none;
+  color: black;
+  padding: 2%;
+  background-color: white;
+  width: 100%;
+  margin-bottom: 2%;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.1s ease-in;
+}
+.respuestas a:hover{
+  box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.5);
+}
+
+.pregunta-respuesta{
+  background-color: white;
+  width: 50%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 15px;  
+}
+
+#barra-tiempo{
+  background-color: #258cfb;
+  height: 30%;
+  width: 80%;
+  transition: width 1.5s ease-in;
+  border-start-start-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+#timer{
+  margin-right: 2%;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-bottom: 3.3%;
+  padding-top: 1%;
+  margin-top: 1%;
+  border-radius: 50%;
+  background-color: rgb(150, 33, 218);
+  color: white;
+  font-family: 'Mikado Bold DEMO';
+}
+.contenedor-tiempo{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.contenedor-ftcategoria img{
+  margin-right: 2%;
+  height: 100%;
+}
+.contenedor-ftcategoria{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.parte-juego .titulo-pregunta{
+   width: 80%;
+   text-align: center;
+}
+
+.parte-juego .foto-pregunta{
+  width: 50%;
+  border-radius: 15px;
 }
