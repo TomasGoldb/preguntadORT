@@ -8,7 +8,11 @@ namespace preguntadORT.Models{
         public string Mail {set; private get;}
         public string FotoPerfil {get;set;}
         private int CodigoRecuperacion {get;set;}
+        public 
 
+
+        
+        public Usuario(){}
 
         public Usuario(string nombre, string nick,string contrasena, string mail){
             this.Nombre=nombre;
@@ -17,9 +21,6 @@ namespace preguntadORT.Models{
             this.Mail=mail;
             this.FotoPerfil="/fotosPerfil/fotoDefault.png";
             CodigoRecuperacion=-1;
-        }
-        public Usuario(){
-            
         }
         public bool CheckContra (string contrasenaPosible){
             if (contrasenaPosible==this.Contrasena){
