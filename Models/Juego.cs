@@ -6,6 +6,7 @@ static class Juego
     private static int cantidadPreguntasCorrectas {get; set;}
     private static List<Preguntas> preguntas {get; set;}
     private static List<Respuestas> respuestas {get; set;}
+    private static int dificultad {get;set;}
     private static bool[] personajesConseguidos = new bool[6];
 
     public static void InicializarJuego(/* string usuario */)
@@ -24,15 +25,16 @@ static class Juego
         List<Dificultades> dificultades = BD.ObtenerDificultades();
         return dificultades;
     }
-    public static void CargarPartida(string username, int dificultad, int categoria)
+    public static void CargarPartida(string username, int categoria)
     {
         preguntas = BD.ObtenerPreguntas(dificultad, categoria);
     }
-    public static Preguntas ObtenerProximaPregunta()
+    public static Preguntas ObtenerProximaPregunta(int idCategoria)
     {
+        List<Preguntas> preguntitas=BD.ObtenerPreguntas(dificultad,idCategoria);
         Random rd = new Random();
-        int idPregunta = rd.Next(0, preguntas.Count);
-        Preguntas pregunta = preguntas[idPregunta];
+        int idPregunta = rd.Next(0, preguntitas.Count);
+        Preguntas pregunta = preguntitas[idPregunta];
         return pregunta;
     }
     public static List<Respuestas> ObtenerProximasRespuestas(int idPregunta)

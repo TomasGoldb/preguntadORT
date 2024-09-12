@@ -82,7 +82,7 @@ public IActionResult RecuperarContrasenaMail(string direccion)
     
     public IActionResult Comenzar(string username, int dificultad, int categoria)
     {
-        Juego.CargarPartida(username, dificultad, categoria);
+        Juego.CargarPartida(username, categoria);
         return View("Ruleta");
     }
 
@@ -94,6 +94,9 @@ public IActionResult RecuperarContrasenaMail(string direccion)
     public IActionResult Pregunta(int idCategoria){
         Categorias categoria = BD.ObtenerCategoriaPorID(idCategoria);
         ViewBag.categoria=categoria;
+        Preguntas pregunta= Juego.ObtenerProximaPregunta(idCategoria);
+        ViewBag.Pregunta=pregunta;
+        ViewBag.Respuestas=Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
         ViewBag.fotoCategoria=categoria.Foto;
         return View("Pregunta");
     }

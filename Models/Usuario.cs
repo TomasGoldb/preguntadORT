@@ -8,7 +8,7 @@ namespace preguntadORT.Models{
         public string Mail {set; private get;}
         public string FotoPerfil {get;set;}
         private int CodigoRecuperacion {get;set;}
-        public 
+        
 
 
         
