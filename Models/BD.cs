@@ -78,6 +78,14 @@ class BD
             db.Execute(sql);
         }
     }
+    public static int CrearPartida(Partida NuevaPartida){
+        int idNuevaPartida;
+        using(SqlConnection db = new SqlConnection(_connectionString)){
+            string sql = "SP_CrearPartida";
+            idNuevaPartida = db.QueryFirst(sql, new {@IdPartida = NuevaPartida.IdPartida, @TiempoMax = NuevaPartida.TiempoMax, @GirarNehuen = Convert.ToInt32(NuevaPartida.GirarNehuen), @Dificultad = NuevaPartida.Dificultad.IdDificultad});
+        }
+        return idNuevaPartida; 
+    } 
     public static List<JugadorEnJuego> SeleccionarJugadorEnJuego(int idPartida){
         List<JugadorEnJuego> listaJug = new List<JugadorEnJuego>();
         using(SqlConnection db = new SqlConnection(_connectionString)){
