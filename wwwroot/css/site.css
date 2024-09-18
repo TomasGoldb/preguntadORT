@@ -17,8 +17,6 @@ html {
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
-*{
-}
 html {
   position: relative;
   min-height: 100%;
@@ -112,7 +110,7 @@ h1{
   box-sizing: border-box;
 }
 
-.pagina-login-register .login-boton {
+.login-boton {
   width: 100%;
   padding: 10px;
   background-color: rgb(135, 3, 212);
@@ -124,7 +122,7 @@ h1{
   margin-top: 10px;
 }
 
-.pagina-login-register .login-boton:hover {
+.login-boton:hover {
   background-color: rgb(115, 16, 172);
 }
 
@@ -446,4 +444,39 @@ h1{
 .parte-juego .foto-pregunta{
   width: 50%;
   border-radius: 15px;
+}
+
+.titulo{
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  bottom: 73%;
+  text-align: center;
+  font-size: 700%;
+  color: white;
+}
+
+.contenedor-jugadores{
+  background-color: gainsboro;
+  border-radius: 8px;
+  height: 200px;
+  width: 100%;
+  margin-bottom: 4%;
+}
+
+.codigo{
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 77%;
+  text-align: center;
+  font-size: 400%;
+  width: 40%;
+  background-color: white;
+  border-radius: 8px;
+  padding: 1% 0 1% 0;
 }

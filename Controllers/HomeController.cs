@@ -100,7 +100,27 @@ public IActionResult RecuperarContrasenaMail(string direccion)
         ViewBag.fotoCategoria=categoria.Foto;
         return View("Pregunta");
     }
-    /// PARTE DE LOGIN Y REGISTRO
+
+    public IActionResult CrearPartida(int tiempoMax, int idDificultad, bool girarNehuen)
+    {
+        /*int idPartida = Juego.CrearPartida(tiempoMax, idDificultad, girarNehuen);
+        Jugador jugador = new Jugador(Sesion.userActual.idUsuario, 1, idPartida);
+        Sesion.SetearJugador(jugador);
+        ViewBag.jugador = jugador;
+        ViewBag.idPartida = idPartida;*/
+        return View("SalaEspera");
+    }
+
+    public IActionResult Unirse(int codigo)
+    {
+        /*Jugador jugador = new Jugador(Sesion.userActual.idUsuario, 2, codigo);
+        Sesion.SetearJugador(jugador);
+        ViewBag.jugador = jugador;
+        ViewBag.idPartida = codigo;*/
+        return View("SalaEspera");
+    }
+
+    // PARTE DE LOGIN Y REGISTRO
 
     public IActionResult register()
     {
