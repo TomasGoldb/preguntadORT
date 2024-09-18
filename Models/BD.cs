@@ -78,12 +78,41 @@ class BD
             db.Execute(sql);
         }
     }
-    public static int CrearPartida(Partida NuevaPartida){
+    public static int CrearPartida(int TiempoMax, bool GirarNehuen, Dificultades Dificultad){
         int idNuevaPartida;
         using(SqlConnection db = new SqlConnection(_connectionString)){
             string sql = "SP_CrearPartida";
-            idNuevaPartida = db.QueryFirst(sql, new {@IdPartida = NuevaPartida.IdPartida, @TiempoMax = NuevaPartida.TiempoMax, @GirarNehuen = Convert.ToInt32(NuevaPartida.GirarNehuen), @Dificultad = NuevaPartida.Dificultad.IdDificultad});
+            idNuevaPartida = db.QueryFirst(sql, new {@TiempoMax = TiempoMax, @GirarNehuen = Convert.ToInt32(GirarNehuen), @Dificultad = Dificultad.IdDificultad});
         }
         return idNuevaPartida; 
+    }
+    public static int CrearJugador(Jugador jugador, int PartidaID, int JugadorID){
+        int? IdPartida;
+        int? IdJugador = null;
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+           string sql = "SP_ObtenerPartida";
+           IdPartida = db.QueryFirst(sql, new {@PartidaID = PartidaID});
+           if(IdPartida != null){
+                sql = "SP_ObtenerJugador";
+                IdJugador = db.QueryFirst(sql, new {@JugadorID = JugadorID, @PartidaID = PartidaID});
+           }
+        }        
+        if (IdPartida == null) 
+        {
+            return 1;
+        }
+        else if(IdJugador != null){
+            return 2;
+        }
+        else
+        {
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                string sql = "SP_CrearJugador";
+                db.Execute(sql, new {@IdUsuario = jugador.IdUsuario, @IdJugador = jugador.IdJugador, @IdPartida = jugador.IdPartida}); 
+            }
+            return 0; 
+        }
     } 
 }
