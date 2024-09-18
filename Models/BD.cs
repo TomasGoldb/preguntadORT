@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Data;
 class BD
 {
-    private static string _connectionString = @"Server = A-PHZ2-CIDI-16; Database = PreguntadORT; Trusted_Connection = True;";
+    private static string _connectionString = @"Server = A-PHZ2-CIDI-23; Database = PreguntadORT; Trusted_Connection = True;";
     public static List<Categorias> ObtenerCategorias(){
         List<Categorias> categoriasList;
         using (SqlConnection db = new SqlConnection(_connectionString))
@@ -78,4 +78,12 @@ class BD
             db.Execute(sql);
         }
     }
+    public static int CrearPartida(Partida NuevaPartida){
+        int idNuevaPartida;
+        using(SqlConnection db = new SqlConnection(_connectionString)){
+            string sql = "SP_CrearPartida";
+            idNuevaPartida = db.QueryFirst(sql, new {@IdPartida = NuevaPartida.IdPartida, @TiempoMax = NuevaPartida.TiempoMax, @GirarNehuen = Convert.ToInt32(NuevaPartida.GirarNehuen), @Dificultad = NuevaPartida.Dificultad.IdDificultad});
+        }
+        return idNuevaPartida; 
+    } 
 }

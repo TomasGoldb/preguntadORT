@@ -52,4 +52,10 @@ static class Juego
         preguntas.Remove(preguntas[idPregunta]);
         return correcta;
     }
+    public static int CrearPartida(int IdPartida, int TiempoMax, bool GirarNehuen, Dificultades Dificultad){
+        int idNuevaPartida;
+        Partida NuevaPartida = new Partida(IdPartida, TiempoMax, GirarNehuen, Dificultad);
+        idNuevaPartida = BD.CrearPartida(NuevaPartida);
+        return idNuevaPartida;
+    }
 }
