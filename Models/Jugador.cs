@@ -10,11 +10,9 @@ public class Jugador
     public int CantidadParaCorona {get;set;}
 
     public Jugador(){}
-    public Jugador(int idUsuario, int idJugador, int idPartida, string personajesConseguidos,int cantidadParaCorona){
+    public Jugador(int idUsuario, int idJugador, int idPartida){
         IdUsuario=idUsuario;
         IdPartida=idPartida;
         IdJugador=idJugador;
-        PersonajesConseguidos=personajesConseguidos;
-        CantidadParaCorona=cantidadParaCorona;
     }
 }
