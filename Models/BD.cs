@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Data;
 class BD
 {
-    private static string _connectionString = @"Server = A-PHZ2-CIDI-16; Database = PreguntadORT; Trusted_Connection = True;";
+    private static string _connectionString = @"Server = A-PHZ2-CIDI-23; Database = PreguntadORT; Trusted_Connection = True;";
     public static List<Categorias> ObtenerCategorias(){
         List<Categorias> categoriasList;
         using (SqlConnection db = new SqlConnection(_connectionString))
@@ -77,5 +77,13 @@ class BD
             string sql = $"UPDATE usuario SET FotoPerfil='{objeto.FotoPerfil}' where mail='{objeto.GetMail()}'";
             db.Execute(sql);
         }
+    }
+    public static List<JugadorEnJuego> SeleccionarJugadorEnJuego(int idPartida){
+        List<JugadorEnJuego> listaJug = new List<JugadorEnJuego>();
+        using(SqlConnection db = new SqlConnection(_connectionString)){
+            string sql="SP_ListarUsuariosXIDPartida";
+            listaJug = db.Query<JugadorEnJuego>(sql, new{ @IdPartida = idPartida }).ToList();
+        }
+        return listaJug;
     }
 }
