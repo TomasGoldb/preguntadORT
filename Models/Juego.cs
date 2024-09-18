@@ -25,16 +25,15 @@ static class Juego
         List<Dificultades> dificultades = BD.ObtenerDificultades();
         return dificultades;
     }
-    public static void CargarPartida(string username, int categoria)
+    public static void CargarPartida(int categoria)
     {
         preguntas = BD.ObtenerPreguntas(dificultad, categoria);
     }
     public static Preguntas ObtenerProximaPregunta(int idCategoria)
     {
-        List<Preguntas> preguntitas=BD.ObtenerPreguntas(dificultad,idCategoria);
         Random rd = new Random();
-        int idPregunta = rd.Next(0, preguntitas.Count);
-        Preguntas pregunta = preguntitas[idPregunta];
+        int idPregunta = 10; //rd.Next(0, preguntitas.Count);
+        Preguntas pregunta = preguntas[idPregunta];
         return pregunta;
     }
     public static List<Respuestas> ObtenerProximasRespuestas(int idPregunta)
@@ -51,5 +50,8 @@ static class Juego
         }
         preguntas.Remove(preguntas[idPregunta]);
         return correcta;
+    }
+    public static List<JugadorEnJuego> ObtenerJugadoresEnJuego(int idPartida){
+        return BD.SeleccionarJugadorEnJuego(0);
     }
 }

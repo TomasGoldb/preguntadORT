@@ -82,7 +82,7 @@ public IActionResult RecuperarContrasenaMail(string direccion)
     
     public IActionResult Comenzar(string username, int dificultad, int categoria)
     {
-        Juego.CargarPartida(username, categoria);
+        Juego.CargarPartida(categoria);
         return View("Ruleta");
     }
 
@@ -201,6 +201,16 @@ public IActionResult RecuperarContrasenaMail(string direccion)
     }
     public IActionResult Ruleta(){
         return View();
+    }
+    public string ObtenerPersonajesConseguidos(int idUsuario, int idPartida){
+        List<JugadorEnJuego> jugadores= Juego.ObtenerJugadoresEnJuego(idPartida);
+        foreach (JugadorEnJuego jug in jugadores){
+            if(jug.IdUsuario==idUsuario){
+                return jug.PersonajesConseguidos;
+            }
+        }
+        return "ERROR";
+
     }
     private string FormatearError(string error)
     {
