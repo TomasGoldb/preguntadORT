@@ -51,16 +51,7 @@ static class Juego
         preguntas.Remove(preguntas[idPregunta]);
         return correcta;
     }
-<<<<<<< HEAD
-=======
     public static List<JugadorEnJuego> ObtenerJugadoresEnJuego(int idPartida){
         return BD.SeleccionarJugadorEnJuego(0);
     }
-    public static int CrearPartida(int IdPartida, int TiempoMax, bool GirarNehuen, Dificultades Dificultad){
-        int idNuevaPartida;
-        Partida NuevaPartida = new Partida(IdPartida, TiempoMax, GirarNehuen, Dificultad);
-        idNuevaPartida = BD.CrearPartida(NuevaPartida);
-        return idNuevaPartida;
-    }
->>>>>>> 50f3506f931eaf7e71d6afabbd0fa7e31a7fb720
 }
