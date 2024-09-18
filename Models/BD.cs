@@ -115,4 +115,12 @@ class BD
             return 0; 
         }
     } 
+    public static List<JugadorEnJuego> SeleccionarJugadorEnJuego(int idPartida){
+        List<JugadorEnJuego> listaJug = new List<JugadorEnJuego>();
+        using(SqlConnection db = new SqlConnection(_connectionString)){
+            string sql="SP_ListarUsuariosXIDPartida";
+            listaJug = db.Query<JugadorEnJuego>(sql, new{ @IdPartida = idPartida }).ToList();
+        }
+        return listaJug;
+    }
 }

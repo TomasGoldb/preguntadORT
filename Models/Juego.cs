@@ -25,16 +25,15 @@ static class Juego
         List<Dificultades> dificultades = BD.ObtenerDificultades();
         return dificultades;
     }
-    public static void CargarPartida(string username, int categoria)
+    public static void CargarPartida(int categoria)
     {
         preguntas = BD.ObtenerPreguntas(dificultad, categoria);
     }
     public static Preguntas ObtenerProximaPregunta(int idCategoria)
     {
-        List<Preguntas> preguntitas=BD.ObtenerPreguntas(dificultad,idCategoria);
         Random rd = new Random();
-        int idPregunta = rd.Next(0, preguntitas.Count);
-        Preguntas pregunta = preguntitas[idPregunta];
+        int idPregunta = 10; //rd.Next(0, preguntitas.Count);
+        Preguntas pregunta = preguntas[idPregunta];
         return pregunta;
     }
     public static List<Respuestas> ObtenerProximasRespuestas(int idPregunta)
@@ -52,4 +51,16 @@ static class Juego
         preguntas.Remove(preguntas[idPregunta]);
         return correcta;
     }
+<<<<<<< HEAD
+=======
+    public static List<JugadorEnJuego> ObtenerJugadoresEnJuego(int idPartida){
+        return BD.SeleccionarJugadorEnJuego(0);
+    }
+    public static int CrearPartida(int IdPartida, int TiempoMax, bool GirarNehuen, Dificultades Dificultad){
+        int idNuevaPartida;
+        Partida NuevaPartida = new Partida(IdPartida, TiempoMax, GirarNehuen, Dificultad);
+        idNuevaPartida = BD.CrearPartida(NuevaPartida);
+        return idNuevaPartida;
+    }
+>>>>>>> 50f3506f931eaf7e71d6afabbd0fa7e31a7fb720
 }
