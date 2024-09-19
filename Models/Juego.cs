@@ -54,4 +54,8 @@ static class Juego
     public static List<JugadorEnJuego> ObtenerJugadoresEnJuego(int idPartida){
         return BD.SeleccionarJugadorEnJuego(0);
     }
+    public static void CrearJugador(int IdUsuario, int IdJugador, int IdPartida){
+        Jugador nuevoJugador = new Jugador();
+        int output = BD.CrearJugador(nuevoJugador);
+    }
 }
