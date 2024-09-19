@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<main class="pagina-corona">
+<section class="seccion-login"> 
+    <div class="container">
+        <h1>¿Qué jugador querés ganar?</h1>
+        <div clas="conjunto-personajes">
+        @{
+            for(int i=0;i<ViewBag.PersonajesNombres.Length;i++){
+                
+                <a class="personaje" asp-action="PostCorona" asp-controller="Home" asp-route-opcion="@ViewBag.PersonajesNombres[i]"><img src="@ViewBag.PersonajesFoto[i]"></a>
+            }
+        }
+        </div>
+    </div>
+</section>
+</main>

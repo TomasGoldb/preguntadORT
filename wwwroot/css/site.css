@@ -501,4 +501,27 @@ h1{
   height: 70%;
   margin: 1%;
 }
-
+.pagina-corona{
+  display: flex;
+  justify-content: center;
+    align-items: center;
+}
+.pagina-corona .container{
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.pagina-corona .conjunto-personajes{
+  width: 50%;
+  display: flex;
+}
+.pagina-corona .conjunto-personajes .personaje{
+  margin: 4%;
+  width: 10%;
+}

@@ -14,6 +14,15 @@ class BD
         }
         return categoriasList;
     }
+    public static Categorias ObtenerIDDeCategoria(string nombreCategoria){
+        Categorias cat= new Categorias();
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            string sql = "SP_ObtenerIDDeCategoria";
+            cat= db.QueryFirstOrDefault<Categorias>(sql,new { Nombre = nombreCategoria });
+        }
+        return cat;
+    }
     public static Categorias ObtenerCategoriaPorID(int id){
         Categorias categoria= new Categorias();
         using (SqlConnection db = new SqlConnection(_connectionString))

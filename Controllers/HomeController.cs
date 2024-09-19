@@ -177,7 +177,21 @@ public IActionResult RecuperarContrasenaMail(string direccion)
             return View("login");
         }
     }
-
+    public IActionResult Corona(){
+        ViewBag.PersonajesNombre=2;
+        string[] listaFotos = {"/personajesCategorias/arte.png", "/personajesCategorias/ciencia.png", "/personajesCategorias/deportes.png", "/personajesCategorias/entretenimiento.png","/personajesCategorias/geografia.png","/personajesCategorias/historia.png"};
+        ViewBag.PersonajesFoto=listaFotos;
+        string [] listaNombres = {"arte","ciencia","deportes","entretenimiento","geografia","historia"};
+        ViewBag.PersonajesNombres=listaNombres;
+        return View("Corona");
+    }
+    public IActionResult PostCorona(string opcion){
+        
+        Preguntas pregunta= Juego.ObtenerProximaPregunta(Categorias.ObtenerCategoriaPorNombre(opcion).IdCategoria);
+        ViewBag.Pregunta = pregunta;
+        ViewBag.Respuestas=Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
+        return View("Pregunta");
+    }
     public IActionResult ActualizarFotoPerfil(IFormFile archivo){
         bool seCambio=Sesion.userActual.CambiarFoto(archivo, Environment);
         if(seCambio){

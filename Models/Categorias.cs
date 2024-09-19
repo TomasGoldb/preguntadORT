@@ -12,4 +12,8 @@ public class Categorias
         Nombre=nombre;
         Foto=foto;
     }
+    public static Categorias ObtenerCategoriaPorNombre(string nombre){
+        return  BD.ObtenerIDDeCategoria(nombre);
+        
+    }
 }
