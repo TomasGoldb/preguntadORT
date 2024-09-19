@@ -199,7 +199,10 @@ public IActionResult RecuperarContrasenaMail(string direccion)
         Sesion.LogOut();
         return View("Index");
     }
-    public IActionResult Ruleta(){
+    public IActionResult Ruleta(Jugador jugador1, Jugador jugador2, int IdPartida){
+        ViewBag.Jugador1 = jugador1;
+        ViewBag.Jugador2 = jugador2;
+        ViewBag.Partida = IdPartida;
         return View();
     }
     public string ObtenerPersonajesConseguidos(int idUsuario, int idPartida){

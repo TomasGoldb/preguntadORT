@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', function()){
         dataType: 'json',
         success: function(response){
             let categorias = {"arte","ciencia","deportes","entretenimiento","geografia","historia"}
-            let personajes = response.Split("/");
             for(int i=0;i<response.Lenght();i++){
                 if (response[i]==1)){
                     $(`#${categorias[i]}`).setClass("personaje-conseguido");
