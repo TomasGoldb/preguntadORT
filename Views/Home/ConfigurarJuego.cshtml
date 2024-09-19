@@ -15,11 +15,12 @@
                 <option value="45">45 segundos</option>
                 <option value="60">1 minuto</option>
             </select>
-            <select class="form-select form-select-lg mb-3 select-tiempo" name="idDificultad" required>
+            <select class="form-select form-select-lg mb-3 select-tiempo" name="dificultad" required>
                 <option selected disabled value="">Dificultad</option>
-                <option value="1">Fácil</option>
-                <option value="2">Intermedio</option>
-                <option value="3">Difícil</option>
+                @foreach(Dificultades dificultad in ViewBag.dificultades)
+                {
+                    <option value=@dificultad>@dificultad.Nombre</option>
+                }
             </select>
             <div class="form-check form-switch switch-secreto">
                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="girarNehuen">

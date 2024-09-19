@@ -79,41 +79,42 @@ class BD
         }
     }
     public static int CrearPartida(int TiempoMax, bool GirarNehuen, Dificultades Dificultad){
+        Partida partida = new Partida();
         int idNuevaPartida;
         using(SqlConnection db = new SqlConnection(_connectionString)){
             string sql = "SP_CrearPartida";
-            idNuevaPartida = db.QueryFirst(sql, new {@TiempoMax = TiempoMax, @GirarNehuen = Convert.ToInt32(GirarNehuen), @Dificultad = Dificultad.IdDificultad});
+            db.Execute(sql, new {@TiempoMax = TiempoMax, @GirarNehuen = Convert.ToInt32(GirarNehuen), @IdDificultad = Dificultad.IdDificultad});
+            sql = "SP_ObtenerIdPartida";
+            partida = db.QueryFirstOrDefault<Partida>(sql);
         }
-        return idNuevaPartida; 
+        idNuevaPartida = partida.IdPartida;
+        return idNuevaPartida;
     }
     public static int CrearJugador(Jugador jugador){
-        int? IdPartida;
-        int? IdJugador = null;
+        Partida partida = new Partida();
+        Jugador jugadorBD = new Jugador();
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-           string sql = "SP_ObtenerPartida";
-           IdPartida = db.QueryFirst(sql, new {@PartidaID = jugador.IdJugador});
-           if(IdPartida != null){
+            string sql = "SP_ObtenerPartida";
+            partida = db.QueryFirstOrDefault<Partida>(sql, new {@PartidaID = jugador.IdPartida});
+            if(partida != null){
                 sql = "SP_ObtenerJugador";
-                IdJugador = db.QueryFirst(sql, new {@JugadorID = jugador.IdJugador, @PartidaID = jugador.IdPartida});
-           }
-        }        
-        if (IdPartida == null) 
-        {
-            return 1;
-        }
-        else if(IdJugador != null){
-            return 2;
-        }
-        else
-        {
-            using (SqlConnection db = new SqlConnection(_connectionString))
-            {
-                string sql = "SP_CrearJugador";
-                db.Execute(sql, new {@IdUsuario = jugador.IdUsuario, @IdJugador = jugador.IdJugador, @IdPartida = jugador.IdPartida}); 
+                jugadorBD = db.QueryFirstOrDefault<Jugador>(sql, new {@JugadorID = jugador.IdJugador, @PartidaID = jugador.IdPartida});
             }
-            return 0; 
-        }
+            if (partida == null) 
+            {
+                return 1;
+            }
+            else if(jugadorBD != null){
+                return 2;
+            }
+            else
+            {
+                sql = "SP_CrearJugador";
+                db.Execute(sql, new {@IdUsuario = jugador.IdUsuario, @IdJugador = jugador.IdJugador, @IdPartida = jugador.IdPartida});
+                return 0; 
+            }
+        }        
     } 
     public static List<JugadorEnJuego> SeleccionarJugadorEnJuego(int idPartida){
         List<JugadorEnJuego> listaJug = new List<JugadorEnJuego>();

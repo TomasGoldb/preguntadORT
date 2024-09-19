@@ -32,8 +32,6 @@ public class HomeController : Controller
     
     public IActionResult ConfigurarJuego()
     {
-        Juego.InicializarJuego();
-        ViewBag.categorias = Juego.ObtenerCategorias();
         ViewBag.dificultades = Juego.ObtenerDificultades();
         return View();
     }
@@ -101,23 +99,41 @@ public IActionResult RecuperarContrasenaMail(string direccion)
         return View("Pregunta");
     }
 
-    public IActionResult CrearPartida(int tiempoMax, int idDificultad, bool girarNehuen)
+    public IActionResult CrearPartida(int tiempoMax, Dificultades dificultad, bool girarNehuen)
     {
-        /*int idPartida = Juego.CrearPartida(tiempoMax, idDificultad, girarNehuen);
+        int idPartida = Juego.CrearPartida(tiempoMax, girarNehuen, dificultad);
         Jugador jugador = new Jugador(Sesion.userActual.idUsuario, 1, idPartida);
+        Juego.CrearJugador(jugador);
         Sesion.SetearJugador(jugador);
         ViewBag.jugador = jugador;
-        ViewBag.idPartida = idPartida;*/
+        ViewBag.idPartida = idPartida;
         return View("SalaEspera");
     }
 
     public IActionResult Unirse(int codigo)
     {
-        /*Jugador jugador = new Jugador(Sesion.userActual.idUsuario, 2, codigo);
-        Sesion.SetearJugador(jugador);
-        ViewBag.jugador = jugador;
-        ViewBag.idPartida = codigo;*/
-        return View("SalaEspera");
+        Jugador jugador = new Jugador(Sesion.userActual.idUsuario, 2, codigo);
+        int idError = Juego.CrearJugador(jugador);
+        switch(idError)
+        {
+            case 0:
+                Sesion.SetearJugador(jugador);
+                ViewBag.jugador = jugador;
+                ViewBag.idPartida = codigo;
+                return View("SalaEspera");
+            
+            case 1:
+                ViewBag.error = "El código ingresado es incorrecto.";
+                return View("ConfigurarJuego");
+
+            case 2:
+                ViewBag.error = "Esa partida ya está llena.";
+                return View("ConfigurarJuego");
+
+            default:
+                ViewBag.error = "Se ha producido un error.";
+                return View("ConfigurarJuego");
+        }
     }
 
     // PARTE DE LOGIN Y REGISTRO

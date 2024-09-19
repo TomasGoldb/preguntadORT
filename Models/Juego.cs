@@ -9,12 +9,6 @@ static class Juego
     private static int dificultad {get;set;}
     private static bool[] personajesConseguidos = new bool[6];
 
-    public static void InicializarJuego(/* string usuario */)
-    {
-        username = String.Empty; // Aca se puede referenciar a la BD
-        cantidadPreguntasCorrectas = 0;
-        for(int i = 0; i < personajesConseguidos.Length; i++) personajesConseguidos[i] = false;
-    }
     public static List<Categorias> ObtenerCategorias()
     {
         List<Categorias> categorias = BD.ObtenerCategorias();
@@ -54,8 +48,13 @@ static class Juego
     public static List<JugadorEnJuego> ObtenerJugadoresEnJuego(int idPartida){
         return BD.SeleccionarJugadorEnJuego(0);
     }
-    public static void CrearJugador(int IdUsuario, int IdJugador, int IdPartida){
-        Jugador nuevoJugador = new Jugador();
-        int output = BD.CrearJugador(nuevoJugador);
+    public static int CrearJugador(Jugador jugador){
+        int output = BD.CrearJugador(jugador);
+        return output;
+    }
+    public static int CrearPartida(int tiempoMax, bool girarNehuen, Dificultades dificultad)
+    {
+        int idPartida = BD.CrearPartida(tiempoMax, girarNehuen, dificultad);
+        return idPartida;
     }
 }
