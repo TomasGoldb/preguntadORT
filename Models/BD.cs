@@ -87,16 +87,16 @@ class BD
         }
         return idNuevaPartida; 
     }
-    public static int CrearJugador(Jugador jugador, int PartidaID, int JugadorID){
+    public static int CrearJugador(Jugador jugador){
         int? IdPartida;
         int? IdJugador = null;
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
            string sql = "SP_ObtenerPartida";
-           IdPartida = db.QueryFirst(sql, new {@PartidaID = PartidaID});
+           IdPartida = db.QueryFirst(sql, new {@PartidaID = jugador.IdJugador});
            if(IdPartida != null){
                 sql = "SP_ObtenerJugador";
-                IdJugador = db.QueryFirst(sql, new {@JugadorID = JugadorID, @PartidaID = PartidaID});
+                IdJugador = db.QueryFirst(sql, new {@JugadorID = jugador.IdJugador, @PartidaID = jugador.IdPartida});
            }
         }        
         if (IdPartida == null) 
