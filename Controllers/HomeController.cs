@@ -92,12 +92,12 @@ public IActionResult RecuperarContrasenaMail(string direccion)
 
 
     public IActionResult Pregunta(int idCategoria){
-        Categorias categoria = BD.ObtenerCategoriaPorID(idCategoria);
-        ViewBag.categoria=categoria;
+        //Categorias categoria = BD.ObtenerCategoriaPorID(idCategoria);
+        //ViewBag.categoria=categoria;
         Preguntas pregunta= Juego.ObtenerProximaPregunta(idCategoria);
-        ViewBag.Pregunta=pregunta;
+        ViewBag.Pregunta = pregunta;
         ViewBag.Respuestas=Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
-        ViewBag.fotoCategoria=categoria.Foto;
+        //ViewBag.fotoCategoria=categoria.Foto;
         return View("Pregunta");
     }
 
@@ -107,7 +107,7 @@ public IActionResult RecuperarContrasenaMail(string direccion)
         Jugador jugador = new Jugador(Sesion.userActual.idUsuario, 1, idPartida);
         Sesion.SetearJugador(jugador);
         ViewBag.jugador = jugador;
-        ViewBag.idPartida = idPartida;*/
+        ViewBag.idPartida = idPartida;*/ 
         return View("SalaEspera");
     }
 
