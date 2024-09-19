@@ -14,6 +14,15 @@ class BD
         }
         return categoriasList;
     }
+    public static Categorias ObtenerIDDeCategoria(string nombreCategoria){
+        Categorias cat= new Categorias();
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            string sql = "SP_ObtenerIDDeCategoria";
+            cat= db.QueryFirstOrDefault<Categorias>(sql,new { Nombre = nombreCategoria });
+        }
+        return cat;
+    }
     public static Categorias ObtenerCategoriaPorID(int id){
         Categorias categoria= new Categorias();
         using (SqlConnection db = new SqlConnection(_connectionString))
@@ -36,6 +45,7 @@ class BD
         List<Preguntas> preguntasList;
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
+            //que esl stored procedure las devuelva ordenadas al azar
             string sql = "SP_ListarPreguntas";
             preguntasList = db.Query<Preguntas>(sql, new { dificultadId = dificultad, categoriaId = categoria }).ToList();
         }
@@ -46,7 +56,7 @@ class BD
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SP_ListarRespuestas";
-            respuestas = db.Query<Respuestas>(sql, new { IdPregunta = preguntaId }).ToList();
+            respuestas = db.Query<Respuestas>(sql, new { PreguntaId = preguntaId }).ToList();
         }
         return respuestas;
     }

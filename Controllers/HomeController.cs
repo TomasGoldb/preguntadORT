@@ -90,12 +90,12 @@ public IActionResult RecuperarContrasenaMail(string direccion)
 
 
     public IActionResult Pregunta(int idCategoria){
-        Categorias categoria = BD.ObtenerCategoriaPorID(idCategoria);
-        ViewBag.categoria=categoria;
+        //Categorias categoria = BD.ObtenerCategoriaPorID(idCategoria);
+        //ViewBag.categoria=categoria;
         Preguntas pregunta= Juego.ObtenerProximaPregunta(idCategoria);
-        ViewBag.Pregunta=pregunta;
+        ViewBag.Pregunta = pregunta;
         ViewBag.Respuestas=Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
-        ViewBag.fotoCategoria=categoria.Foto;
+        //ViewBag.fotoCategoria=categoria.Foto;
         return View("Pregunta");
     }
 
@@ -193,7 +193,21 @@ public IActionResult RecuperarContrasenaMail(string direccion)
             return View("login");
         }
     }
-
+    public IActionResult Corona(){
+        ViewBag.PersonajesNombre=2;
+        string[] listaFotos = {"/personajesCategorias/arte.png", "/personajesCategorias/ciencia.png", "/personajesCategorias/deportes.png", "/personajesCategorias/entretenimiento.png","/personajesCategorias/geografia.png","/personajesCategorias/historia.png"};
+        ViewBag.PersonajesFoto=listaFotos;
+        string [] listaNombres = {"arte","ciencia","deportes","entretenimiento","geografia","historia"};
+        ViewBag.PersonajesNombres=listaNombres;
+        return View("Corona");
+    }
+    public IActionResult PostCorona(string opcion){
+        
+        Preguntas pregunta= Juego.ObtenerProximaPregunta(Categorias.ObtenerCategoriaPorNombre(opcion).IdCategoria);
+        ViewBag.Pregunta = pregunta;
+        ViewBag.Respuestas=Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
+        return View("Pregunta");
+    }
     public IActionResult ActualizarFotoPerfil(IFormFile archivo){
         bool seCambio=Sesion.userActual.CambiarFoto(archivo, Environment);
         if(seCambio){
@@ -215,7 +229,10 @@ public IActionResult RecuperarContrasenaMail(string direccion)
         Sesion.LogOut();
         return View("Index");
     }
-    public IActionResult Ruleta(){
+    public IActionResult Ruleta(Jugador jugador1, Jugador jugador2, int IdPartida){
+        ViewBag.Jugador1 = jugador1;
+        ViewBag.Jugador2 = jugador2;
+        ViewBag.Partida = IdPartida;
         return View();
     }
     public string ObtenerPersonajesConseguidos(int idUsuario, int idPartida){
