@@ -45,37 +45,37 @@ public class HomeController : Controller
         return View();
     }
     [HttpPost]
-public IActionResult RecuperarContrasenaMail(string direccion) 
-{
-    try
+    public IActionResult RecuperarContrasenaMail(string direccion) 
     {
-        using (var mail = new MailMessage())
+        try
         {
-            mail.To.Add(new MailAddress(direccion));
-            mail.From = new MailAddress("nehuentados.noresponder@gmail.com");
-            mail.Subject = "No responder";  // Se puede cambiar
-            mail.Body = "Holi, esto es un test";  // Se puede cambiar
-            mail.IsBodyHtml = true;
-
-            using (var smtp = new SmtpClient("smtp.gmail.com", 587))
+            using (var mail = new MailMessage())
             {
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new System.Net.NetworkCredential("nehuentados.noresponder@gmail.com", "NehuGod123");
-                smtp.EnableSsl = true;
+                mail.To.Add(new MailAddress(direccion));
+                mail.From = new MailAddress("nehuentados.noresponder@gmail.com");
+                mail.Subject = "No responder";  // Se puede cambiar
+                mail.Body = "Holi, esto es un test";  // Se puede cambiar
+                mail.IsBodyHtml = true;
 
-                smtp.Send(mail);
+                using (var smtp = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new System.Net.NetworkCredential("nehuentados.noresponder@gmail.com", "NehuGod123");
+                    smtp.EnableSsl = true;
+
+                    smtp.Send(mail);
+                }
             }
-        }
 
-        return View("Index");
+            return View("Index");
+        }
+        catch (Exception ex)
+        {
+            // Manejar el error y mostrar un mensaje adecuado
+            ViewBag.ErrorMessage = "Hubo un problema enviando el correo: " + ex.Message;
+            return View("Home"); // Asegúrate de tener una vista de error
+        }
     }
-    catch (Exception ex)
-    {
-        // Manejar el error y mostrar un mensaje adecuado
-        ViewBag.ErrorMessage = "Hubo un problema enviando el correo: " + ex.Message;
-        return View("Home"); // Asegúrate de tener una vista de error
-    }
-}
 
     
     public IActionResult Comenzar(string username, int dificultad, int categoria)
@@ -252,18 +252,15 @@ public IActionResult RecuperarContrasenaMail(string direccion)
     }
     private string FormatearError(string error)
     {
-        string mensaje=error;
-        if(error=="ERROR_001_YaExisteNickoMail"){
-            mensaje="Ya existe un usuario con ese nick o mail.";
-        }else if(error=="ERROR_002_ContraNoCoincide"){
-            mensaje="Las contraseñas no coinciden.";
-        }else if(error=="ERROR_003_ContraIncorrecta"){
-            mensaje="La contraseña es incorrecta.";
-        }else if(error=="ERROR_004_SinArchivo"){
-            mensaje="No has ingresado ningún archivo!";
-        } else if(error=="ERROR_005_MailIncorrecto"){
-            mensaje="El mail ingresado es incorrecto.";
-        }
+        Dictionary<string, string> ErroresAMensajes = new();
+        ErroresAMensajes["ERROR_001_YaExisteNickoMail"] = "Ya existe un usuario con ese nick o mail.";
+        ErroresAMensajes["ERROR_002_ContraNoCoincide"] = "Las contraseñas no coinciden.";
+        ErroresAMensajes["ERROR_003_ContraIncorrecta"] = "La contraseña es incorrecta.";
+        ErroresAMensajes["ERROR_004_SinArchivo"] = "No has ingresado ningún archivo!";
+        ErroresAMensajes["ERROR_005_MailIncorrecto"] = "El mail ingresado es incorrecto.";
+
+        string mensaje = ErroresAMensajes[error];
+
         return "<div class='alert alert-danger alert-dismissible' role='alert'><div>"+ mensaje + "</div>   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
     }
 
