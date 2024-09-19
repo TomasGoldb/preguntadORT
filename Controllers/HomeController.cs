@@ -114,6 +114,7 @@ public IActionResult RecuperarContrasenaMail(string direccion)
     {
         Jugador jugador = new Jugador(Sesion.userActual.idUsuario, 2, codigo);
         int idError = Juego.CrearJugador(jugador);
+        ViewBag.dificultades = Juego.ObtenerDificultades();
         switch(idError)
         {
             case 0:
@@ -127,7 +128,7 @@ public IActionResult RecuperarContrasenaMail(string direccion)
                 return View("ConfigurarJuego");
 
             case 2:
-                ViewBag.error = "Esa partida ya está llena.";
+                ViewBag.error = "La partida está llena.";
                 return View("ConfigurarJuego");
 
             default:

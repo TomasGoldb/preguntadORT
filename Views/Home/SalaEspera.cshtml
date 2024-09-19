@@ -10,7 +10,10 @@
         <div class="contenedor-jugadores">
             
         </div>
-        <button class="login-boton" onclick="Jugar()">Iniciar</button>
+        @if(ViewBag.jugador.IdJugador == 1) 
+        {
+            <button class="login-boton" style="margin-top: 4%" onclick="Jugar()">Iniciar</button>
+        }
     </div>
 </section>
 <h1 class="codigo">Código: @ViewBag.idPartida</h1>
