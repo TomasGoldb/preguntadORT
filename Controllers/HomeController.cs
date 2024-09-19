@@ -245,6 +245,10 @@ public IActionResult RecuperarContrasenaMail(string direccion)
         return "ERROR";
 
     }
+    public JsonResult ObtenerNombreJugador(){
+        List<JugadorEnJuego> jugadores = BD.SeleccionarJugadorEnJuego(Sesion.jugadorActual.IdPartida);
+        return Json(jugadores);
+    }
     private string FormatearError(string error)
     {
         string mensaje=error;

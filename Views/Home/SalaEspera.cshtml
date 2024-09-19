@@ -8,10 +8,34 @@
     <div class="container">
         <h1>Jugadores</h1>
         <div class="contenedor-jugadores">
-            
+            <p></p>
+            <p></p>
         </div>
         <button class="login-boton" onclick="Jugar()">Iniciar</button>
     </div>
 </section>
 <h1 class="codigo">Código: @ViewBag.idPartida</h1>
 </main>
+
+<script>
+
+$(document).ready(function () {
+            $('.login-boton').click(function () {
+                $.ajax({
+                    url: '@Url.Action("ObtenerNombreJugador", "Home")',
+                    type: 'POST',
+                    data: {},
+                    success: function (data) {
+                        $('#jugadoresContainer').empty(); // Limpiar el div antes de agregar
+                        $.each(data, function (index, jugador) {
+                            $('.contenedor-jugadores').append('<p>' + jugador + '</p>');
+                        });
+                        $('#nombreJugador').val(''); // Limpiar el campo de texto
+                    },
+                    error: function () {
+                        alert('Error al agregar el jugador.');
+                    }
+                });
+            });
+        });
+</script>
