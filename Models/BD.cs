@@ -78,11 +78,11 @@ class BD
             db.Execute(sql);
         }
     }
-    public static int CrearPartida(int TiempoMax, bool GirarNehuen, int IdDificultad){
+    public static int CrearPartida(int TiempoMax, bool GirarNehuen, Dificultades Dificultad){
         int idNuevaPartida;
         using(SqlConnection db = new SqlConnection(_connectionString)){
             string sql = "SP_CrearPartida";
-            idNuevaPartida = db.QueryFirst(sql, new {@TiempoMax = TiempoMax, @GirarNehuen = Convert.ToInt32(GirarNehuen), @Dificultad = IdDificultad});
+            idNuevaPartida = db.QueryFirst(sql, new {@TiempoMax = TiempoMax, @GirarNehuen = Convert.ToInt32(GirarNehuen), @Dificultad = Dificultad.IdDificultad});
         }
         return idNuevaPartida; 
     }
