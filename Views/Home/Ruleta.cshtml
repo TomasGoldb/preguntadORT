@@ -48,6 +48,7 @@
 document.addEventListener('DOMContentLoaded', function()){
     $.ajax({
         url: '/home/ObtenerPersonajesConseguidos',
+        //data: {idUsuario: @ViewBag.Jugador1.idUsuario, idPartida: @ViewBag.Partida.IdPartida},
         data: {idUsuario: @ViewBag.Jugador1.idUsuario, idPartida: @ViewBag.Partida.IdPartida},
         type: 'POST',
         dataType: 'json',
