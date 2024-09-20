@@ -1,0 +1,449 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+@font-face {
+  font-family: 'Mikado Bold DEMO';
+  src: url('/MikadoBold_DEMO.ttf') format('Truetype');
+  font-style: normal;
+  font-weight: normal;
+  
+}
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+*{
+}
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  background-color: rgb(135, 3, 212);
+}
+h1{
+  font-family: 'Mikado Bold DEMO';
+}
+
+.parte-index{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.parte-index div{
+  width: 70%;
+  height: 50%;
+  background-color: white;
+  border-radius: 15px;
+}
+.parte-index div h1{
+  text-align: center;
+  font-size: 4vw;
+  margin-top: 2%
+}
+
+
+.parte-index div a{
+  width: 50%;
+}
+.parte-index div a .logo{
+  width: 100%;
+}
+.base-logo{
+  position: absolute;
+}
+.adentro-logo{
+  position: absolute;
+  filter: opacity(0%);
+  transition: filter 0.1s ease-in;
+  transition: transform 0.05s ease-in;
+}
+.parte-index div a:hover .adentro-logo{
+  transform: scale(1.2);
+  filter: opacity(100%);
+}
+
+
+
+/*PARTE DE LOGIN Y REGISTRO*/
+
+.pagina-login-register{
+  width: 100%;
+}
+
+.pagina-login-register .container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.pagina-login-register h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.pagina-login-register .form-group {
+  margin-bottom: 15px;
+}
+
+.pagina-login-register .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.pagina-login-register .form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.pagina-login-register .login-boton {
+  width: 100%;
+  padding: 10px;
+  background-color: rgb(135, 3, 212);
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.pagina-login-register .login-boton:hover {
+  background-color: rgb(115, 16, 172);
+}
+
+
+.botones-reg-log{
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
+}
+.botones-reg-log a{
+  padding: 2%;
+  font-size: 4vw;
+  text-decoration: none;
+  color: white;
+  border-radius: 7px;
+  background-color: rgb(135, 3, 212);
+  transition: background-color 0.2s ease-in;
+}
+
+.botones-reg-log a:hover{
+  background-color: rgb(135, 3, 212);
+}
+
+.indexjeje{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.nombre-logeado{
+  margin-top: 4%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.nombre-logeado p{
+  font-size: 2vw;
+  text-align: center;
+}
+
+.boton-logout{
+  padding: 1%;
+  font-size: 1.5vw;
+  text-decoration: none;
+  color: white;
+  border-radius: 7px;
+  background-color: rgb(135, 3, 212);
+  transition: background-color 0.2s ease-in;
+}
+
+.foto-perfil{
+  width: 10%;
+  border-radius: 50%;
+}
+
+.seccion-login{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+
+}
+.index-secction{
+  display: flex;
+  align-items: center;
+}
+.index-secction h1{
+  color: white;
+  text-align: center;
+  font-size: 6vw;
+}
+.foto-index{
+  height: 100vh;
+  width: 50vw;
+  object-fit: cover;
+  margin: 0px;
+}
+.index-secction div{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.index-secction div .botones-sesion{
+  display: flex;
+  justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    font-size: 2vw;
+    margin-top:6%;
+}
+
+.index-secction div .botones-sesion a{
+  font-family: 'Mikado Bold DEMO';
+  padding: 2%;
+  background-color: rgb(150, 33, 218);
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background-color 0.1s ease-in;
+  margin-bottom: 3%;
+  width: 50%;
+  text-align: center;
+}
+.index-secction div .botones-sesion a:hover{
+  background-color: rgb(115, 16, 172);
+}
+.logo-index{
+  width: 15%;
+  margin-bottom: 1%;
+}
+
+/*FIN PARTE LOGIN Y REGISTRO*/
+
+
+.pag-ruleta{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pag-ruleta .wheel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20vw;
+  height: 20vw;
+  margin-bottom: 20px;
+}
+
+.pag-ruleta .wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transition: transform 4s ease-out;
+  position: absolute;
+}
+
+
+
+
+.pag-ruleta .ruleta-centro{
+  z-index: 99;
+  width: 40%;
+  height: 45%;
+  margin-bottom: 5%;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+
+.parte-juego{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pag-ruleta .arriba-ruleta{
+  width: 100%;
+    height: 25%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-top: 2%;
+    align-items: center;
+}
+.pag-ruleta .arriba-ruleta .desc-pers{
+  background-color: white;
+  border-radius: 10px;
+  width: 35%;
+  height: 100%;
+  margin: 2%;
+}
+
+.pag-ruleta .arriba-ruleta .desc-pers .foto-nombre{
+  margin-top:1%;
+  display: flex;
+    flex-wrap: wrap;
+    margin-left: 3%;
+    align-content: center;
+    align-items: center;
+}
+.pag-ruleta .arriba-ruleta .desc-pers .foto-nombre .foto-perfil{
+  width: 10%;
+  margin-right: 1%;
+  border-radius: 50%;
+}
+.wheel-container{
+  margin-top: 3%;
+}
+
+.vs{
+  background-color: white;
+  border-radius: 50%;
+  padding: 2%;
+  height: 10%;
+  width: 5%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  padding-top: 3%;
+}
+.vs p{
+  font-size: 2vw;
+  font-family: 'Mikado Bold DEMO';
+}
+
+.seccion-configurar{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.input-codigo::-webkit-inner-spin-button, .input-codigo::-webkit-outer-spin-button{
+  -webkit-appearance: none;
+}
+
+.select-tiempo{
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.switch-secreto{
+  position: absolute;
+  left: 20%;
+  margin-top: 1%;
+}
+
+.switch-secreto input:not(:checked){
+  opacity: 0%;
+}
+
+.respuestas{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+.respuestas a{
+  font-family: 'Mikado Bold DEMO';
+  text-decoration: none;
+  color: black;
+  padding: 2%;
+  background-color: white;
+  width: 100%;
+  margin-bottom: 2%;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.1s ease-in;
+}
+.respuestas a:hover{
+  box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.5);
+}
+
+.pregunta-respuesta{
+  background-color: white;
+  width: 50%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 15px;  
+}
+
+#barra-tiempo{
+  background-color: #258cfb;
+  height: 30%;
+  width: 80%;
+  transition: width 1.5s ease-in;
+  border-start-start-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+#timer{
+  margin-right: 2%;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-bottom: 3.3%;
+  padding-top: 1%;
+  margin-top: 1%;
+  border-radius: 50%;
+  background-color: rgb(150, 33, 218);
+  color: white;
+  font-family: 'Mikado Bold DEMO';
+}
+.contenedor-tiempo{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.contenedor-ftcategoria img{
+  margin-right: 2%;
+  height: 100%;
+}
+.contenedor-ftcategoria{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.parte-juego .titulo-pregunta{
+   width: 80%;
+   text-align: center;
+}
+
+.parte-juego .foto-pregunta{
+  width: 50%;
+  border-radius: 15px;
+}
