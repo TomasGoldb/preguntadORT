@@ -222,7 +222,12 @@ public class HomeController : Controller
         }
         
     }
-    public IActionResult CuentaAtras(){
+    public IActionResult CuentaAtras(string host){
+        if(host="si"){
+            ViewBag.Tiempo=3.5;
+        } else{
+            ViewBag.Tiempo=3;
+        }
         return View();
     }
     public IActionResult login()
@@ -265,6 +270,14 @@ public class HomeController : Controller
         }
         return Json(new { jug1 = jugador, jug2= jugador2 });
 
+    }
+    [HttpGet]
+    public JsonResult ChequearInicio(){
+        
+        return Json(Empezo=, );
+    }
+    public IActionResult EmpezarPartida(){
+        
     }
     private string FormatearError(string error)
     {
