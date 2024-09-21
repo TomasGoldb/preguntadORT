@@ -18,6 +18,7 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 *{
+  border: 1px solid black;
 }
 html {
   position: relative;
@@ -44,6 +45,9 @@ h1{
   height: 50%;
   background-color: white;
   border-radius: 15px;
+  display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 .parte-index div h1{
   text-align: center;
@@ -53,23 +57,30 @@ h1{
 
 
 .parte-index div a{
-  width: 50%;
+  display:block;
+  width: 25%;
+  height: 50%;
 }
 .parte-index div a .logo{
   width: 100%;
+  height: 100%;
+  background-image: url("/img/logo jugar.png");
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size: cover;
+  border-radius: 0;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
-.base-logo{
-  position: absolute;
-}
+
 .adentro-logo{
-  position: absolute;
-  filter: opacity(0%);
-  transition: filter 0.1s ease-in;
-  transition: transform 0.05s ease-in;
+  width: 65%;
+  transition: transform 0.05s ease-in-out;
 }
 .parte-index div a:hover .adentro-logo{
   transform: scale(1.2);
-  filter: opacity(100%);
 }
 
 
@@ -541,4 +552,10 @@ h1{
 }
 .gris{
   background-color: grey;
+}
+.correcto{
+  background-color: rgb(167, 255, 167);
+}
+.incorrecto{
+  background-color: rgb(255, 129, 129);
 }

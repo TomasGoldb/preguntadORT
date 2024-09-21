@@ -39,6 +39,7 @@ public class HomeController : Controller
     [HttpPost] IActionResult VerificarRespuesta(Preguntas pregunta, int opcion){
         ViewBag.IsCorrect = Juego.VerificarRespuesta(pregunta.IdPregunta, opcion);
         ViewBag.Opcion= opcion;
+        ViewBag.Opciones=BD.ObtenerRespuestas(pregunta.IdPregunta);
         return View("RespuestaCorrecta");
     }
     
