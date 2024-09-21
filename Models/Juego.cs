@@ -19,15 +19,10 @@ static class Juego
         List<Dificultades> dificultades = BD.ObtenerDificultades();
         return dificultades;
     }
-    public static void CargarPartida(int categoria)
-    {
-        
-    }
     public static Preguntas ObtenerProximaPregunta(int idCategoria)
     {
-        Preguntas pregunta = BD.ObtenerPreguntas(dificultad, idCategoria)[0];
-        Console.WriteLine(pregunta.Enunciado);
-        return pregunta;
+        List<Preguntas> preguntas = BD.ObtenerPreguntas(dificultad, idCategoria);
+        return preguntas[0];
     }
     public static List<Respuestas> ObtenerProximasRespuestas(int idPregunta)
     {

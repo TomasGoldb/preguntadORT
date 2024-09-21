@@ -79,21 +79,9 @@ public class HomeController : Controller
         }
     }
 
-    
-    public IActionResult Comenzar(string username, int dificultad, int categoria)
-    {
-        Juego.CargarPartida(categoria);
-        return View("Ruleta");
-    }
-
-    public IActionResult Jugar(int idCategoria){
-        return View("Juego");
-    }
-
-
     public IActionResult Pregunta(int idCategoria){
-        //Categorias categoria = BD.ObtenerCategoriaPorID(idCategoria);
-        //ViewBag.categoria=categoria;
+        Categorias categoria = BD.ObtenerCategoriaPorID(idCategoria);
+        ViewBag.categoria=categoria;
         Preguntas pregunta= Juego.ObtenerProximaPregunta(idCategoria);
         ViewBag.Pregunta = pregunta;
         ViewBag.Respuestas=Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
