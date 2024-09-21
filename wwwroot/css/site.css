@@ -56,12 +56,12 @@ h1{
 }
 
 
-.parte-index div a{
+.parte-index div .a-logo{
   display:block;
   width: 25%;
   height: 50%;
 }
-.parte-index div a .logo{
+.parte-index div .a-logo .logo{
   width: 100%;
   height: 100%;
   background-image: url("/img/logo jugar.png");
@@ -79,10 +79,27 @@ h1{
   width: 65%;
   transition: transform 0.05s ease-in-out;
 }
-.parte-index div a:hover .adentro-logo{
+.parte-index div .a-logo:hover .adentro-logo{
   transform: scale(1.2);
 }
-
+.boton-logout{
+  width: 25%;
+  padding: 10px;
+  background-color: rgb(135, 3, 212);
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-family: 'Mikado Bold DEMO';
+  text-decoration: none;
+  text-align: center;
+}
+.boton-logout:hover{
+  background-color: rgb(115, 16, 172);
+  color: white;
+}
 
 
 /*PARTE DE LOGIN Y REGISTRO*/
@@ -558,4 +575,27 @@ h1{
 }
 .incorrecto{
   background-color: rgb(255, 129, 129);
+}
+
+.cuenta-atras{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+.cuenta-atras div{
+  background-color: white;
+  border-radius: 50%;
+  width: 20%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+.cuenta-atras div .countdown{
+  font-size: 6vw;
+  color: rgb(135, 3, 212);
 }

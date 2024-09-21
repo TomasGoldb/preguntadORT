@@ -222,14 +222,17 @@ public class HomeController : Controller
         }
         
     }
+    public IActionResult CuentaAtras(){
+        return View();
+    }
     public IActionResult login()
     {
         ViewBag.logeado = Sesion.EstaLogeado;
         return View();
     }
     public IActionResult logout(){
-        ViewBag.logeado = Sesion.EstaLogeado;
         Sesion.LogOut();
+        ViewBag.logeado = Sesion.EstaLogeado;
         return View("Index");
     }
     public IActionResult Ruleta(Jugador jugador1, Jugador jugador2, int IdPartida){
