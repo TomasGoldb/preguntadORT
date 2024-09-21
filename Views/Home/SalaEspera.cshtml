@@ -22,8 +22,13 @@
 
 <script>
 
+let bucle;
 document.addEventListener('DOMContentLoaded', function() {
-                $.ajax({
+                bucle=setInterval(ChequearNombres,5000);
+        });
+
+    function ChequearNombres(){
+        $.ajax({
                     url: '@Url.Action("ObtenerNombreJugador", "Home")',
                     type: 'GET',
                     data: {},
@@ -31,14 +36,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         $('.contenedor-jugadores').empty(); // Limpiar el div antes de agregar
                         $('.contenedor-jugadores').append('<p>' + data.jug1 + '</p>');
                         $('.contenedor-jugadores').append('<p>' + data.jug2 + '</p>');
-                        console.log(data.jug);
                     },
-                    error: function (xhr, status, error) {
-                        console.error("Error: ", error); // Imprimir el error en la consola
-    console.log("Status: ", status); // Estado de la respuesta
-    console.log("Response: ", xhr.responseText); // Ver el texto de la respuesta del servidor
-    alert('Error al agregar el jugador.');
+                    error: function () {
+                        alert('Error al agregar el jugador.');
                     }
                 });
-        });
+    }
 </script>

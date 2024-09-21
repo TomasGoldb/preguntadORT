@@ -32,6 +32,15 @@ class BD
         }
         return categoria;
     }
+    public static Usuario ObtenerUsuarioPorID(int id){
+        Usuario user= new Usuario();
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            string sql = "SP_SeleccionarUsuarioXID";
+            user= db.QueryFirstOrDefault<Usuario>(sql,new { IdUSuario = id });
+        }
+        return user;
+    }
     public static List<Dificultades> ObtenerDificultades(){
         List<Dificultades> dificultadesList;
         using (SqlConnection db = new SqlConnection(_connectionString))
@@ -74,6 +83,7 @@ class BD
         }
         return listaUsuario;
     }
+    
         public static void CrearUsuario(Usuario objeto){
         using (SqlConnection db = new SqlConnection(_connectionString))
         {

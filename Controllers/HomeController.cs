@@ -250,11 +250,10 @@ public class HomeController : Controller
     public JsonResult ObtenerNombreJugador(){
         List<JugadorEnJuego> jugadores = BD.SeleccionarJugadorEnJuego(Sesion.jugadorActual.IdPartida);
         string jugador="", jugador2="";
-        jugador=BD.Seleccionar($"select * from usuario where IdUsuario={jugadores[0].IdUsuario}")[0].Nombre;
+        jugador=Juego.UsuarioPorID(jugadores[0].IdUsuario).Nick;
         if(jugadores.Count!=1){
-        jugador2=BD.Seleccionar($"select * from usuario where IdUsuario={jugadores[1].IdUsuario}")[0].Nombre;
+        jugador2=Juego.UsuarioPorID(jugadores[1].IdUsuario).Nick;
         }
-        Console.WriteLine(jugador+" "+jugador2);
         return Json(new { jug1 = jugador, jug2= jugador2 });
 
     }

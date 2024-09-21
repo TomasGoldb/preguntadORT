@@ -56,4 +56,7 @@ static class Juego
         int idPartida = BD.CrearPartida(tiempoMax, girarNehuen, dificultad);
         return idPartida;
     }
+    public static Usuario UsuarioPorID(int id){
+            return BD.ObtenerUsuarioPorID(id);
+        }
 }
