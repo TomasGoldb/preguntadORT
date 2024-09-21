@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section class="cuenta-atras">
+    <div>
+        <h1 class="countdown" id="muestra-cuenta">3</h1>
+    </div>
+</section>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    let timerDisplay = document.getElementById('muestra-cuenta');
+        let totalTime = @ViewBag.Tiempo; 
+        let remainingTime = totalTime;
+        
+        let countdown = setInterval(function() {
+            remainingTime--;
+            timerDisplay.innerText = remainingTime;
+    
+            if (remainingTime <= 0) {
+                clearInterval(countdown);
+                 window.location.href='/Home/Ruleta';
+                
+            }
+        }, 1000);
+      });
+</script>

@@ -210,14 +210,22 @@ public class HomeController : Controller
         }
         
     }
+    public IActionResult CuentaAtras(string host){
+        if(host=="si"){
+            ViewBag.Tiempo=3.5;
+        } else{
+            ViewBag.Tiempo=3;
+        }
+        return View();
+    }
     public IActionResult login()
     {
         ViewBag.logeado = Sesion.EstaLogeado;
         return View();
     }
     public IActionResult logout(){
-        ViewBag.logeado = Sesion.EstaLogeado;
         Sesion.LogOut();
+        ViewBag.logeado = Sesion.EstaLogeado;
         return View("Index");
     }
     public IActionResult Ruleta(Jugador jugador1, Jugador jugador2, int IdPartida){
@@ -251,6 +259,14 @@ public class HomeController : Controller
         return Json(new { jug1 = jugador, jug2= jugador2 });
 
     }
+    [HttpGet]
+    /*public JsonResult ChequearInicio(){
+        
+        return Json(Empezo=, );
+    }
+    public IActionResult EmpezarPartida(){
+        
+    }*/
     private string FormatearError(string error)
     {
         Dictionary<string, string> ErroresAMensajes = new();

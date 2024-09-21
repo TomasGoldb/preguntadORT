@@ -53,13 +53,13 @@ h1{
 }
 
 
-.parte-index div a{
+.parte-index div .a-logo{
   display:block;
   width: 272px;
   height: 272px;
   border-radius: 50%;
 }
-.parte-index div a .logo{
+.parte-index div .a-logo .logo{
   border-radius: 50%;
   display: flex;
     justify-content: center;
@@ -78,10 +78,27 @@ h1{
   text-align: center;
   transition: transform 0.05s ease-in-out;
 }
-.parte-index div a:hover .adentro-logo{
+.parte-index div .a-logo:hover .adentro-logo{
   transform: scale(1.15);
 }
-
+.boton-logout{
+  width: 25%;
+  padding: 10px;
+  background-color: rgb(135, 3, 212);
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 2%;
+  font-family: 'Mikado Bold DEMO';
+  text-decoration: none;
+  text-align: center;
+}
+.boton-logout:hover{
+  background-color: rgb(115, 16, 172);
+  color: white;
+}
 
 
 /*PARTE DE LOGIN Y REGISTRO*/
@@ -575,4 +592,26 @@ input[type=number] {
 .contenedor-jugadores div p{
   font-size: 30px;
   font-family: 'Mikado Bold DEMO';
+}
+.cuenta-atras{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+.cuenta-atras div{
+  background-color: white;
+  border-radius: 50%;
+  width: 20%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+.cuenta-atras div .countdown{
+  font-size: 6vw;
+  color: rgb(135, 3, 212);
 }
