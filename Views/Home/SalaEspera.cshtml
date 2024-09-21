@@ -1,0 +1,44 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<main class="pagina-login-register">
+<h1 class="titulo">Nehuentados</h1>
+<section class="seccion-configurar">
+    <div class="container">
+        <h1>Jugadores</h1>
+        <div class="contenedor-jugadores">
+            <p></p>
+            <p></p>
+        </div>
+        @if(ViewBag.jugador.IdJugador == 1) 
+        {
+            <button class="login-boton" style="margin-top: 4%" onclick="Jugar()">Iniciar</button>
+        }
+    </div>
+</section>
+<h1 class="codigo">Código: @ViewBag.idPartida</h1>
+</main>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+                $.ajax({
+                    url: '@Url.Action("ObtenerNombreJugador", "Home")',
+                    type: 'GET',
+                    data: {},
+                    success: function (data) {
+                        $('.contenedor-jugadores').empty(); // Limpiar el div antes de agregar
+                        $('.contenedor-jugadores').append('<p>' + data.jug1 + '</p>');
+                        $('.contenedor-jugadores').append('<p>' + data.jug2 + '</p>');
+                        console.log(data.jug);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error: ", error); // Imprimir el error en la consola
+    console.log("Status: ", status); // Estado de la respuesta
+    console.log("Response: ", xhr.responseText); // Ver el texto de la respuesta del servidor
+    alert('Error al agregar el jugador.');
+                    }
+                });
+        });
+</script>

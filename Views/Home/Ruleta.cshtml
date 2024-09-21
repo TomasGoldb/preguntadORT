@@ -10,12 +10,32 @@
                 <img class="foto-perfil" src="/FotosPerfil/fotoDefault.png">
                 <h3>Juancito megirola</h3>
             </div>
+            <div class="personajes">
+            <img src="/personajesCategorias/arte.png" class="personaje-no-conseguido">
+            <img src="/personajesCategorias/ciencia.png" class="personaje-no-conseguido">
+            <img src="/personajesCategorias/deportes.png" class="personaje-conseguido">
+            <img src="/personajesCategorias/entretenimiento.png" class="personaje-no-conseguido">
+            <img src="/personajesCategorias/geografia.png" class="personaje-conseguido">
+            <img src="/personajesCategorias/historia.png" class="personaje-no-conseguido">
+            </div>
         </div>
         <div class="vs">
             <p>Vs</p>
         </div>
         <div class="desc-pers">
             <!--Jugador 2-->
+            <div class="foto-nombre reversa">
+                <img class="foto-perfil" src="/FotosPerfil/fotoDefault.png">
+                <h3>Gabriel Stancanelli</h3>
+            </div>
+            <div class="personajes reversa">
+            <img src="/personajesCategorias/arte.png" class="personaje-no-conseguido" id="arte">
+            <img src="/personajesCategorias/ciencia.png" class="personaje-no-conseguido" id="ciencia">
+            <img src="/personajesCategorias/deportes.png" class="personaje-no-conseguido" id="deportes">
+            <img src="/personajesCategorias/entretenimiento.png" class="personaje-no-conseguido" id="entretenimiento">
+            <img src="/personajesCategorias/geografia.png" class="personaje-no-conseguido" id="geografia">
+            <img src="/personajesCategorias/historia.png" class="personaje-no-conseguido" id="historia">
+            </div>
         </div>
     </div>
     <div class="wheel-container">
@@ -24,3 +44,29 @@
     </div>
 </section>
 <script src="/js/ruleta.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function()){
+    $.ajax({
+        url: '/home/ObtenerPersonajesConseguidos',
+        //data: {idUsuario: @ViewBag.Jugador1.idUsuario, idPartida: @ViewBag.Partida.IdPartida},
+        data: {idUsuario: @ViewBag.Jugador1.idUsuario, idPartida: @ViewBag.Partida.IdPartida},
+        type: 'POST',
+        dataType: 'json',
+        success: function(response){
+            let categorias = {"arte","ciencia","deportes","entretenimiento","geografia","historia"}
+            for(int i=0;i<response.Lenght();i++){
+                if (response[i]==1)){
+                    $(`#${categorias[i]}`).setClass("personaje-conseguido");
+                }
+            }
+        },
+        error function(){
+
+        },
+        complete: function(){
+
+        }
+    });
+}
+</script>

@@ -14,6 +14,15 @@ class BD
         }
         return categoriasList;
     }
+    public static Categorias ObtenerIDDeCategoria(string nombreCategoria){
+        Categorias cat= new Categorias();
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            string sql = "SP_ObtenerIDDeCategoria";
+            cat= db.QueryFirstOrDefault<Categorias>(sql,new { Nombre = nombreCategoria });
+        }
+        return cat;
+    }
     public static Categorias ObtenerCategoriaPorID(int id){
         Categorias categoria= new Categorias();
         using (SqlConnection db = new SqlConnection(_connectionString))
@@ -36,6 +45,7 @@ class BD
         List<Preguntas> preguntasList;
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
+            //que esl stored procedure las devuelva ordenadas al azar
             string sql = "SP_ListarPreguntas";
             preguntasList = db.Query<Preguntas>(sql, new { dificultadId = dificultad, categoriaId = categoria }).ToList();
         }
@@ -46,7 +56,7 @@ class BD
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SP_ListarRespuestas";
-            respuestas = db.Query<Respuestas>(sql, new { IdPregunta = preguntaId }).ToList();
+            respuestas = db.Query<Respuestas>(sql, new { PreguntaId = preguntaId }).ToList();
         }
         return respuestas;
     }
@@ -77,5 +87,51 @@ class BD
             string sql = $"UPDATE usuario SET FotoPerfil='{objeto.FotoPerfil}' where mail='{objeto.GetMail()}'";
             db.Execute(sql);
         }
+    }
+    public static int CrearPartida(int TiempoMax, bool GirarNehuen, Dificultades Dificultad){
+        Partida partida = new Partida();
+        int idNuevaPartida;
+        using(SqlConnection db = new SqlConnection(_connectionString)){
+            string sql = "SP_CrearPartida";
+            db.Execute(sql, new {@TiempoMax = TiempoMax, @GirarNehuen = Convert.ToInt32(GirarNehuen), @IdDificultad = Dificultad.IdDificultad});
+            sql = "SP_ObtenerIdPartida";
+            partida = db.QueryFirstOrDefault<Partida>(sql);
+        }
+        idNuevaPartida = partida.IdPartida;
+        return idNuevaPartida;
+    }
+    public static int CrearJugador(Jugador jugador){
+        Partida partida = new Partida();
+        Jugador jugadorBD = new Jugador();
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            string sql = "SP_ObtenerPartida";
+            partida = db.QueryFirstOrDefault<Partida>(sql, new {@PartidaID = jugador.IdPartida});
+            if(partida != null){
+                sql = "SP_ObtenerJugador";
+                jugadorBD = db.QueryFirstOrDefault<Jugador>(sql, new {@JugadorID = jugador.IdJugador, @PartidaID = jugador.IdPartida});
+            }
+            if (partida == null) 
+            {
+                return 1;
+            }
+            else if(jugadorBD != null){
+                return 2;
+            }
+            else
+            {
+                sql = "SP_CrearJugador";
+                db.Execute(sql, new {@IdUsuario = jugador.IdUsuario, @IdJugador = jugador.IdJugador, @IdPartida = jugador.IdPartida});
+                return 0; 
+            }
+        }        
+    } 
+    public static List<JugadorEnJuego> SeleccionarJugadorEnJuego(int idPartida){
+        List<JugadorEnJuego> listaJug = new List<JugadorEnJuego>();
+        using(SqlConnection db = new SqlConnection(_connectionString)){
+            string sql="SP_ListarUsuariosXIDPartida";
+            listaJug = db.Query<JugadorEnJuego>(sql, new{ @IdPartida = idPartida }).ToList();
+        }
+        return listaJug;
     }
 }

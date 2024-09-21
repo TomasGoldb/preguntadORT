@@ -32,8 +32,6 @@ public class HomeController : Controller
     
     public IActionResult ConfigurarJuego()
     {
-        Juego.InicializarJuego();
-        ViewBag.categorias = Juego.ObtenerCategorias();
         ViewBag.dificultades = Juego.ObtenerDificultades();
         return View();
     }
@@ -47,42 +45,42 @@ public class HomeController : Controller
         return View();
     }
     [HttpPost]
-public IActionResult RecuperarContrasenaMail(string direccion) 
-{
-    try
+    public IActionResult RecuperarContrasenaMail(string direccion) 
     {
-        using (var mail = new MailMessage())
+        try
         {
-            mail.To.Add(new MailAddress(direccion));
-            mail.From = new MailAddress("nehuentados.noresponder@gmail.com");
-            mail.Subject = "No responder";  // Se puede cambiar
-            mail.Body = "Holi, esto es un test";  // Se puede cambiar
-            mail.IsBodyHtml = true;
-
-            using (var smtp = new SmtpClient("smtp.gmail.com", 587))
+            using (var mail = new MailMessage())
             {
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new System.Net.NetworkCredential("nehuentados.noresponder@gmail.com", "NehuGod123");
-                smtp.EnableSsl = true;
+                mail.To.Add(new MailAddress(direccion));
+                mail.From = new MailAddress("nehuentados.noresponder@gmail.com");
+                mail.Subject = "No responder";  // Se puede cambiar
+                mail.Body = "Holi, esto es un test";  // Se puede cambiar
+                mail.IsBodyHtml = true;
 
-                smtp.Send(mail);
+                using (var smtp = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new System.Net.NetworkCredential("nehuentados.noresponder@gmail.com", "NehuGod123");
+                    smtp.EnableSsl = true;
+
+                    smtp.Send(mail);
+                }
             }
-        }
 
-        return View("Index");
+            return View("Index");
+        }
+        catch (Exception ex)
+        {
+            // Manejar el error y mostrar un mensaje adecuado
+            ViewBag.ErrorMessage = "Hubo un problema enviando el correo: " + ex.Message;
+            return View("Home"); // Asegúrate de tener una vista de error
+        }
     }
-    catch (Exception ex)
-    {
-        // Manejar el error y mostrar un mensaje adecuado
-        ViewBag.ErrorMessage = "Hubo un problema enviando el correo: " + ex.Message;
-        return View("Home"); // Asegúrate de tener una vista de error
-    }
-}
 
     
     public IActionResult Comenzar(string username, int dificultad, int categoria)
     {
-        Juego.CargarPartida(username, dificultad, categoria);
+        Juego.CargarPartida(categoria);
         return View("Ruleta");
     }
 
@@ -92,12 +90,54 @@ public IActionResult RecuperarContrasenaMail(string direccion)
 
 
     public IActionResult Pregunta(int idCategoria){
-        Categorias categoria = BD.ObtenerCategoriaPorID(idCategoria);
-        ViewBag.categoria=categoria;
-        ViewBag.fotoCategoria=categoria.Foto;
+        //Categorias categoria = BD.ObtenerCategoriaPorID(idCategoria);
+        //ViewBag.categoria=categoria;
+        Preguntas pregunta= Juego.ObtenerProximaPregunta(idCategoria);
+        ViewBag.Pregunta = pregunta;
+        ViewBag.Respuestas=Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
+        //ViewBag.fotoCategoria=categoria.Foto;
         return View("Pregunta");
     }
-    /// PARTE DE LOGIN Y REGISTRO
+
+    public IActionResult CrearPartida(int tiempoMax, Dificultades dificultad, bool girarNehuen)
+    {
+        int idPartida = Juego.CrearPartida(tiempoMax, girarNehuen, dificultad);
+        Jugador jugador = new Jugador(Sesion.userActual.idUsuario, 1, idPartida);
+        Juego.CrearJugador(jugador);
+        Sesion.SetearJugador(jugador);
+        ViewBag.jugador = jugador;
+        ViewBag.idPartida = idPartida;
+        return View("SalaEspera");
+    }
+
+    public IActionResult Unirse(int codigo)
+    {
+        Jugador jugador = new Jugador(Sesion.userActual.idUsuario, 2, codigo);
+        int idError = Juego.CrearJugador(jugador);
+        ViewBag.dificultades = Juego.ObtenerDificultades();
+        switch(idError)
+        {
+            case 0:
+                Sesion.SetearJugador(jugador);
+                ViewBag.jugador = jugador;
+                ViewBag.idPartida = codigo;
+                return View("SalaEspera");
+            
+            case 1:
+                ViewBag.error = "El código ingresado es incorrecto.";
+                return View("ConfigurarJuego");
+
+            case 2:
+                ViewBag.error = "La partida está llena.";
+                return View("ConfigurarJuego");
+
+            default:
+                ViewBag.error = "Se ha producido un error.";
+                return View("ConfigurarJuego");
+        }
+    }
+
+    // PARTE DE LOGIN Y REGISTRO
 
     public IActionResult register()
     {
@@ -154,7 +194,21 @@ public IActionResult RecuperarContrasenaMail(string direccion)
             return View("login");
         }
     }
-
+    public IActionResult Corona(){
+        ViewBag.PersonajesNombre=2;
+        string[] listaFotos = {"/personajesCategorias/arte.png", "/personajesCategorias/ciencia.png", "/personajesCategorias/deportes.png", "/personajesCategorias/entretenimiento.png","/personajesCategorias/geografia.png","/personajesCategorias/historia.png"};
+        ViewBag.PersonajesFoto=listaFotos;
+        string [] listaNombres = {"arte","ciencia","deportes","entretenimiento","geografia","historia"};
+        ViewBag.PersonajesNombres=listaNombres;
+        return View("Corona");
+    }
+    public IActionResult PostCorona(string opcion){
+        
+        Preguntas pregunta= Juego.ObtenerProximaPregunta(Categorias.ObtenerCategoriaPorNombre(opcion).IdCategoria);
+        ViewBag.Pregunta = pregunta;
+        ViewBag.Respuestas=Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
+        return View("Pregunta");
+    }
     public IActionResult ActualizarFotoPerfil(IFormFile archivo){
         bool seCambio=Sesion.userActual.CambiarFoto(archivo, Environment);
         if(seCambio){
@@ -176,23 +230,45 @@ public IActionResult RecuperarContrasenaMail(string direccion)
         Sesion.LogOut();
         return View("Index");
     }
-    public IActionResult Ruleta(){
+    public IActionResult Ruleta(Jugador jugador1, Jugador jugador2, int IdPartida){
+        ViewBag.Jugador1 = jugador1;
+        ViewBag.Jugador2 = jugador2;
+        ViewBag.Partida = IdPartida;
         return View();
+    }
+    public string ObtenerPersonajesConseguidos(int idUsuario, int idPartida){
+        List<JugadorEnJuego> jugadores= Juego.ObtenerJugadoresEnJuego(idPartida);
+        foreach (JugadorEnJuego jug in jugadores){
+            if(jug.IdUsuario==idUsuario){
+                return jug.PersonajesConseguidos;
+            }
+        }
+        return "ERROR";
+
+    }
+    [HttpGet]
+    public JsonResult ObtenerNombreJugador(){
+        List<JugadorEnJuego> jugadores = BD.SeleccionarJugadorEnJuego(Sesion.jugadorActual.IdPartida);
+        string jugador="", jugador2="";
+        jugador=BD.Seleccionar($"select * from usuario where IdUsuario={jugadores[0].IdUsuario}")[0].Nombre;
+        if(jugadores.Count!=1){
+        jugador2=BD.Seleccionar($"select * from usuario where IdUsuario={jugadores[1].IdUsuario}")[0].Nombre;
+        }
+        Console.WriteLine(jugador+" "+jugador2);
+        return Json(new { jug1 = jugador, jug2= jugador2 });
+
     }
     private string FormatearError(string error)
     {
-        string mensaje=error;
-        if(error=="ERROR_001_YaExisteNickoMail"){
-            mensaje="Ya existe un usuario con ese nick o mail.";
-        }else if(error=="ERROR_002_ContraNoCoincide"){
-            mensaje="Las contraseñas no coinciden.";
-        }else if(error=="ERROR_003_ContraIncorrecta"){
-            mensaje="La contraseña es incorrecta.";
-        }else if(error=="ERROR_004_SinArchivo"){
-            mensaje="No has ingresado ningún archivo!";
-        } else if(error=="ERROR_005_MailIncorrecto"){
-            mensaje="El mail ingresado es incorrecto.";
-        }
+        Dictionary<string, string> ErroresAMensajes = new();
+        ErroresAMensajes["ERROR_001_YaExisteNickoMail"] = "Ya existe un usuario con ese nick o mail.";
+        ErroresAMensajes["ERROR_002_ContraNoCoincide"] = "Las contraseñas no coinciden.";
+        ErroresAMensajes["ERROR_003_ContraIncorrecta"] = "La contraseña es incorrecta.";
+        ErroresAMensajes["ERROR_004_SinArchivo"] = "No has ingresado ningún archivo!";
+        ErroresAMensajes["ERROR_005_MailIncorrecto"] = "El mail ingresado es incorrecto.";
+
+        string mensaje = ErroresAMensajes[error];
+
         return "<div class='alert alert-danger alert-dismissible' role='alert'><div>"+ mensaje + "</div>   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
     }
 

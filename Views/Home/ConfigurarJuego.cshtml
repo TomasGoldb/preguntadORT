@@ -3,16 +3,24 @@
 }
 
 <main class="pagina-login-register">
-<section class="seccion-configurar"> 
+<h1 class="titulo">Nehuentados</h1>
+<section class="seccion-configurar">
     <div class="container">
         <h1>Crear partida</h1>
-        <form action='@Url.Action("SalaEspera", "Home")' method="post">
+        <form action='@Url.Action("CrearPartida", "Home")' method="post">
             <select class="form-select form-select-lg mb-3 select-tiempo" name="tiempoMax" required>
                 <option selected disabled value="">Tiempo máximo</option>
-                <option value="1">15 segundos</option>
-                <option value="2">30 segundos</option>
-                <option value="3">45 segundos</option>
-                <option value="4">1 minuto</option>
+                <option value="15">15 segundos</option>
+                <option value="30">30 segundos</option>
+                <option value="45">45 segundos</option>
+                <option value="60">1 minuto</option>
+            </select>
+            <select class="form-select form-select-lg mb-3 select-tiempo" name="dificultad" required>
+                <option selected disabled value="">Dificultad</option>
+                @foreach(Dificultades dificultad in ViewBag.dificultades)
+                {
+                    <option value=@dificultad>@dificultad.Nombre</option>
+                }
             </select>
             <div class="form-check form-switch switch-secreto">
                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="girarNehuen">
@@ -23,7 +31,7 @@
     </div>
     <div class="container">
         <h1>Unirse a partida</h1>
-        <form action='@Url.Action("SalaEspera", "Home")' method="post">
+        <form action='@Url.Action("Unirse", "Home")' method="post">
             <div class="form-floating mb-3">
                 <input type="number" class="form-control input-codigo" id="floatingInput" autocomplete="off" placeholder="" name="codigo" required>
                 <label for="floatingInput">Código</label>
