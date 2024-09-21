@@ -11,12 +11,12 @@
                 <h3>Juancito megirola</h3>
             </div>
             <div class="personajes">
-            <img src="/personajesCategorias/arte.png" class="personaje-no-conseguido">
-            <img src="/personajesCategorias/ciencia.png" class="personaje-no-conseguido">
-            <img src="/personajesCategorias/deportes.png" class="personaje-conseguido">
-            <img src="/personajesCategorias/entretenimiento.png" class="personaje-no-conseguido">
-            <img src="/personajesCategorias/geografia.png" class="personaje-conseguido">
-            <img src="/personajesCategorias/historia.png" class="personaje-no-conseguido">
+            <img src="/personajesCategorias/arte.png" class="personaje-no-conseguido" id="arte">
+            <img src="/personajesCategorias/ciencia.png" class="personaje-no-conseguido" id="ciencia">
+            <img src="/personajesCategorias/deportes.png" class="personaje-no-conseguido" id="deportes">
+            <img src="/personajesCategorias/entretenimiento.png" class="personaje-no-conseguido" id="entretenimiento">
+            <img src="/personajesCategorias/geografia.png" class="personaje-no-conseguido" id="geografia">
+            <img src="/personajesCategorias/historia.png" class="personaje-no-conseguido" id="historia">
             </div>
         </div>
         <div class="vs">
@@ -29,12 +29,12 @@
                 <h3>Gabriel Stancanelli</h3>
             </div>
             <div class="personajes reversa">
-            <img src="/personajesCategorias/arte.png" class="personaje-no-conseguido" id="arte">
-            <img src="/personajesCategorias/ciencia.png" class="personaje-no-conseguido" id="ciencia">
-            <img src="/personajesCategorias/deportes.png" class="personaje-no-conseguido" id="deportes">
-            <img src="/personajesCategorias/entretenimiento.png" class="personaje-no-conseguido" id="entretenimiento">
-            <img src="/personajesCategorias/geografia.png" class="personaje-no-conseguido" id="geografia">
-            <img src="/personajesCategorias/historia.png" class="personaje-no-conseguido" id="historia">
+            <img src="/personajesCategorias/arte.png" class="personaje-no-conseguido" id="arte2">
+            <img src="/personajesCategorias/ciencia.png" class="personaje-no-conseguido" id="ciencia2">
+            <img src="/personajesCategorias/deportes.png" class="personaje-no-conseguido" id="deportes2">
+            <img src="/personajesCategorias/entretenimiento.png" class="personaje-no-conseguido" id="entretenimiento2">
+            <img src="/personajesCategorias/geografia.png" class="personaje-no-conseguido" id="geografia2">
+            <img src="/personajesCategorias/historia.png" class="personaje-no-conseguido" id="historia2">
             </div>
         </div>
     </div>
@@ -42,31 +42,50 @@
         <img src="/img/ruleta bien.png" alt="Ruleta" id="wheel" class="wheel">
         <img id="spin" class="ruleta-centro" src="/img/ruleta centro.png">
     </div>
+    <!--- reveer lo de corona --->
+    <div class="cantidad-para-corona">
+        @{
+            for (int i=1;i<=3;i++){
+                if(ViewBag.CantParaCorona<=i){
+                    <div class="cantidad-corona dorado"></div>
+                } else {
+                    <div class="cantidad-corona gris"></div>
+                }
+            }
+        }
+    </div>
 </section>
 <script src="/js/ruleta.js"></script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function()){
+document.addEventListener('DOMContentLoaded', function(){
     $.ajax({
-        url: '/home/ObtenerPersonajesConseguidos',
-        //data: {idUsuario: @ViewBag.Jugador1.idUsuario, idPartida: @ViewBag.Partida.IdPartida},
-        data: {idUsuario: @ViewBag.Jugador1.idUsuario, idPartida: @ViewBag.Partida.IdPartida},
-        type: 'POST',
-        dataType: 'json',
+        url: '@Url.Action("ObtenerPersonajesConseguidos", "Home")',
+        data: {},
+        type: 'GET',
         success: function(response){
-            let categorias = {"arte","ciencia","deportes","entretenimiento","geografia","historia"}
-            for(int i=0;i<response.Lenght();i++){
-                if (response[i]==1)){
-                    $(`#${categorias[i]}`).setClass("personaje-conseguido");
+            console.log(response.usuario1);
+            let categorias = ["arte","ciencia","deportes","entretenimiento","geografia","historia"];
+            for(let i=0;i<6;i++){
+                if (response.usuario1[i]){
+                    let fotoCat = $("#"+categorias[i]);
+                    fotoCat.removeClass('personaje-no-conseguido');
+                    fotoCat.addClass('personaje-conseguido');
+                }
+            }
+            for(let i=0;i<6;i++){
+                if (response.usuario2[i]){
+                    let fotoCat = $("#"+categorias[i]+"2");
+                    fotoCat.removeClass('personaje-no-conseguido');
+                    fotoCat.addClass('personaje-conseguido');
                 }
             }
         },
-        error function(){
-
-        },
-        complete: function(){
+        error: function(){
 
         }
     });
-}
+});
 </script>
+
+

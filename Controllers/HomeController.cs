@@ -36,9 +36,10 @@ public class HomeController : Controller
         return View();
     }
 
-    [HttpPost] IActionResult VerificarRespuesta(int idPregunta, int opcion){
-        ViewBag.IsCorrect = Juego.VerificarRespuesta(idPregunta, opcion);
-        return View("Respuesta");
+    [HttpPost] IActionResult VerificarRespuesta(Preguntas pregunta, int opcion){
+        ViewBag.IsCorrect = Juego.VerificarRespuesta(pregunta.IdPregunta, opcion);
+        ViewBag.Opcion= opcion;
+        return View("RespuestaCorrecta");
     }
     
     public IActionResult recuperarContrasena(){
@@ -234,16 +235,20 @@ public class HomeController : Controller
         ViewBag.Jugador1 = jugador1;
         ViewBag.Jugador2 = jugador2;
         ViewBag.Partida = IdPartida;
+        ViewBag.CantParaCorona=Sesion.jugadorActual.CantidadParaCorona;
         return View();
     }
-    public string ObtenerPersonajesConseguidos(int idUsuario, int idPartida){
-        List<JugadorEnJuego> jugadores= Juego.ObtenerJugadoresEnJuego(idPartida);
-        foreach (JugadorEnJuego jug in jugadores){
-            if(jug.IdUsuario==idUsuario){
-                return jug.PersonajesConseguidos;
-            }
-        }
-        return "ERROR";
+    [HttpGet]
+    public JsonResult ObtenerPersonajesConseguidos(){
+
+//FALTA HACER BIEN ESTO CUANDO YA VINCULEMOS PARTIDA CON EL JUEGO
+
+        //List<JugadorEnJuego> jugadores= Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdPartida);
+        //string[] personajes1 = jugadores[0].PersonajesConseguidos.Split("/");
+        //string[] personajes2 = jugadores[1].PersonajesConseguidos.Split("/");
+        int[] personajes1 = {0,0,1,0,0,1};
+        int[] personajes2 = {0,0,0,0,1,0};
+        return Json(new {usuario1 = personajes1, usuario2=personajes2});
 
     }
     [HttpGet]

@@ -526,3 +526,19 @@ h1{
   margin: 4%;
   width: 10%;
 }
+
+.pagina-corona .cantidad-para-corona{
+  height: 10%;
+  width: 60%;
+}
+
+.pagina-corona .cantidad-para-corona .cantidad-corona{
+  width: 30%;
+  height: 100%;
+}
+.dorado{
+  background-color: gold;
+}
+.gris{
+  background-color: grey;
+}
