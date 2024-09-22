@@ -54,4 +54,11 @@ static class Juego
     public static Usuario UsuarioPorID(int id){
             return BD.ObtenerUsuarioPorID(id);
         }
+    public static void EmpezarPartida(int IdPartida){
+        BD.EmpezarPartida(IdPartida);
+    }
+    public static bool EmpezoLaPartida(int idPartida){
+        return BD.ObtenerPartidaPorID(idPartida).PartidaIniciada;
+    }
+    
 }

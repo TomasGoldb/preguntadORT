@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Data;
 class BD
 {
-    private static string _connectionString = @"Server = localhost; Database = PreguntadORT; Trusted_Connection = True;";
+    private static string _connectionString = @"Server = DESKTOP-BS9P9C6\SQLEXPRESS; Database = PreguntadORT; Trusted_Connection = True;";
     public static List<Categorias> ObtenerCategorias(){
         List<Categorias> categoriasList;
         using (SqlConnection db = new SqlConnection(_connectionString))
@@ -31,6 +31,15 @@ class BD
             categoria= db.QueryFirstOrDefault<Categorias>(sql,new { idCategoria = id });
         }
         return categoria;
+    }
+    public static Partida ObtenerPartidaPorID(int id){
+        Partida partida= new Partida();
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            string sql = "SP_SP_ObtenerPartidaXID";
+            partida= db.QueryFirstOrDefault<Partida>(sql,new { IdPartida = id });
+        }
+        return partida;
     }
     public static Usuario ObtenerUsuarioPorID(int id){
         Usuario user= new Usuario();
@@ -89,6 +98,14 @@ class BD
         {
             string sql = "SP_CrearUsuario";
             db.Execute(sql, new {contra=objeto.GetContrasena(),nick=objeto.Nick,nombre=objeto.Nombre,mail=objeto.GetMail()});
+        }
+    }
+
+    public static void EmpezarPartida(int idPartida){
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            string sql = "SP_IniciarPartida";
+            db.Execute(sql, new {IdPartida=idPartida});
         }
     }
 

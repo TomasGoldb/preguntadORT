@@ -210,14 +210,7 @@ public class HomeController : Controller
         }
         
     }
-    public IActionResult CuentaAtras(string host){
-        if(host=="si"){
-            ViewBag.Tiempo=3.5;
-        } else{
-            ViewBag.Tiempo=3;
-        }
-        return View();
-    }
+
     public IActionResult login()
     {
         ViewBag.logeado = Sesion.EstaLogeado;
@@ -260,13 +253,21 @@ public class HomeController : Controller
 
     }
     [HttpGet]
-    /*public JsonResult ChequearInicio(){
-        
-        return Json(Empezo=, );
+    public JsonResult YaEmpezoLaPartida(){
+        bool empezo=Juego.EmpezoLaPartida(Sesion.jugadorActual.IdPartida);
+        return Json(new {Empezo=empezo});
     }
-    public IActionResult EmpezarPartida(){
-        
-    }*/
+    
+    public IActionResult EmpezarPartida(string host){
+        Juego.EmpezarPartida(Sesion.jugadorActual.IdPartida);
+                if (host=="si"){
+                ViewBag.Tiempo=3.5;
+            } else{
+                ViewBag.Tiempo=3;
+            }
+            return View("CuentaAtras");
+    }
+    
     private string FormatearError(string error)
     {
         Dictionary<string, string> ErroresAMensajes = new();
@@ -286,4 +287,5 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+
 }
