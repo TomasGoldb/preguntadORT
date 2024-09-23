@@ -92,9 +92,10 @@ public class HomeController : Controller
     public IActionResult CrearPartida(int tiempoMax, Dificultades dificultad, bool girarNehuen)
     {
         int idPartida = Juego.CrearPartida(tiempoMax, girarNehuen, dificultad);
+        Partida partida = new Partida(idPartida, tiempoMax, girarNehuen, dificultad.IdDificultad);
         Jugador jugador = new Jugador(Sesion.userActual.idUsuario, 1, idPartida);
         Juego.CrearJugador(jugador);
-        Sesion.SetearJugador(jugador);
+        Sesion.SetearPartida(partida, jugador);
         ViewBag.jugador = jugador;
         ViewBag.idPartida = idPartida;
         return View("SalaEspera");
@@ -103,28 +104,32 @@ public class HomeController : Controller
     public IActionResult Unirse(int codigo)
     {
         Jugador jugador = new Jugador(Sesion.userActual.idUsuario, 2, codigo);
+        Partida partida = Juego.ObtenerPartidaPorID(codigo);
         int idError = Juego.CrearJugador(jugador);
+        string error;
         ViewBag.dificultades = Juego.ObtenerDificultades();
         switch(idError)
         {
             case 0:
-                Sesion.SetearJugador(jugador);
+                Sesion.SetearPartida(partida, jugador);
                 ViewBag.jugador = jugador;
                 ViewBag.idPartida = codigo;
                 return View("SalaEspera");
             
             case 1:
-                ViewBag.error = "El código ingresado es incorrecto.";
-                return View("ConfigurarJuego");
+                error = "El código ingresado es incorrecto.";
+                break;
 
             case 2:
-                ViewBag.error = "La partida está llena.";
-                return View("ConfigurarJuego");
+                error = "La partida está llena.";
+                break;
 
             default:
-                ViewBag.error = "Se ha producido un error.";
-                return View("ConfigurarJuego");
+                error = "Se ha producido un error.";
+                break;
         }
+        ViewBag.error = "<div class='alert alert-danger alert-dismissible' role='alert'><div>"+ error + "</div>   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+        return View("ConfigurarJuego");
     }
 
     // PARTE DE LOGIN Y REGISTRO
@@ -147,7 +152,7 @@ public class HomeController : Controller
             }
             if (!coincide){
                 ViewBag.error="";
-                BD.CrearUsuario(user);
+                BD.CrearUsuario(user); //HACER QUE ESTO DEVUELVA LA ID PARA PONERLA EN user.IdUsuario
                 Sesion.SetearSesion(user);  
                 return RedirectToAction("Home");
             } else{
@@ -225,7 +230,7 @@ public class HomeController : Controller
         ViewBag.Jugador1 = jugador1;
         ViewBag.Jugador2 = jugador2;
         ViewBag.Partida = IdPartida;
-        ViewBag.CantParaCorona=Sesion.jugadorActual.CantidadParaCorona;
+        ViewBag.CantParaCorona= Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida);;
         return View();
     }
     [HttpGet]
@@ -254,8 +259,9 @@ public class HomeController : Controller
     }
     [HttpGet]
     public JsonResult YaEmpezoLaPartida(){
-        bool empezo=Juego.EmpezoLaPartida(Sesion.jugadorActual.IdPartida);
-        return Json(new {Empezo=empezo});
+        int empezo=Juego.ObtenerPartidaPorID(Sesion.jugadorActual.IdPartida).PartidaIniciada;
+        Console.WriteLine(empezo);
+        return Json(new {Empezo=1, IdJugador=Sesion.jugadorActual.IdJugador});
     }
     
     public IActionResult EmpezarPartida(string host){

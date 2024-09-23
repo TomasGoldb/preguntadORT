@@ -5,6 +5,7 @@ namespace preguntadORT.Models{
         public static bool EstaJugando = false;
         public static Usuario userActual = new Usuario();
         public static Jugador jugadorActual = new Jugador();
+        public static Partida partidaActual = new Partida();
 
 
         public static void SetearSesion(Usuario use){
@@ -17,14 +18,16 @@ namespace preguntadORT.Models{
             userActual=new Usuario();
         }
 
-        public static void SetearJugador(Jugador jugador){
+        public static void SetearPartida(Partida partida, Jugador jugador){
+            partidaActual = partida;
             jugadorActual = jugador;
             EstaJugando=true;
         }
 
-        public static void BorrarJugador(){
+        public static void BorrarPartida(){
             EstaJugando=false;
             jugadorActual=new Jugador();
+            partidaActual=new Partida();
         }
 
     }

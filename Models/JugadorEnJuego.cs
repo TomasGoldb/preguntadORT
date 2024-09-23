@@ -15,4 +15,5 @@ public class JugadorEnJuego
         PersonajesConseguidos=personajesConseguidos;
         CantidadParaCorona=cantidadParaCorona;
     }
+    
 }

@@ -36,7 +36,7 @@ class BD
         Partida partida= new Partida();
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            string sql = "SP_SP_ObtenerPartidaXID";
+            string sql = "SP_ObtenerPartidaXID";
             partida= db.QueryFirstOrDefault<Partida>(sql,new { IdPartida = id });
         }
         return partida;
@@ -132,8 +132,8 @@ class BD
         Jugador jugadorBD = new Jugador();
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            string sql = "SP_ObtenerPartida";
-            partida = db.QueryFirstOrDefault<Partida>(sql, new {@PartidaID = jugador.IdPartida});
+            string sql = "SP_ObtenerPartidaXID";
+            partida = db.QueryFirstOrDefault<Partida>(sql, new {@IdPartida = jugador.IdPartida});
             if(partida != null){
                 sql = "SP_ObtenerJugador";
                 jugadorBD = db.QueryFirstOrDefault<Jugador>(sql, new {@JugadorID = jugador.IdJugador, @PartidaID = jugador.IdPartida});
