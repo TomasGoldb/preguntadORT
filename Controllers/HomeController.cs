@@ -92,9 +92,11 @@ public class HomeController : Controller
     public IActionResult CrearPartida(int tiempoMax, Dificultades dificultad, bool girarNehuen)
     {
         int idPartida = Juego.CrearPartida(tiempoMax, girarNehuen, dificultad);
+        Console.WriteLine(girarNehuen);
+        Partida partida = new Partida(idPartida, tiempoMax, girarNehuen, dificultad.IdDificultad);
         Jugador jugador = new Jugador(Sesion.userActual.idUsuario, 1, idPartida);
         Juego.CrearJugador(jugador);
-        Sesion.SetearJugador(jugador);
+        Sesion.SetearPartida(partida, jugador);
         ViewBag.jugador = jugador;
         ViewBag.idPartida = idPartida;
         return View("SalaEspera");
@@ -108,7 +110,7 @@ public class HomeController : Controller
         switch(idError)
         {
             case 0:
-                Sesion.SetearJugador(jugador);
+                //Sesion.SetearPartida(jugador);
                 ViewBag.jugador = jugador;
                 ViewBag.idPartida = codigo;
                 return View("SalaEspera");
