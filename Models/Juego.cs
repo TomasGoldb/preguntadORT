@@ -57,6 +57,7 @@ static class Juego
     public static void EmpezarPartida(int IdPartida){
         BD.EmpezarPartida(IdPartida);
     }
+
     //public static bool EmpezoLaPartida(int idPartida){
     //    return BD.ObtenerPartidaPorID(idPartida).PartidaIniciada;
     //}
@@ -69,5 +70,7 @@ static class Juego
         }
         return -1;
     }
-    
+    public static Partida ObtenerPartidaPorID(int idPartida){
+        return BD.ObtenerPartidaPorID(idPartida);
+    }
 }

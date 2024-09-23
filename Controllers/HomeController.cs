@@ -92,9 +92,10 @@ public class HomeController : Controller
     public IActionResult CrearPartida(int tiempoMax, Dificultades dificultad, bool girarNehuen)
     {
         int idPartida = Juego.CrearPartida(tiempoMax, girarNehuen, dificultad);
+        Partida partida = new Partida(idPartida, tiempoMax, girarNehuen, dificultad.IdDificultad);
         Jugador jugador = new Jugador(Sesion.userActual.idUsuario, 1, idPartida);
         Juego.CrearJugador(jugador);
-        Sesion.SetearJugador(jugador);
+        Sesion.SetearPartida(partida, jugador);
         ViewBag.jugador = jugador;
         ViewBag.idPartida = idPartida;
         return View("SalaEspera");
@@ -103,12 +104,13 @@ public class HomeController : Controller
     public IActionResult Unirse(int codigo)
     {
         Jugador jugador = new Jugador(Sesion.userActual.idUsuario, 2, codigo);
+        Partida partida = Juego.ObtenerPartidaPorID(codigo);
         int idError = Juego.CrearJugador(jugador);
         ViewBag.dificultades = Juego.ObtenerDificultades();
         switch(idError)
         {
             case 0:
-                Sesion.SetearJugador(jugador);
+                Sesion.SetearPartida(partida, jugador);
                 ViewBag.jugador = jugador;
                 ViewBag.idPartida = codigo;
                 return View("SalaEspera");
@@ -147,7 +149,7 @@ public class HomeController : Controller
             }
             if (!coincide){
                 ViewBag.error="";
-                BD.CrearUsuario(user);
+                BD.CrearUsuario(user); //HACER QUE ESTO DEVUELVA LA ID PARA PONERLA EN user.IdUsuario
                 Sesion.SetearSesion(user);  
                 return RedirectToAction("Home");
             } else{
