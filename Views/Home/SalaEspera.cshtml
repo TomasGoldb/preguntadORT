@@ -1,5 +1,7 @@
 @{
     ViewData["Title"] = "Home Page";
+
+    string jugador2 = "";
 }
 
 <main class="pagina-login-register">
@@ -8,10 +10,7 @@
     <div class="container">
         <h1>Jugadores</h1>
         <div class="contenedor-jugadores"></div>
-        @if(ViewBag.jugador.IdJugador == 1) 
-        {
-            <button class="login-boton" style="margin-top: 4%" id="boton-iniciar">Iniciar</button>
-        }
+        <div class="contenedor-boton"></div>
     </div>
 </section>
 <h1 class="codigo">Código: @ViewBag.idPartida</h1>
@@ -20,16 +19,12 @@
 <script>
 
 let buclenombre, bubleinicio;
-let boton = document.getElementById("boton-iniciar");
 document.addEventListener('DOMContentLoaded', function() {
                 ChequearNombres();
                 buclenombre=setInterval(ChequearNombres,3000);
                 bucleinicio=setInterval(ChequearInicio,500);
                 
         });
-boton.addEventListener("click", function (){
-                window.location.href='/Home/EmpezarPartida?host="si"';
-                })
         
         
 
@@ -40,10 +35,13 @@ boton.addEventListener("click", function (){
                     data: {},
                     success: function (data) {
                         $('.contenedor-jugadores').empty();
+                        $('.contenedor-boton').empty();
                         $('.contenedor-jugadores').append('<div><p>' + data.jug1 + '</p></div>');
                         if(data.jug2 != "")
                         {
+                            jugador2 = data.jug2;
                             $('.contenedor-jugadores').append('<div><p>' + data.jug2 + '</p></div>');
+                            $('.contenedor-boton').append('<button class="login-boton" style="margin-top: 4%" onclick=Iniciar()>Iniciar</button>');
                         }
                     },
                     error: function () {
@@ -51,16 +49,16 @@ boton.addEventListener("click", function (){
                     }
                 });
     }
+    function Iniciar(){
+        window.location.href='/Home/EmpezarPartida?host="si"';
+    }
     function ChequearInicio(){
-        console.log("hola");
         $.ajax({
                     url: '@Url.Action("YaEmpezoLaPartida", "Home")',
                     type: 'GET',
                     data: {},
                     success: function (data) {
-                        console.log(data.empezo);
                         if(data.empezo==1){
-                            console.log("entro bien adentro");
                              window.location.href='/Home/EmpezarPartida?host="no"';
                         }
 
