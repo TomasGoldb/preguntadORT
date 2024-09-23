@@ -1,5 +1,6 @@
 // JavaScript
 function handleClick(girarNehuen) {
+    console.log(girarNehuen);
     const button = document.getElementById('spin');
     const wheel = document.getElementById('wheel');
     if (girarNehuen == 1)
