@@ -261,16 +261,11 @@ public class HomeController : Controller
     public JsonResult YaEmpezoLaPartida(){
         int empezo=Juego.ObtenerPartidaPorID(Sesion.jugadorActual.IdPartida).PartidaIniciada;
         Console.WriteLine(empezo);
-        return Json(new {Empezo=1, IdJugador=Sesion.jugadorActual.IdJugador});
+        return Json(new {Empezo=empezo, IdJugador=Sesion.jugadorActual.IdJugador});
     }
     
-    public IActionResult EmpezarPartida(string host){
+    public IActionResult EmpezarPartida(){
         Juego.EmpezarPartida(Sesion.jugadorActual.IdPartida);
-                if (host=="si"){
-                ViewBag.Tiempo=3.5;
-            } else{
-                ViewBag.Tiempo=3;
-            }
             return View("CuentaAtras");
     }
     

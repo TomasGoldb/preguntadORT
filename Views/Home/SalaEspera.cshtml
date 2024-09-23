@@ -24,7 +24,7 @@ let boton = document.getElementById("boton-iniciar");
 document.addEventListener('DOMContentLoaded', function() {
                 ChequearNombres();
                 buclenombre=setInterval(ChequearNombres,3000);
-                bucleinicio=setInterval(ChequearInicio,1000);
+                bucleinicio=setInterval(ChequearInicio,500);
                 
         });
 boton.addEventListener("click", function (){
@@ -58,10 +58,10 @@ boton.addEventListener("click", function (){
                     type: 'GET',
                     data: {},
                     success: function (data) {
-                        console.log(data);
-                        if(data.Empezo===1){
+                        console.log(data.empezo);
+                        if(data.empezo==1){
                             console.log("entro bien adentro");
-                                window.location.href='/Home/CuentaAtras?host="no"';
+                             window.location.href='/Home/EmpezarPartida?host="no"';
                         }
 
                     },
