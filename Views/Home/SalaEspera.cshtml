@@ -19,28 +19,18 @@
 
 <script>
 
-let buclenombre, bucleinicio;
+let buclenombre, bubleinicio;
 let boton = document.getElementById("boton-iniciar");
 document.addEventListener('DOMContentLoaded', function() {
                 ChequearNombres();
                 buclenombre=setInterval(ChequearNombres,3000);
-                bucleinicio=setInterval(ChequearInicio,1000);
+                bucleinicio=setInterval(ChequearInicio,500);
                 
         });
-
-        boton.addEventListener("click", function (){
-                $.ajax({
-                    url: '@Url.Action("EmpezarPartida", "Home")',
-                    type: 'GET',
-                    data: {},
-                    success: function(data){
-                        console.log(data.empezada)
-                    },
-                    error: function () {
-                        alert('Error al actualizar los jugadores');
-                    }
-                });
+boton.addEventListener("click", function (){
+                window.location.href='/Home/EmpezarPartida?host="si"';
                 })
+        
         
 
     function ChequearNombres(){
@@ -71,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         console.log(data.empezo);
                         if(data.empezo==1){
                             console.log("entro bien adentro");
-                             window.location.href='/Home/EmpezarPartida';
+                             window.location.href='/Home/EmpezarPartida?host="no"';
                         }
 
                     },
