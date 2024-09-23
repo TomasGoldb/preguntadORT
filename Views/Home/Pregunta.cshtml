@@ -14,7 +14,7 @@
 <div class="respuestas">
 @{
     for(int i=0;i<4;i++){
-    <a asp-action="VerificarRespuesta" asp-controller="Home" asp-route-pregunta="@ViewBag.Pregunta" asp-route-opcion="@i">@ViewBag.Respuestas[i].Contenido</a>
+    <a asp-action="VerificarRespuesta" asp-controller="Home" asp-route-idPregunta="@ViewBag.Pregunta.IdPregunta" asp-route-opcion="@i">@ViewBag.Respuestas[i].Contenido</a>
     }
 }
 </div>

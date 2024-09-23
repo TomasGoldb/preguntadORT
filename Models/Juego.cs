@@ -3,7 +3,6 @@ namespace preguntadORT.Models;
 static class Juego
 {
     private static string username {get; set;}
-    private static int cantidadPreguntasCorrectas {get; set;}
     private static List<Preguntas> preguntas {get; set;}
     private static List<Respuestas> respuestas {get; set;}
     private static int dificultad {get;set;} =1;
@@ -30,13 +29,8 @@ static class Juego
     }
     public static bool VerificarRespuesta(int idPregunta, int opcion)
     {
+        List<Respuestas> respuestas=BD.ObtenerRespuestas(idPregunta);
         bool correcta = respuestas[opcion].Correcta;
-        if (correcta)
-        {
-            cantidadPreguntasCorrectas++;
-            /*Mas tarde vemos lo de los personajes*/
-        }
-        preguntas.Remove(preguntas[idPregunta]);
         return correcta;
     }
     public static List<JugadorEnJuego> ObtenerJugadoresEnJuego(int idPartida){
