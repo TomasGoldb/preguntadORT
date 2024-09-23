@@ -19,7 +19,7 @@
 
 <script>
 
-let buclenombre, bubleinicio;
+let buclenombre, bucleinicio;
 let boton = document.getElementById("boton-iniciar");
 document.addEventListener('DOMContentLoaded', function() {
                 ChequearNombres();
@@ -27,20 +27,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 bucleinicio=setInterval(ChequearInicio,1000);
                 
         });
-boton.addEventListener("click", function (){
+
+        boton.addEventListener("click", function (){
                 $.ajax({
                     url: '@Url.Action("EmpezarPartida", "Home")',
                     type: 'GET',
                     data: {},
                     success: function(data){
                         console.log(data.empezada)
-                    }
+                    },
                     error: function () {
                         alert('Error al actualizar los jugadores');
                     }
                 });
                 })
-        
         
 
     function ChequearNombres(){

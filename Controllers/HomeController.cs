@@ -269,7 +269,7 @@ public class HomeController : Controller
         Juego.EmpezarPartida(Sesion.jugadorActual.IdPartida);
         seEmpezo=true;
         }
-        return Json(new{empezada=seEmpezo});
+        return Json(new {empezada=seEmpezo});
     }
     public IActionResult CuentaAtras(){
         return View();
