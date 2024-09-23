@@ -24,14 +24,12 @@ let boton = document.getElementById("boton-iniciar");
 document.addEventListener('DOMContentLoaded', function() {
                 ChequearNombres();
                 buclenombre=setInterval(ChequearNombres,3000);
-                if(@ViewBag.jugador.IdJugador==0){
                 bucleinicio=setInterval(ChequearInicio,1000);
-                }else{
-                    boton.addEventListener("click", function (){
-                    window.location.href='/Home/EmpezarPartida?host="si"';
-        })
-                }
+                
         });
+boton.addEventListener("click", function (){
+                window.location.href='/Home/EmpezarPartida?host="si"';
+                })
         
         
 
@@ -54,16 +52,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
     }
     function ChequearInicio(){
+        console.log("hola");
         $.ajax({
                     url: '@Url.Action("YaEmpezoLaPartida", "Home")',
                     type: 'GET',
                     data: {},
                     success: function (data) {
-                        if(data.Empezo){
-                            if(data.IdJugador=0){
+                        console.log(data);
+                        if(data.Empezo===1){
+                            console.log("entro bien adentro");
                                 window.location.href='/Home/CuentaAtras?host="no"';
-                            }
                         }
+
                     },
                     error: function () {
                         alert('Error al chequear si inició');

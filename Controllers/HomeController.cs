@@ -257,7 +257,8 @@ public class HomeController : Controller
     [HttpGet]
     public JsonResult YaEmpezoLaPartida(){
         int empezo=Juego.ObtenerPartidaPorID(Sesion.jugadorActual.IdPartida).PartidaIniciada;
-        return Json(new {Empezo=empezo});
+        Console.WriteLine(empezo);
+        return Json(new {Empezo=1, IdJugador=Sesion.jugadorActual.IdJugador});
     }
     
     public IActionResult EmpezarPartida(string host){
