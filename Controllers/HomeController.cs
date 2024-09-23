@@ -106,6 +106,7 @@ public class HomeController : Controller
         Jugador jugador = new Jugador(Sesion.userActual.idUsuario, 2, codigo);
         Partida partida = Juego.ObtenerPartidaPorID(codigo);
         int idError = Juego.CrearJugador(jugador);
+        string error;
         ViewBag.dificultades = Juego.ObtenerDificultades();
         switch(idError)
         {
@@ -116,17 +117,19 @@ public class HomeController : Controller
                 return View("SalaEspera");
             
             case 1:
-                ViewBag.error = "El código ingresado es incorrecto.";
-                return View("ConfigurarJuego");
+                error = "El código ingresado es incorrecto.";
+                break;
 
             case 2:
-                ViewBag.error = "La partida está llena.";
-                return View("ConfigurarJuego");
+                error = "La partida está llena.";
+                break;
 
             default:
-                ViewBag.error = "Se ha producido un error.";
-                return View("ConfigurarJuego");
+                error = "Se ha producido un error.";
+                break;
         }
+        ViewBag.error = "<div class='alert alert-danger alert-dismissible' role='alert'><div>"+ error + "</div>   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+        return View("ConfigurarJuego");
     }
 
     // PARTE DE LOGIN Y REGISTRO
