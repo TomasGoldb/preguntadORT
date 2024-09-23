@@ -17,6 +17,7 @@ html {
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
+
 html {
   position: relative;
   min-height: 100%;
@@ -554,19 +555,24 @@ input[type=number] {
   width: 50%;
   display: flex;
 }
-.pagina-corona .conjunto-personajes .personaje{
+.conjunto-personajes .personaje{
   margin: 4%;
   width: 10%;
 }
 
-.pagina-corona .cantidad-para-corona{
-  height: 10%;
-  width: 60%;
+.cantidad-para-corona{
+  height: 2vh;
+  width: 40vw;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5%;
 }
 
-.pagina-corona .cantidad-para-corona .cantidad-corona{
+.cantidad-para-corona .cantidad-corona{
   width: 30%;
   height: 100%;
+  width: 30%;
+  border-radius: 10px;
 }
 .dorado{
   background-color: gold;

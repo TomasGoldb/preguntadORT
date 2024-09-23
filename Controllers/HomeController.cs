@@ -230,7 +230,7 @@ public class HomeController : Controller
         ViewBag.Jugador1 = jugador1;
         ViewBag.Jugador2 = jugador2;
         ViewBag.Partida = IdPartida;
-        ViewBag.CantParaCorona=Sesion.jugadorActual.CantidadParaCorona;
+        ViewBag.CantParaCorona= Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida);;
         return View();
     }
     [HttpGet]
