@@ -58,9 +58,6 @@ static class Juego
         BD.EmpezarPartida(IdPartida);
     }
 
-    //public static bool EmpezoLaPartida(int idPartida){
-    //    return BD.ObtenerPartidaPorID(idPartida).PartidaIniciada;
-    //}
     public static int ObtenerCantidadParaCorona(int idPartida){
         List<JugadorEnJuego> jugadores= BD.SeleccionarJugadorEnJuego(idPartida);
         foreach(JugadorEnJuego jug in jugadores){

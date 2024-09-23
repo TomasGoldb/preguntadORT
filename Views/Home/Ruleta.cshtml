@@ -58,6 +58,11 @@
 <script src="/js/ruleta.js"></script>
 
 <script>
+document.getElementById('spin').addEventListener('click', function () {
+    handleClick(@Convert.ToInt32(ViewBag.girarNehuen));
+});
+
+
 document.addEventListener('DOMContentLoaded', function(){
     $.ajax({
         url: '@Url.Action("ObtenerPersonajesConseguidos", "Home")',

@@ -1,7 +1,11 @@
 // JavaScript
-function handleClick() {
+function handleClick(girarNehuen) {
     const button = document.getElementById('spin');
     const wheel = document.getElementById('wheel');
+    if (girarNehuen == 1)
+    {
+        wheel = document.getElementById('spin');
+    }
     const rotation = Math.floor(Math.random() * 3600) + 360; // Gira entre 360 y 3960 grados
 
     wheel.style.transform = `rotate(${rotation}deg)`;
@@ -36,5 +40,3 @@ function handleClick() {
     // Remover el event listener para evitar clics adicionales
     button.removeEventListener('click', handleClick);
 }
-
-document.getElementById('spin').addEventListener('click', handleClick);

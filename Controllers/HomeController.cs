@@ -85,7 +85,7 @@ public class HomeController : Controller
         Preguntas pregunta= Juego.ObtenerProximaPregunta(idCategoria);
         ViewBag.Pregunta = pregunta;
         ViewBag.Respuestas=Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
-        //ViewBag.fotoCategoria=categoria.Foto;
+        ViewBag.tiempoMax = Sesion.partidaActual.TiempoMax;
         return View("Pregunta");
     }
 
@@ -152,7 +152,7 @@ public class HomeController : Controller
             }
             if (!coincide){
                 ViewBag.error="";
-                BD.CrearUsuario(user); //HACER QUE ESTO DEVUELVA LA ID PARA PONERLA EN user.IdUsuario
+                user.idUsuario = BD.CrearUsuario(user);
                 Sesion.SetearSesion(user);  
                 return RedirectToAction("Home");
             } else{
@@ -230,6 +230,7 @@ public class HomeController : Controller
         ViewBag.Jugador1 = jugador1;
         ViewBag.Jugador2 = jugador2;
         ViewBag.Partida = IdPartida;
+        ViewBag.girarNehuen = Sesion.partidaActual.GirarNehuen;
         ViewBag.CantParaCorona= Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida);;
         return View();
     }

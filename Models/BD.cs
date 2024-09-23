@@ -93,12 +93,16 @@ class BD
         return listaUsuario;
     }
     
-        public static void CrearUsuario(Usuario objeto){
+        public static int CrearUsuario(Usuario objeto){
+        int idUsuario;
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SP_CrearUsuario";
             db.Execute(sql, new {contra=objeto.GetContrasena(),nick=objeto.Nick,nombre=objeto.Nombre,mail=objeto.GetMail()});
+            sql = "SP_ObtenerIdUsuario";
+            idUsuario = db.QueryFirstOrDefault<Usuario>(sql).idUsuario;
         }
+        return idUsuario;
     }
 
     public static void EmpezarPartida(int idPartida){
