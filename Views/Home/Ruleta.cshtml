@@ -69,17 +69,17 @@ function ObtenerPersonajes(){
         data: {},
         type: 'GET',
         success: function(response){
-            console.log(response.usuario1);
+            console.log(response);
             let categorias = ["arte","ciencia","deportes","entretenimiento","geografia","historia"];
             for(let i=0;i<6;i++){
-                if (response.usuario1[i]){
+                if (response.usuario1[i]=="1"){
                     let fotoCat = $("#"+categorias[i]);
                     fotoCat.removeClass('personaje-no-conseguido');
                     fotoCat.addClass('personaje-conseguido');
                 }
             }
             for(let i=0;i<6;i++){
-                if (response.usuario2[i]){
+                if (response.usuario2[i]=="1"){
                     let fotoCat = $("#"+categorias[i]+"2");
                     fotoCat.removeClass('personaje-no-conseguido');
                     fotoCat.addClass('personaje-conseguido');

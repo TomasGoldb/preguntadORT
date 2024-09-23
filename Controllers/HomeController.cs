@@ -93,6 +93,7 @@ public class HomeController : Controller
         Preguntas pregunta= Juego.ObtenerProximaPregunta(idCategoria);
         ViewBag.Pregunta = pregunta;
         ViewBag.Respuestas=Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
+        ViewBag.Tiempo=Sesion.partidaActual.TiempoMax;
         //ViewBag.fotoCategoria=categoria.Foto;
         return View("Pregunta");
     }
@@ -257,9 +258,7 @@ public class HomeController : Controller
         List<JugadorEnJuego> jugadores= Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdPartida);
         string[] personajes1 = jugadores[0].PersonajesConseguidos.Split("/");
         string[] personajes2 = jugadores[1].PersonajesConseguidos.Split("/");
-        int[] personajesInt1 = personajes1.Select(int.Parse).ToArray();
-        int[] personajesInt2 = personajes2.Select(int.Parse).ToArray();
-        return Json(new {usuario1 = personajesInt1, usuario2=personajesInt2});
+        return Json(new {usuario1 = personajes1, usuario2=personajes2});
 
     }
     [HttpGet]

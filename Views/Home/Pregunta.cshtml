@@ -26,5 +26,11 @@
 
 </main>
 
-<script src="/js/pregunta.js" onload="setearTiempo(10)">
+<script src="/js/pregunta.js">
+
+<script>
+document.addEventListener("DOMContentLoaded", function (){
+    setearTiempo(@ViewBag.Tiempo);
+});
+</script>
 
