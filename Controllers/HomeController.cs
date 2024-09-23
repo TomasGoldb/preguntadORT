@@ -250,6 +250,10 @@ public class HomeController : Controller
         }
         return View();
     }
+    public JsonResult ObtenerGirarNehuen(){
+        int girar=Convert.ToInt32(Sesion.partidaActual.GirarNehuen);
+        return Json(new {giro=girar});
+    }
     [HttpGet]
     public JsonResult ObtenerPersonajesConseguidos(){
 
