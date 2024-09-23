@@ -8,7 +8,7 @@
         <!--Jugador 1-->
             <div class="foto-nombre">
                 <img class="foto-perfil" src="/FotosPerfil/fotoDefault.png">
-                <h3>Juancito megirola</h3>
+                <h3>@ViewBag.jugador1.Nombre</h3>
             </div>
             <div class="personajes">
             <img src="/personajesCategorias/arte.png" class="personaje-no-conseguido" id="arte">
@@ -26,7 +26,7 @@
             <!--Jugador 2-->
             <div class="foto-nombre reversa">
                 <img class="foto-perfil" src="/FotosPerfil/fotoDefault.png">
-                <h3>Gabriel Stancanelli</h3>
+                <h3>@ViewBag.jugador2.Nombre</h3>
             </div>
             <div class="personajes reversa">
             <img src="/personajesCategorias/arte.png" class="personaje-no-conseguido" id="arte2">
@@ -59,6 +59,11 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function(){
+    let RecargarPersonajes = setInterval(ObtenerPersonajes, 3000);
+});
+
+function ObtenerPersonajes(){
+    console.log("aa");
     $.ajax({
         url: '@Url.Action("ObtenerPersonajesConseguidos", "Home")',
         data: {},
@@ -85,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
         }
     });
-});
+}
 </script>
 
 

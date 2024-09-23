@@ -37,9 +37,17 @@ public class HomeController : Controller
     }
 
     [HttpPost] IActionResult VerificarRespuesta(Preguntas pregunta, int opcion){
-        ViewBag.IsCorrect = Juego.VerificarRespuesta(pregunta.IdPregunta, opcion);
+        bool esCorrecta=Juego.VerificarRespuesta(pregunta.IdPregunta, opcion);
+        ViewBag.IsCorrect = esCorrecta;
         ViewBag.Opcion= opcion;
         ViewBag.Opciones=BD.ObtenerRespuestas(pregunta.IdPregunta);
+        if(esCorrecta){
+            Juego.SumarParaCorona(Sesion.jugadorActual.IdJugador);
+            if(Juego.ObtenerCantidadParaCorona(Sesion.jugadorActual.IdJugador)==3){
+            }
+        } else{
+            Juego.ReiniciarCorona(Sesion.jugadorActual.IdJugador);
+        }
         return View("RespuestaCorrecta");
     }
     
@@ -226,11 +234,19 @@ public class HomeController : Controller
         ViewBag.logeado = Sesion.EstaLogeado;
         return View("Index");
     }
-    public IActionResult Ruleta(Jugador jugador1, Jugador jugador2, int IdPartida){
-        ViewBag.Jugador1 = jugador1;
-        ViewBag.Jugador2 = jugador2;
-        ViewBag.Partida = IdPartida;
-        ViewBag.CantParaCorona= Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida);;
+    public IActionResult Ruleta(){
+        List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
+        foreach(JugadorEnJuego jug in jugadores){
+            if(jug.IdUsuario==Sesion.userActual.idUsuario){
+                ViewBag.jugador1=jug;
+            } else{
+                ViewBag.jugador2=jug;
+            }
+        }
+        ViewBag.CantParaCorona= Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida);
+        if(Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==3){
+            return View("Corona");
+        }
         return View();
     }
     [HttpGet]
@@ -238,12 +254,12 @@ public class HomeController : Controller
 
 //FALTA HACER BIEN ESTO CUANDO YA VINCULEMOS PARTIDA CON EL JUEGO
 
-        //List<JugadorEnJuego> jugadores= Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdPartida);
-        //string[] personajes1 = jugadores[0].PersonajesConseguidos.Split("/");
-        //string[] personajes2 = jugadores[1].PersonajesConseguidos.Split("/");
-        int[] personajes1 = {0,0,1,0,0,1};
-        int[] personajes2 = {0,0,0,0,1,0};
-        return Json(new {usuario1 = personajes1, usuario2=personajes2});
+        List<JugadorEnJuego> jugadores= Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdPartida);
+        string[] personajes1 = jugadores[0].PersonajesConseguidos.Split("/");
+        string[] personajes2 = jugadores[1].PersonajesConseguidos.Split("/");
+        int[] personajesInt1 = personajes1.Select(int.Parse).ToArray();
+        int[] personajesInt2 = personajes2.Select(int.Parse).ToArray();
+        return Json(new {usuario1 = personajesInt1, usuario2=personajesInt2});
 
     }
     [HttpGet]
@@ -260,7 +276,6 @@ public class HomeController : Controller
     [HttpGet]
     public JsonResult YaEmpezoLaPartida(){
         int empezo=Juego.ObtenerPartidaPorID(Sesion.jugadorActual.IdPartida).PartidaIniciada;
-        Console.WriteLine(empezo);
         return Json(new {Empezo=empezo, IdJugador=Sesion.jugadorActual.IdJugador});
     }
     
