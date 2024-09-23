@@ -46,7 +46,7 @@
     <div class="cantidad-para-corona">
         @{
             for (int i=1;i<=3;i++){
-                if(ViewBag.CantParaCorona<=i){
+                if(ViewBag.CantParaCorona>=i){
                     <div class="cantidad-corona dorado"></div>
                 } else {
                     <div class="cantidad-corona gris"></div>

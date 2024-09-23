@@ -225,7 +225,7 @@ public class HomeController : Controller
         ViewBag.Jugador1 = jugador1;
         ViewBag.Jugador2 = jugador2;
         ViewBag.Partida = IdPartida;
-        ViewBag.CantParaCorona=Sesion.jugadorActual.CantidadParaCorona;
+        ViewBag.CantParaCorona= Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida);;
         return View();
     }
     [HttpGet]
@@ -253,10 +253,10 @@ public class HomeController : Controller
 
     }
     [HttpGet]
-    public JsonResult YaEmpezoLaPartida(){
-        bool empezo=Juego.EmpezoLaPartida(Sesion.jugadorActual.IdPartida);
-        return Json(new {Empezo=empezo});
-    }
+    //public JsonResult YaEmpezoLaPartida(){
+    //    bool empezo=Juego.EmpezoLaPartida(Sesion.jugadorActual.IdPartida);
+    //    return Json(new {Empezo=empezo});
+    //}
     
     public IActionResult EmpezarPartida(string host){
         Juego.EmpezarPartida(Sesion.jugadorActual.IdPartida);

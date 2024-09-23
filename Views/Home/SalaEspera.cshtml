@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     type: 'GET',
                     data: {},
                     success: function (data) {
-                        $('.contenedor-jugadores').empty(); // Limpiar el div antes de agregar
+                        $('.contenedor-jugadores').empty();
                         $('.contenedor-jugadores').append('<div><p>' + data.jug1 + '</p></div>');
                         if(data.jug2 != "")
                         {
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     },
                     error: function () {
-                        alert('Error al agregar el jugador.');
+                        alert('Error al actualizar los jugadores');
                     }
                 });
     }
