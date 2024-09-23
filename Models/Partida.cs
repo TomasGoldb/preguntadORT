@@ -6,7 +6,7 @@ public class Partida
     public int TiempoMax{get;set;}
     public bool GirarNehuen{get;set;}
     public int IdDificultad{get;set;}
-    public bool PartidaIniciada{get;set;}
+    public int PartidaIniciada{get;set;}
 
     public Partida(){}
     public Partida(int idPartida, int tiempoMax, bool girarNehuen, int idDificultad)
