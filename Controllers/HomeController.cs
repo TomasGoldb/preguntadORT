@@ -37,10 +37,10 @@ public class HomeController : Controller
     }
 
     [HttpPost] IActionResult VerificarRespuesta(int idPregunta, int opcion){
-        bool esCorrecta=Juego.VerificarRespuesta(idPregunta, opcion);
+        bool esCorrecta = Juego.VerificarRespuesta(idPregunta, opcion);
         ViewBag.IsCorrect = esCorrecta;
-        ViewBag.Opcion= opcion;
-        ViewBag.Opciones=BD.ObtenerRespuestas(idPregunta);
+        ViewBag.Opcion = opcion;
+        ViewBag.Opciones = BD.ObtenerRespuestas(idPregunta);
         if(esCorrecta){
             Juego.SumarParaCorona(Sesion.jugadorActual.IdJugador);
             if(Juego.ObtenerCantidadParaCorona(Sesion.jugadorActual.IdJugador)==3){

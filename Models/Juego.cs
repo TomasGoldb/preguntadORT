@@ -29,8 +29,9 @@ static class Juego
     }
     public static bool VerificarRespuesta(int idPregunta, int opcion)
     {
-        List<Respuestas> respuestas=BD.ObtenerRespuestas(idPregunta);
+        List<Respuestas> respuestas = BD.ObtenerRespuestas(idPregunta);
         bool correcta = respuestas[opcion].Correcta;
+        Console.WriteLine(correcta);
         return correcta;
     }
     public static List<JugadorEnJuego> ObtenerJugadoresEnJuego(int idPartida){

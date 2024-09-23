@@ -76,6 +76,10 @@ class BD
             string sql = "SP_ListarRespuestas";
             respuestas = db.Query<Respuestas>(sql, new { PreguntaId = preguntaId }).ToList();
         }
+        foreach (var item in respuestas)
+        {
+            Console.WriteLine(item.Correcta);
+        }
         return respuestas;
     }
     public static List<Usuario> Seleccionar(string sql){
