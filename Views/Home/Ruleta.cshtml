@@ -8,7 +8,7 @@
         <!--Jugador 1-->
             <div class="foto-nombre">
                 <img class="foto-perfil" src="/FotosPerfil/fotoDefault.png">
-                <h3>Juancito megirola</h3>
+                <h3>@ViewBag.jugador1.Nombre</h3>
             </div>
             <div class="personajes">
             <img src="/personajesCategorias/arte.png" class="personaje-no-conseguido" id="arte">
@@ -26,7 +26,7 @@
             <!--Jugador 2-->
             <div class="foto-nombre reversa">
                 <img class="foto-perfil" src="/FotosPerfil/fotoDefault.png">
-                <h3>Gabriel Stancanelli</h3>
+                <h3>@ViewBag.jugador2.Nombre</h3>
             </div>
             <div class="personajes reversa">
             <img src="/personajesCategorias/arte.png" class="personaje-no-conseguido" id="arte2">
@@ -64,22 +64,27 @@ document.getElementById('spin').addEventListener('click', function () {
 
 
 document.addEventListener('DOMContentLoaded', function(){
+    let RecargarPersonajes = setInterval(ObtenerPersonajes, 3000);
+});
+
+function ObtenerPersonajes(){
+    console.log("aa");
     $.ajax({
         url: '@Url.Action("ObtenerPersonajesConseguidos", "Home")',
         data: {},
         type: 'GET',
         success: function(response){
-            console.log(response.usuario1);
+            console.log(response);
             let categorias = ["arte","ciencia","deportes","entretenimiento","geografia","historia"];
             for(let i=0;i<6;i++){
-                if (response.usuario1[i]){
+                if (response.usuario1[i]=="1"){
                     let fotoCat = $("#"+categorias[i]);
                     fotoCat.removeClass('personaje-no-conseguido');
                     fotoCat.addClass('personaje-conseguido');
                 }
             }
             for(let i=0;i<6;i++){
-                if (response.usuario2[i]){
+                if (response.usuario2[i]=="1"){
                     let fotoCat = $("#"+categorias[i]+"2");
                     fotoCat.removeClass('personaje-no-conseguido');
                     fotoCat.addClass('personaje-conseguido');
@@ -90,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
         }
     });
-});
+}
 </script>
 
 

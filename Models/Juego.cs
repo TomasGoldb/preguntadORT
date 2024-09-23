@@ -40,7 +40,7 @@ static class Juego
         return correcta;
     }
     public static List<JugadorEnJuego> ObtenerJugadoresEnJuego(int idPartida){
-        return BD.SeleccionarJugadorEnJuego(0);
+        return BD.SeleccionarJugadorEnJuego(idPartida);
     }
     public static int CrearJugador(Jugador jugador){
         int output = BD.CrearJugador(jugador);
@@ -69,5 +69,11 @@ static class Juego
     }
     public static Partida ObtenerPartidaPorID(int idPartida){
         return BD.ObtenerPartidaPorID(idPartida);
+    }
+    public static void SumarParaCorona(int idJugador){
+        BD.AgregarCantidadCorona(idJugador);
+    }
+    public static void ReiniciarCorona(int idJugador){
+        BD.ReiniciarCantidadCorona(idJugador);
     }
 }
