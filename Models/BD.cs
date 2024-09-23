@@ -100,6 +100,20 @@ class BD
             db.Execute(sql, new {contra=objeto.GetContrasena(),nick=objeto.Nick,nombre=objeto.Nombre,mail=objeto.GetMail()});
         }
     }
+    public static void ReiniciarCantidadCorona(int idJugador){
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            string sql = "SP_ReiniciarCantidadCorona";
+            db.Execute(sql, new {IdJugador=idJugador});
+        }
+    }
+    public static void AgregarCantidadCorona(int idJugador){
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            string sql = "SP_SumarCantidadCorona";
+            db.Execute(sql, new {IdJugador=idJugador});
+        }
+    }
 
     public static void EmpezarPartida(int idPartida){
         using (SqlConnection db = new SqlConnection(_connectionString))
