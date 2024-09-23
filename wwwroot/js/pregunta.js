@@ -2,10 +2,6 @@ let tiempo=0;
 
 function setearTiempo(temp) {
     tiempo=temp;
-}
-
-
-document.addEventListener('DOMContentLoaded', function() {
     let timerDisplay = document.getElementById('timer');
     let barraTiempo = document.getElementById('barra-tiempo');
         let totalTime = tiempo; 
@@ -27,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
             }
         }, 1000);
-      });
+      }
     
 
     
