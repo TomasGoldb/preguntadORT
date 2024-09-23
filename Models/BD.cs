@@ -36,7 +36,7 @@ class BD
         Partida partida= new Partida();
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            string sql = "SP_SP_ObtenerPartidaXID";
+            string sql = "SP_ObtenerPartidaXID";
             partida= db.QueryFirstOrDefault<Partida>(sql,new { IdPartida = id });
         }
         return partida;
