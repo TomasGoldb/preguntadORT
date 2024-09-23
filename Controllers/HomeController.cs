@@ -255,10 +255,10 @@ public class HomeController : Controller
 
     }
     [HttpGet]
-    //public JsonResult YaEmpezoLaPartida(){
-    //    bool empezo=Juego.EmpezoLaPartida(Sesion.jugadorActual.IdPartida);
-    //    return Json(new {Empezo=empezo});
-    //}
+    public JsonResult YaEmpezoLaPartida(){
+        int empezo=Juego.ObtenerPartidaPorID(Sesion.jugadorActual.IdPartida).PartidaIniciada;
+        return Json(new {Empezo=empezo});
+    }
     
     public IActionResult EmpezarPartida(string host){
         Juego.EmpezarPartida(Sesion.jugadorActual.IdPartida);
