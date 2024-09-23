@@ -57,8 +57,7 @@ static class Juego
     public static void EmpezarPartida(int IdPartida){
         BD.EmpezarPartida(IdPartida);
     }
-    public static bool EmpezoLaPartida(int idPartida){
-        return BD.ObtenerPartidaPorID(idPartida).PartidaIniciada;
+    public static Partida ObtenerPartidaPorID(int idPartida){
+        return BD.ObtenerPartidaPorID(idPartida);
     }
-    
 }
