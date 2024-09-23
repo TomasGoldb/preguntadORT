@@ -262,7 +262,7 @@ public class HomeController : Controller
         int empezo=Juego.ObtenerPartidaPorID(Sesion.jugadorActual.IdPartida).PartidaIniciada;
         return Json(new {Empezo=empezo, IdJugador=Sesion.jugadorActual.IdJugador});
     }
-    
+    [HttpGet]
     public JsonResult EmpezarPartida(){
         bool seEmpezo=false;
         if(Sesion.jugadorActual.IdJugador==1){
