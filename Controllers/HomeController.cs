@@ -260,20 +260,20 @@ public class HomeController : Controller
     [HttpGet]
     public JsonResult YaEmpezoLaPartida(){
         int empezo=Juego.ObtenerPartidaPorID(Sesion.jugadorActual.IdPartida).PartidaIniciada;
-        Console.WriteLine(empezo);
-        return Json(new {Empezo=1, IdJugador=Sesion.jugadorActual.IdJugador});
+        return Json(new {Empezo=empezo, IdJugador=Sesion.jugadorActual.IdJugador});
     }
     
-    public IActionResult EmpezarPartida(string host){
+    public JsonResult EmpezarPartida(){
+        bool seEmpezo=false;
+        if(Sesion.jugadorActual.IdJugador==1){
         Juego.EmpezarPartida(Sesion.jugadorActual.IdPartida);
-                if (host=="si"){
-                ViewBag.Tiempo=3.5;
-            } else{
-                ViewBag.Tiempo=3;
-            }
-            return View("CuentaAtras");
+        seEmpezo=true;
+        }
+        return Json(new{empezada=seEmpezo});
     }
-    
+    public IActionResult CuentaAtras(){
+        return View();
+    }
     private string FormatearError(string error)
     {
         Dictionary<string, string> ErroresAMensajes = new();

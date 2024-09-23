@@ -28,7 +28,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 
         });
 boton.addEventListener("click", function (){
-                window.location.href='/Home/EmpezarPartida?host="si"';
+                $.ajax({
+                    url: '@Url.Action("EmpezarPartida", "Home")',
+                    type: 'GET',
+                    data: {},
+                    success: function(data){
+                        console.log(data.empezada)
+                    }
+                    error: function () {
+                        alert('Error al actualizar los jugadores');
+                    }
+                });
                 })
         
         
@@ -58,10 +68,10 @@ boton.addEventListener("click", function (){
                     type: 'GET',
                     data: {},
                     success: function (data) {
-                        console.log(data);
-                        if(data.Empezo===1){
+                        console.log(data.empezo);
+                        if(data.empezo==1){
                             console.log("entro bien adentro");
-                                window.location.href='/Home/CuentaAtras?host="no"';
+                             window.location.href='/Home/EmpezarPartida';
                         }
 
                     },
