@@ -91,10 +91,13 @@ static class Juego
                 for(int i=0;i<6;i++){
                     if(Juego.ObtenerPregunta(idPregunta).IdCategoria==i){
                         personajes[i]="1";
-                        
+                        BD.ActualizarPersonajes(Sesion.jugadorActual.IdJugador, string.Join("/",personajes));
                     }
                 }
             }
         }
+    }
+    public static void Setear3Coronas(){
+        BD.SetearEn3Corona(Sesion.jugadorActual.IdJugador);
     }
 }

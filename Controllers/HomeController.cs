@@ -43,18 +43,23 @@ public class HomeController : Controller
         ViewBag.Opcion = opcion;
         ViewBag.Respuestas = BD.ObtenerRespuestas(idPregunta);
         ViewBag.Pregunta = Juego.ObtenerPregunta(idPregunta);
-        if(esCorrecta){
+        if(esCorrecta==true){
             Juego.SumarParaCorona(Sesion.jugadorActual.IdJugador);
-            if(Juego.ObtenerCantidadParaCorona(Sesion.jugadorActual.IdJugador)==3){
-            }
+            if (Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==3){
+            Juego.ReiniciarCorona(Sesion.jugadorActual.IdJugador);
+            Juego.AgregarPersonaje(idPregunta);
+        }
         } else{
             Juego.ReiniciarCorona(Sesion.jugadorActual.IdJugador);
         } 
-        if (Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==3){
+        if(Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==4){
             Juego.ReiniciarCorona(Sesion.jugadorActual.IdJugador);
-
         }
         return View("RespuestaCorrecta");
+    }
+    public RedirectToActionResult CoronaOpcion(){
+        Juego.Setear3Coronas();
+        return RedirectToAction("Corona");
     }
     public IActionResult Ganar(bool ganado){
         List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);

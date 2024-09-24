@@ -120,6 +120,20 @@ class BD
             db.Execute(sql, new {IdJugador=idJugador});
         }
     }
+    public static void SetearEn3Corona(int idJugador){
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            string sql = "SP_SetearCoronasEn3";
+            db.Execute(sql, new {IdJugador=idJugador});
+        }
+    }
+    public static void ActualizarPersonajes(int idJugador, string personajes){
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            string sql = "SP_ActualizarPersonajes";
+            db.Execute(sql, new {IdJugador=idJugador, Personajes=personajes});
+        }
+    }
     public static void AgregarCantidadCorona(int idJugador){
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
