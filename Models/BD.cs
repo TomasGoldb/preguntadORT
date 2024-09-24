@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Data;
 class BD
 {
-    private static string _connectionString = @"Server = A-PHZ2-CIDI-14; Database = PreguntadORT; Trusted_Connection = True;";
+    private static string _connectionString = @"Server = A-PHZ2-CIDI-17; Database = PreguntadORT; Trusted_Connection = True;";
     public static List<Categorias> ObtenerCategorias(){
         List<Categorias> categoriasList;
         using (SqlConnection db = new SqlConnection(_connectionString))
@@ -19,7 +19,16 @@ class BD
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SP_ObtenerIDDeCategoria";
-            cat= db.QueryFirstOrDefault<Categorias>(sql,new { Nombre = nombreCategoria });
+            cat= db.QueryFirstOrDefault<Categorias>(sql,new { Categoria = nombreCategoria });
+        }
+        return cat;
+    }
+    public static Preguntas ObtenerPreguntaPorID(int idPregunta){
+        Preguntas cat= new Preguntas();
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            string sql = "SP_ObtenerPreguntaXID";
+            cat= db.QueryFirstOrDefault<Preguntas>(sql,new { IdPregunta= idPregunta });
         }
         return cat;
     }
@@ -75,10 +84,6 @@ class BD
         {
             string sql = "SP_ListarRespuestas";
             respuestas = db.Query<Respuestas>(sql, new { PreguntaId = preguntaId }).ToList();
-        }
-        foreach (var item in respuestas)
-        {
-            Console.WriteLine(item.Correcta);
         }
         return respuestas;
     }

@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section class="parte-index ganar">
+    <div>
+        <h1>Nehuentados</h1>
+        <p class="jug1">@ViewBag.jug1.Nombre</p>
+        <p class="jug2">@ViewBag.jug2.Nombre</p>
+        <img src="/img/podio.webp" class="podio">
+        <a class="boton-logout volver-a-home" asp-action="Home" asp-controller="Home" >Volver a Home</a>
+    </div>
+</section>

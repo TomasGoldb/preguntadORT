@@ -6,23 +6,27 @@
 <section class="pregunta-respuesta">
 
 
-<h1 class="titulo-pregunta">@ViewBag.Pregunta.Enunciado</h1>
-<img class="" src="#">
-<div class="respuestas">
+<h1 class="titulo-pregunta titulo-respuesta">@ViewBag.Pregunta.Enunciado</h1>
+<div class="respuestas respuestas-correcta">
+ 
 @{
-    for(int i=1;i<=4;i++){
-        if(i!=ViewBag.Opcion&&ViewBag.IsCorrect==true){
+    for(int i=0;i<4;i++){
+        Console.WriteLine(ViewBag.IsCorrect);
+        Console.WriteLine(@ViewBag.Respuestas[i].Opcion+ " "+ @ViewBag.Respuestas[i].Contenido);
+        if(@ViewBag.Respuestas[i].Opcion-1==ViewBag.Opcion&&ViewBag.IsCorrect==true||@ViewBag.Respuestas[i].Correcta==true){
             <a class="correcto">@ViewBag.Respuestas[i].Contenido</a>
-        } else if (i!=ViewBag.Opcion&&ViewBag.IsCorrect==false){
+        } else if (@ViewBag.Respuestas[i].Opcion-1==ViewBag.Opcion&&ViewBag.IsCorrect==false){
             <a class="incorrecto">@ViewBag.Respuestas[i].Contenido</a>
         } else{
             <a>@ViewBag.Respuestas[i].Contenido</a>
         }
     }
 }
+
+
 </div>
 <div>
-    <a id="boton-continuar">Continuar (5)</a>
+    <a id="boton-continuar" class="login-boton boton-siguiente" href="/Home/Ruleta">Continuar (5)</a>
 </div>
 
 
@@ -35,13 +39,13 @@
     document.addEventListener('DOMContentLoaded', function() {
         let boton = document.getElementById('boton-continuar');
         let tiempo = 5; 
-        let tiempoRestante = totalTime;
+        let tiempoRestante = 99999990;
         
         let countdown = setInterval(function() {
             tiempoRestante--;
             boton.innerText = "Continuar ("+tiempoRestante+")";
     
-            if (remainingTime <= 0) {
+            if (tiempoRestante <= 0) {
                 clearInterval(countdown);
                  window.location.href='/Home/Ruleta';
                 

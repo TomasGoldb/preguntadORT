@@ -36,21 +36,55 @@ public class HomeController : Controller
         return View();
     }
 
-    [HttpPost] IActionResult VerificarRespuesta(int idPregunta, int opcion){
+    [HttpGet] 
+    public IActionResult VerificarRespuesta(int idPregunta, int opcion){
         bool esCorrecta = Juego.VerificarRespuesta(idPregunta, opcion);
         ViewBag.IsCorrect = esCorrecta;
         ViewBag.Opcion = opcion;
-        ViewBag.Opciones = BD.ObtenerRespuestas(idPregunta);
+        ViewBag.Respuestas = BD.ObtenerRespuestas(idPregunta);
+        ViewBag.Pregunta = Juego.ObtenerPregunta(idPregunta);
         if(esCorrecta){
             Juego.SumarParaCorona(Sesion.jugadorActual.IdJugador);
             if(Juego.ObtenerCantidadParaCorona(Sesion.jugadorActual.IdJugador)==3){
             }
         } else{
             Juego.ReiniciarCorona(Sesion.jugadorActual.IdJugador);
+        } 
+        if (Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==3){
+            Juego.ReiniciarCorona(Sesion.jugadorActual.IdJugador);
+
         }
         return View("RespuestaCorrecta");
     }
-    
+    public IActionResult Ganar(bool ganado){
+        List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
+            if(jugadores[0].IdUsuario==Sesion.userActual.idUsuario){
+                if(ganado){
+                    ViewBag.jug1=jugadores[0];
+                    ViewBag.jug2=jugadores[1];
+                } else{
+                    ViewBag.jug1=jugadores[1];
+                    ViewBag.jug2=jugadores[0];
+                }
+            } else{
+                if(ganado){
+                    ViewBag.jug1=jugadores[1];
+                    ViewBag.jug2=jugadores[0];
+                } else{
+                    ViewBag.jug1=jugadores[0];
+                    ViewBag.jug2=jugadores[1];
+                }
+            }
+        
+        return View();
+    }
+    public IActionResult RespuestaCorrecta(){
+        return View();  
+    }
+    public JsonResult seGano(){
+        bool ganado=Juego.PartidaGanada();
+        return Json(new {ganada=ganado});
+    }
     public IActionResult recuperarContrasena(){
         return View();
     }
@@ -197,6 +231,27 @@ public class HomeController : Controller
             return View("login");
         }
     }
+    public IActionResult Ruleta(){
+        List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
+        foreach(JugadorEnJuego jug in jugadores){
+            if(jug.IdUsuario==Sesion.userActual.idUsuario){
+                ViewBag.jugador1=jug;
+            } else{
+                ViewBag.jugador2=jug;
+            }
+        }
+        ViewBag.CantParaCorona= Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida);
+        if(Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==3){
+            ViewBag.PersonajesNombre=2;
+            string[] listaFotos = {"/personajesCategorias/arte.png", "/personajesCategorias/ciencia.png", "/personajesCategorias/deportes.png", "/personajesCategorias/entretenimiento.png","/personajesCategorias/geografia.png","/personajesCategorias/historia.png"};
+            ViewBag.PersonajesFoto=listaFotos;
+            string [] listaNombres = {"arte","ciencia","deportes","entretenimiento","geografia","historia"};
+            ViewBag.PersonajesNombres=listaNombres;
+
+            return View("Corona");
+        }
+        return View();
+    }
     public IActionResult Corona(){
         ViewBag.PersonajesNombre=2;
         string[] listaFotos = {"/personajesCategorias/arte.png", "/personajesCategorias/ciencia.png", "/personajesCategorias/deportes.png", "/personajesCategorias/entretenimiento.png","/personajesCategorias/geografia.png","/personajesCategorias/historia.png"};
@@ -208,6 +263,7 @@ public class HomeController : Controller
     public IActionResult PostCorona(string opcion){
         
         Preguntas pregunta= Juego.ObtenerProximaPregunta(Categorias.ObtenerCategoriaPorNombre(opcion).IdCategoria);
+        ViewBag.tiempoMax = Sesion.partidaActual.TiempoMax;
         ViewBag.Pregunta = pregunta;
         ViewBag.Respuestas=Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
         return View("Pregunta");
@@ -235,21 +291,7 @@ public class HomeController : Controller
         return View("Index");
     }
 
-    public IActionResult Ruleta(){
-        List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
-        foreach(JugadorEnJuego jug in jugadores){
-            if(jug.IdUsuario==Sesion.userActual.idUsuario){
-                ViewBag.jugador1=jug;
-            } else{
-                ViewBag.jugador2=jug;
-            }
-        }
-        ViewBag.CantParaCorona= Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida);
-        if(Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==3){
-            return View("Corona");
-        }
-        return View();
-    }
+    
     public JsonResult ObtenerGirarNehuen(){
         int girar=Convert.ToInt32(Sesion.partidaActual.GirarNehuen);
         return Json(new {giro=girar});

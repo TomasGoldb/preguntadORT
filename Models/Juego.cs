@@ -31,7 +31,6 @@ static class Juego
     {
         List<Respuestas> respuestas = BD.ObtenerRespuestas(idPregunta);
         bool correcta = respuestas[opcion].Correcta;
-        Console.WriteLine(correcta);
         return correcta;
     }
     public static List<JugadorEnJuego> ObtenerJugadoresEnJuego(int idPartida){
@@ -70,5 +69,32 @@ static class Juego
     }
     public static void ReiniciarCorona(int idJugador){
         BD.ReiniciarCantidadCorona(idJugador);
+    }
+    public static bool PartidaGanada(){
+        List<JugadorEnJuego> part=Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
+        bool seGano=false;
+        foreach(JugadorEnJuego j in part){
+            if(j.PersonajesConseguidos=="1/1/1/1/1/1"){
+                seGano=true;
+            }
+        }
+        return seGano;
+    }
+    public static Preguntas ObtenerPregunta(int idPregunta){
+        return BD.ObtenerPreguntaPorID(idPregunta);
+    }
+    public static void AgregarPersonaje(int idPregunta){
+        List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdJugador);
+        foreach (JugadorEnJuego jug in jugadores){
+            if(jug.IdUsuario==Sesion.userActual.idUsuario){
+                string[] personajes = Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdJugador)[0].PersonajesConseguidos.Split("/");
+                for(int i=0;i<6;i++){
+                    if(Juego.ObtenerPregunta(idPregunta).IdCategoria==i){
+                        personajes[i]="1";
+                        
+                    }
+                }
+            }
+        }
     }
 }
