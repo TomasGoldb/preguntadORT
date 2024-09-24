@@ -5,7 +5,6 @@ static class Juego
     private static string username {get; set;}
     private static List<Preguntas> preguntas {get; set;}
     private static List<Respuestas> respuestas {get; set;}
-    private static int dificultad {get;set;} =1;
     private static bool[] personajesConseguidos = new bool[6];
 
     public static List<Categorias> ObtenerCategorias()
@@ -20,8 +19,11 @@ static class Juego
     }
     public static Preguntas ObtenerProximaPregunta(int idCategoria)
     {
-        List<Preguntas> preguntas = BD.ObtenerPreguntas(dificultad, idCategoria);
-        return preguntas[0];
+        Random rd = new Random();
+        int dificultad = Sesion.partidaActual.IdDificultad;
+        if (dificultad == 4) dificultad = rd.Next(1, 4);
+        Preguntas pregunta = BD.ObtenerPreguntas(dificultad, idCategoria)[0];
+        return pregunta;
     }
     public static List<Respuestas> ObtenerProximasRespuestas(int idPregunta)
     {
@@ -40,7 +42,7 @@ static class Juego
         int output = BD.CrearJugador(jugador);
         return output;
     }
-    public static int CrearPartida(int tiempoMax, bool girarNehuen, Dificultades dificultad)
+    public static int CrearPartida(int tiempoMax, bool girarNehuen, int dificultad)
     {
         int idPartida = BD.CrearPartida(tiempoMax, girarNehuen, dificultad);
         return idPartida;

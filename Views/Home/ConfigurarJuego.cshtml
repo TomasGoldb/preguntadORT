@@ -19,7 +19,7 @@
                 <option selected disabled value="">Dificultad</option>
                 @foreach(Dificultades dificultad in ViewBag.dificultades)
                 {
-                    <option value=@dificultad>@dificultad.Nombre</option>
+                    <option value=@dificultad.IdDificultad>@dificultad.Nombre</option>
                 }
             </select>
             <input class="switch-secreto" id="girarNehuen" type="checkbox" value="true" name="girarNehuen" />

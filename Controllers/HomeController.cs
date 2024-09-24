@@ -136,10 +136,10 @@ public class HomeController : Controller
         return View("Pregunta");
     }
 
-    public IActionResult CrearPartida(int tiempoMax, Dificultades dificultad, bool girarNehuen)
+    public IActionResult CrearPartida(int tiempoMax, int dificultad, bool girarNehuen)
     {
         int idPartida = Juego.CrearPartida(tiempoMax, girarNehuen, dificultad);
-        Partida partida = new Partida(idPartida, tiempoMax, girarNehuen, dificultad.IdDificultad);
+        Partida partida = new Partida(idPartida, tiempoMax, girarNehuen, dificultad);
         Jugador jugador = new Jugador(Sesion.userActual.idUsuario, 1, idPartida);
         Juego.CrearJugador(jugador);
         Sesion.SetearPartida(partida, jugador);

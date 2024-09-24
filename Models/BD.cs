@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Data;
 class BD
 {
-    private static string _connectionString = @"Server = A-PHZ2-CIDI-17; Database = PreguntadORT; Trusted_Connection = True;";
+    private static string _connectionString = @"Server = localhost; Database = PreguntadORT; Trusted_Connection = True;";
     public static List<Categorias> ObtenerCategorias(){
         List<Categorias> categoriasList;
         using (SqlConnection db = new SqlConnection(_connectionString))
@@ -55,7 +55,7 @@ class BD
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SP_SeleccionarUsuarioXID";
-            user= db.QueryFirstOrDefault<Usuario>(sql,new { IdUSuario = id });
+            user= db.QueryFirstOrDefault<Usuario>(sql,new { @IdUsuario = id });
         }
         return user;
     }
@@ -156,12 +156,12 @@ class BD
             db.Execute(sql);
         }
     }
-    public static int CrearPartida(int TiempoMax, bool GirarNehuen, Dificultades Dificultad){
+    public static int CrearPartida(int TiempoMax, bool GirarNehuen, int Dificultad){
         Partida partida = new Partida();
         int idNuevaPartida;
         using(SqlConnection db = new SqlConnection(_connectionString)){
             string sql = "SP_CrearPartida";
-            db.Execute(sql, new {@TiempoMax = TiempoMax, @GirarNehuen = Convert.ToInt32(GirarNehuen), @IdDificultad = Dificultad.IdDificultad});
+            db.Execute(sql, new {@TiempoMax = TiempoMax, @GirarNehuen = Convert.ToInt32(GirarNehuen), @IdDificultad = Dificultad});
             sql = "SP_ObtenerIdPartida";
             partida = db.QueryFirstOrDefault<Partida>(sql);
         }
@@ -200,6 +200,7 @@ class BD
             string sql="SP_ListarUsuariosXIDPartida";
             listaJug = db.Query<JugadorEnJuego>(sql, new{ @IdPartida = idPartida }).ToList();
         }
+        Console.WriteLine(listaJug[0].IdUsuario);
         return listaJug;
     }
 }
