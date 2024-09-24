@@ -128,10 +128,10 @@ public class HomeController : Controller
 
     public IActionResult Pregunta(int idCategoria){
         Categorias categoria = BD.ObtenerCategoriaPorID(idCategoria);
-        ViewBag.categoria=categoria;
-        Preguntas pregunta= Juego.ObtenerProximaPregunta(idCategoria);
+        ViewBag.categoria = categoria;
+        Preguntas pregunta = Juego.ObtenerProximaPregunta(idCategoria);
         ViewBag.Pregunta = pregunta;
-        ViewBag.Respuestas=Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
+        ViewBag.Respuestas = Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
         ViewBag.tiempoMax = Sesion.partidaActual.TiempoMax;
         return View("Pregunta");
     }
