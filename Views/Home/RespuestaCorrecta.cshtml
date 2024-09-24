@@ -11,8 +11,6 @@
  
 @{
     for(int i=0;i<4;i++){
-        Console.WriteLine(ViewBag.IsCorrect);
-        Console.WriteLine(@ViewBag.Respuestas[i].Opcion+ " "+ @ViewBag.Respuestas[i].Contenido);
         if(@ViewBag.Respuestas[i].Opcion-1==ViewBag.Opcion&&ViewBag.IsCorrect==true||@ViewBag.Respuestas[i].Correcta==true){
             <a class="correcto">@ViewBag.Respuestas[i].Contenido</a>
         } else if (@ViewBag.Respuestas[i].Opcion-1==ViewBag.Opcion&&ViewBag.IsCorrect==false){
