@@ -131,7 +131,7 @@ class BD
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SP_ActualizarPersonajes";
-            db.Execute(sql, new {IdJugador=idJugador, Personajes=personajes});
+            db.Execute(sql, new {@IdJugador=idJugador, @Personajes=personajes});
         }
     }
     public static void AgregarCantidadCorona(int idJugador){
