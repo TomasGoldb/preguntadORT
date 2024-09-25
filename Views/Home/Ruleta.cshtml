@@ -76,7 +76,7 @@ function handleClick() {
     }
     const rotation = Math.floor(Math.random() * 3600) + 360; // Gira entre 360 y 3960 grados
 
-    if (@ViewBag.GirarNehuen) {
+    if (ViewBag.GirarNehuen) {
        button.style.transform = `rotate(${rotation}deg)`;
     } else {
        wheel.style.transform = `rotate(${rotation}deg)`; 
