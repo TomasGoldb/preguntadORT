@@ -138,7 +138,7 @@ class BD
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SP_SumarCantidadCorona";
-            db.Execute(sql, new {IdJugador=idJugador});
+            db.Execute(sql, new {@IdJugador=idJugador});
         }
     }
 

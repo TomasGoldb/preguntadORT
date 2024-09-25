@@ -15,9 +15,8 @@
 @{
     int[] orden = {0, 1, 2, 3};
     orden = orden.OrderBy(x => Guid.NewGuid()).ToArray();
-    string strOrden = orden[0] + "/" + orden[1] + "/" + orden[2] + "/" + orden[3];
     for(int i=0;i<4;i++){
-    <a asp-action="VerificarRespuesta" asp-controller="Home" asp-route-idPregunta="@ViewBag.Pregunta.IdPregunta" asp-route-opcion="@orden[i]" asp-route-orden="@strOrden">@ViewBag.Respuestas[orden[i]].Contenido</a>
+    <a asp-action="VerificarRespuesta" asp-controller="Home" asp-route-idPregunta="@ViewBag.Pregunta.IdPregunta" asp-route-opcion="@orden[i]">@ViewBag.Respuestas[orden[i]].Contenido</a>
     }
 }
 </div>

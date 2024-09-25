@@ -87,9 +87,10 @@ static class Juego
     }
     public static void AgregarPersonaje(int idPregunta){
         List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdJugador);
+        string[] personajes = new string[6];
         foreach (JugadorEnJuego jug in jugadores){
             if(jug.IdUsuario==Sesion.userActual.idUsuario){
-                string[] personajes = Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdJugador)[0].PersonajesConseguidos.Split("/");
+                personajes = Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdJugador)[0].PersonajesConseguidos.Split("/");
                 for(int i=0;i<6;i++){
                     if(Juego.ObtenerPregunta(idPregunta).IdCategoria==i+1){
                         personajes[i]="1";

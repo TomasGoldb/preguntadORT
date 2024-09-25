@@ -37,25 +37,21 @@ public class HomeController : Controller
     }
 
     [HttpGet] 
-    public IActionResult VerificarRespuesta(int idPregunta, int opcion, string orden){
+    public IActionResult VerificarRespuesta(int idPregunta, int opcion){
         bool esCorrecta = Juego.VerificarRespuesta(idPregunta, opcion);
         ViewBag.IsCorrect = esCorrecta;
         ViewBag.Opcion = opcion;
         ViewBag.Respuestas = BD.ObtenerRespuestas(idPregunta);
         ViewBag.Pregunta = Juego.ObtenerPregunta(idPregunta);
-        string[] arrayStrOrden = orden.Split("/");
-        int[] arrayIntOrden = new int[4];
-        for (int i = 0; i < 4; i++) arrayIntOrden[i] = int.Parse(arrayStrOrden[i]);
-        ViewBag.Orden = arrayIntOrden;
         if(esCorrecta==true){
             Juego.SumarParaCorona(Sesion.jugadorActual.IdJugador);
             if (Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==4){
-            Juego.ReiniciarCorona(Sesion.jugadorActual.IdJugador);
-            Juego.AgregarPersonaje(idPregunta);
+                Juego.ReiniciarCorona(Sesion.jugadorActual.IdJugador);
+                Juego.AgregarPersonaje(idPregunta);
+            }
         }
-        } else{
+        else{
             Juego.ReiniciarCorona(Sesion.jugadorActual.IdJugador);
-        }
         }
         return View("RespuestaCorrecta");
     }

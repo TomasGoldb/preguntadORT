@@ -140,6 +140,7 @@ function handleClick() {
 
 document.addEventListener('DOMContentLoaded', function(){
     ObtenerPersonajes();
+    ChequearGanar();
     console.log("peron");
     let RecargarPersonajes = setInterval(ObtenerPersonajes, 3000);
     let RecargarGanado = setInterval(ChequearGanar, 5000);

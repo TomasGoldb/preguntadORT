@@ -11,12 +11,12 @@
  
 @{
     for(int i=0;i<4;i++){
-        if(@ViewBag.Respuestas[ViewBag.Orden[i]].Opcion-1==ViewBag.Opcion&&ViewBag.IsCorrect==true||@ViewBag.Respuestas[ViewBag.Orden[i]].Correcta==true){
-            <a class="correcto">@ViewBag.Respuestas[ViewBag.Orden[i]].Contenido</a>
-        } else if (@ViewBag.Respuestas[ViewBag.Orden[i]].Opcion-1==ViewBag.Opcion&&ViewBag.IsCorrect==false){
-            <a class="incorrecto">@ViewBag.Respuestas[ViewBag.Orden[i]].Contenido</a>
+        if(@ViewBag.Respuestas[i].Opcion-1==ViewBag.Opcion&&ViewBag.IsCorrect==true||@ViewBag.Respuestas[i].Correcta==true){
+            <a class="correcto">@ViewBag.Respuestas[i].Contenido</a>
+        } else if (@ViewBag.Respuestas[i].Opcion-1==ViewBag.Opcion&&ViewBag.IsCorrect==false){
+            <a class="incorrecto">@ViewBag.Respuestas[i].Contenido</a>
         } else{
-            <a>@ViewBag.Respuestas[ViewBag.Orden[i]].Contenido</a>
+            <a>@ViewBag.Respuestas[i].Contenido</a>
         }
     }
 }
