@@ -51,9 +51,7 @@ public class HomeController : Controller
         }
         } else{
             Juego.ReiniciarCorona(Sesion.jugadorActual.IdJugador);
-        } 
-        if(Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==4){
-            Juego.ReiniciarCorona(Sesion.jugadorActual.IdJugador);
+        }
         }
         return View("RespuestaCorrecta");
     }
