@@ -9,7 +9,9 @@
         <div clas="conjunto-personajes">
         @{
             for(int i=0;i<ViewBag.PersonajesNombres.Length;i++){
+                if(ViewBag.PersonajesConseguidos[i]=="0"){
                 <a class="personaje" asp-action="PostCorona" asp-controller="Home" asp-route-opcion="@ViewBag.PersonajesNombres[i]"><img src="@ViewBag.PersonajesFoto[i]"></a>
+                }
             }
         }
         </div>

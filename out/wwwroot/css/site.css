@@ -278,7 +278,7 @@ h1{
   margin-bottom: 5%;
   cursor: pointer;
   border-radius: 50%;
-  transition: transform 4s ease-in;
+  transition: transform 4s ease-out;
 }
 
 

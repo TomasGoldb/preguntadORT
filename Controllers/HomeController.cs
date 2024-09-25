@@ -45,7 +45,7 @@ public class HomeController : Controller
         ViewBag.Pregunta = Juego.ObtenerPregunta(idPregunta);
         if(esCorrecta==true){
             Juego.SumarParaCorona(Sesion.jugadorActual.IdJugador);
-            if (Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==3||Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==4){
+            if (Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==4){
             Juego.ReiniciarCorona(Sesion.jugadorActual.IdJugador);
             Juego.AgregarPersonaje(idPregunta);
         }
@@ -262,8 +262,14 @@ public class HomeController : Controller
         ViewBag.PersonajesNombre=2;
         string[] listaFotos = {"/personajesCategorias/arte.png", "/personajesCategorias/ciencia.png", "/personajesCategorias/deportes.png", "/personajesCategorias/entretenimiento.png","/personajesCategorias/geografia.png","/personajesCategorias/historia.png"};
         ViewBag.PersonajesFoto=listaFotos;
-        string [] listaNombres = {"arte","ciencia","deportes","entretenimiento","geografia","historia"};
+        string [] listaNombres = {"historia","arte","ciencia","deportes","entretenimiento","geografia"};
         ViewBag.PersonajesNombres=listaNombres;
+        List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
+        foreach(JugadorEnJuego jug in jugadores){
+            if(jug.IdUsuario==Sesion.userActual.idUsuario){
+                ViewBag.PersonajesConseguidos=jug.PersonajesConseguidos.Split("/");
+            }
+        }
         return View("Corona");
     }
     public IActionResult PostCorona(string opcion){
@@ -309,8 +315,6 @@ public class HomeController : Controller
     }
     [HttpGet]
     public JsonResult ObtenerPersonajesConseguidos(){
-
-//FALTA HACER BIEN ESTO CUANDO YA VINCULEMOS PARTIDA CON EL JUEGO
 
         List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdPartida);
         string[] personajes1 = jugadores[0].PersonajesConseguidos.Split("/");
