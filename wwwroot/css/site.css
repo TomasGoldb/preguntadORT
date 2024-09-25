@@ -677,3 +677,9 @@ input[type=number] {
 .respuestas-correcta{
   color: white;
 }
+
+.nuevaFotoPerfil{
+  height: 200px;
+  margin-bottom: 10px;
+  border-radius: 50px;
+}

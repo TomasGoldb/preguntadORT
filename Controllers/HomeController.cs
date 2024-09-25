@@ -286,6 +286,11 @@ public class HomeController : Controller
         
     }
 
+    public IActionResult setearFotoPerfil(){
+        ViewBag.FotoPerfil = Usuario.FotoPerfil;
+        return View();
+    }
+
     public IActionResult login()
     {
         ViewBag.logeado = Sesion.EstaLogeado;
