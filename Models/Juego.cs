@@ -86,7 +86,7 @@ static class Juego
         return BD.ObtenerPreguntaPorID(idPregunta);
     }
     public static void AgregarPersonaje(int idPregunta){
-        List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdJugador);
+        List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdPartida);
         string[] personajes = new string[6];
         foreach (JugadorEnJuego jug in jugadores){
             if(jug.IdUsuario==Sesion.userActual.idUsuario){
