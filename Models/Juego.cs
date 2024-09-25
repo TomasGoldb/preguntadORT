@@ -104,4 +104,8 @@ static class Juego
     public static void Setear3Coronas(){
         BD.SetearEn3Corona(Sesion.jugadorActual.IdJugador);
     }
+    public static Categorias ObtenerCategoriaPorNombre(string nombre){
+        return  BD.ObtenerIDDeCategoria(nombre);
+        
+    }
 }

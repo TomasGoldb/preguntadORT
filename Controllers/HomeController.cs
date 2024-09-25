@@ -277,7 +277,7 @@ public class HomeController : Controller
     }
     public IActionResult PostCorona(string opcion){
         
-        Preguntas pregunta= Juego.ObtenerProximaPregunta(Categorias.ObtenerCategoriaPorNombre(opcion).IdCategoria);
+        Preguntas pregunta= Juego.ObtenerProximaPregunta(Juego.ObtenerCategoriaPorNombre(opcion).IdCategoria);
         ViewBag.tiempoMax = Sesion.partidaActual.TiempoMax;
         ViewBag.Pregunta = pregunta;
         ViewBag.Respuestas = Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
