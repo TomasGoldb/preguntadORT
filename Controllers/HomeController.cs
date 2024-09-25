@@ -240,9 +240,9 @@ public class HomeController : Controller
         List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
         foreach(JugadorEnJuego jug in jugadores){
             if(jug.IdUsuario==1){
-                ViewBag.jugador1=jug;
+                ViewBag.jugador1 = jug;
             } else{
-                ViewBag.jugador2=jug;
+                ViewBag.jugador2 = jug;
             }
         }
         ViewBag.CantParaCorona= Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida);
@@ -251,7 +251,7 @@ public class HomeController : Controller
             string[] listaFotos = {"/personajesCategorias/arte.png", "/personajesCategorias/ciencia.png", "/personajesCategorias/deportes.png", "/personajesCategorias/entretenimiento.png","/personajesCategorias/geografia.png","/personajesCategorias/historia.png"};
             ViewBag.PersonajesFoto=listaFotos;
             string [] listaNombres = {"arte","ciencia","deportes","entretenimiento","geografia","historia"};
-            ViewBag.PersonajesNombres=listaNombres;
+            ViewBag.PersonajesNombres = listaNombres;
 
             return View("Corona");
         }
@@ -271,7 +271,7 @@ public class HomeController : Controller
         Preguntas pregunta= Juego.ObtenerProximaPregunta(Categorias.ObtenerCategoriaPorNombre(opcion).IdCategoria);
         ViewBag.tiempoMax = Sesion.partidaActual.TiempoMax;
         ViewBag.Pregunta = pregunta;
-        ViewBag.Respuestas=Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
+        ViewBag.Respuestas = Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
         return View("Pregunta");
     }
     public IActionResult ActualizarFotoPerfil(IFormFile archivo){
@@ -280,7 +280,7 @@ public class HomeController : Controller
             
             return RedirectToAction("index");
         }else{
-            ViewBag.error=FormatearError("ERROR_004_SinArchivo");
+            ViewBag.error = FormatearError("ERROR_004_SinArchivo");
             return View("setearfotoperfil");
         }
         
@@ -307,7 +307,7 @@ public class HomeController : Controller
 
 //FALTA HACER BIEN ESTO CUANDO YA VINCULEMOS PARTIDA CON EL JUEGO
 
-        List<JugadorEnJuego> jugadores= Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdPartida);
+        List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdPartida);
         string[] personajes1 = jugadores[0].PersonajesConseguidos.Split("/");
         string[] personajes2 = jugadores[1].PersonajesConseguidos.Split("/");
         return Json(new {usuario1 = personajes1, usuario2=personajes2});
@@ -316,12 +316,12 @@ public class HomeController : Controller
     [HttpGet]
     public JsonResult ObtenerNombreJugador(){
         List<JugadorEnJuego> jugadores = BD.SeleccionarJugadorEnJuego(Sesion.jugadorActual.IdPartida);
-        string jugador="", jugador2="";
+        string jugador = "", jugador2 = "";
         jugador=Juego.UsuarioPorID(jugadores[0].IdUsuario).Nick;
-        if(jugadores.Count!=1){
+        if(jugadores.Count != 1){
         jugador2=Juego.UsuarioPorID(jugadores[1].IdUsuario).Nick;
         }
-        return Json(new { jug1 = jugador, jug2= jugador2 });
+        return Json(new { jug1 = jugador, jug2 = jugador2 });
 
     }
     [HttpGet]
