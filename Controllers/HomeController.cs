@@ -45,7 +45,7 @@ public class HomeController : Controller
         ViewBag.Pregunta = Juego.ObtenerPregunta(idPregunta);
         if(esCorrecta==true){
             Juego.SumarParaCorona(Sesion.jugadorActual.IdJugador);
-            if (Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==3||Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==4){
+            if (Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==4){
             Juego.ReiniciarCorona(Sesion.jugadorActual.IdJugador);
             Juego.AgregarPersonaje(idPregunta);
         }
@@ -262,9 +262,10 @@ public class HomeController : Controller
         ViewBag.PersonajesNombre=2;
         string[] listaFotos = {"/personajesCategorias/arte.png", "/personajesCategorias/ciencia.png", "/personajesCategorias/deportes.png", "/personajesCategorias/entretenimiento.png","/personajesCategorias/geografia.png","/personajesCategorias/historia.png"};
         ViewBag.PersonajesFoto=listaFotos;
-        string [] listaNombres = {"arte","ciencia","deportes","entretenimiento","geografia","historia"};
+        string [] listaNombres = {"historia","arte","ciencia","deportes","entretenimiento","geografia"};
         ViewBag.PersonajesNombres=listaNombres;
         ViewBag.PersonajesConseguidos=Juego.ObtenerPersonajesConseguidos(Sesion.jugadorActual.IdJugador).Split("/");;
+
         return View("Corona");
     }
     public IActionResult PostCorona(string opcion){
