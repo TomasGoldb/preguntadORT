@@ -77,13 +77,14 @@ function handleClick() {
                     type: 'GET',
                     data: {},
                     success: function(data){
+    let sections;
     let button = document.getElementById('spin');
     let wheel = document.getElementById('wheel');
     if (data.giro == 1)
     {
         wheel = document.getElementById('spin');
     //ACA VAN LOS NUEVOS PORCENTAJES DE ROTACION (PARA MATI GRZENDA)
-        const sections = [
+        sections = [
         { name: "/Home/Pregunta?idCategoria=3", startAngle: 37, endAngle: 89 }, //ciencia
         { name: "/Home/Pregunta?idCategoria=6", startAngle: 89, endAngle: 141 }, //geografia
         { name: "/Home/CoronaOpcion", startAngle: 141, endAngle: 193 }, //coronita
@@ -94,7 +95,7 @@ function handleClick() {
         { name: "/Home/Pregunta?idCategoria=1", startAngle: 0, endAngle: 37 } //historia
     ];
     } else{
-        const sections = [
+        sections = [
         { name: "/Home/Pregunta?idCategoria=3", startAngle: 37, endAngle: 89 }, //ciencia
         { name: "/Home/Pregunta?idCategoria=6", startAngle: 89, endAngle: 141 }, //geografia
         { name: "/Home/CoronaOpcion", startAngle: 141, endAngle: 193 }, //coronita
