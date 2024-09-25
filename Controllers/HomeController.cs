@@ -239,7 +239,7 @@ public class HomeController : Controller
     public IActionResult Ruleta(){
         List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
         foreach(JugadorEnJuego jug in jugadores){
-            if(jug.IdUsuario==Sesion.userActual.idUsuario){
+            if(jug.IdUsuario==1){
                 ViewBag.jugador1=jug;
             } else{
                 ViewBag.jugador2=jug;
