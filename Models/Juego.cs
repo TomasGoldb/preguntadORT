@@ -91,11 +91,7 @@ static class Juego
         foreach (JugadorEnJuego jug in jugadores){
             if(jug.IdUsuario==Sesion.userActual.idUsuario){
                 personajes = Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdJugador)[0].PersonajesConseguidos.Split("/");
-                for(int i=0;i<6;i++){
-                    if(Juego.ObtenerPregunta(idPregunta).IdCategoria==i+1){
-                        personajes[i]="1";
-                    }
-                }
+                personajes[Juego.ObtenerPregunta(idPregunta).IdCategoria]="1";
             }
              BD.ActualizarPersonajes(Sesion.jugadorActual.IdJugador, string.Join("/",personajes));
         }
