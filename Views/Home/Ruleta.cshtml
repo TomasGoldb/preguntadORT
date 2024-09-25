@@ -40,7 +40,7 @@
     </div>
     <div class="wheel-container">
         <img src="/img/ruleta bien.png" alt="Ruleta" id="wheel" class="wheel">
-        <img id="spin" class="ruleta-centro" src="/img/ruleta centro.png" onclick=handleClick(@Convert.ToInt32(ViewBag.girarNehuen))>
+        <img id="spin" class="ruleta-centro" src="/img/ruleta centro.png">
     </div>
     <!--- reveer lo de corona --->
     <div class="cantidad-para-corona">
@@ -61,10 +61,19 @@
 
 
 // JavaScript
+const boton = document.getElementById('spin');
+let seGiro=false
+boton.addEventListener('click', function {
+    if (!seGiro){
+    handleClick();
+    seGiro=true;
+    }
+});
+
 
 function handleClick() {
     $.ajax({
-                    url: '@Url.Action("ObtenerNombreJugador", "Home")',
+                    url: '@Url.Action("ObtenerGirarNehuen", "Home")',
                     type: 'GET',
                     data: {},
                     success: function(data){
@@ -75,15 +84,6 @@ function handleClick() {
         wheel = document.getElementById('spin');
     }
     const rotation = Math.floor(Math.random() * 3600) + 360; // Gira entre 360 y 3960 grados
-
-    // Determine which element to spin based on ViewBag.GirarNehuen
-    if (ViewBag.GirarNehuen) {
-        wheel = document.getElementById('spin'); // Assuming this is one image
-    } else {
-        wheel = document.getElementById('wheel'); // Assuming this is another image
-    }
-
-    const rotation = Math.floor(Math.random() * 3600) + 360; // Rotate between 360 and 3960 degrees
 
     wheel.style.transform = `rotate(${rotation}deg)`; 
 
@@ -112,7 +112,7 @@ function handleClick() {
         if (selectedSection) {
             window.location.href = selectedSection.name;
         }
-    }, 4000); // 4000ms para coincidir con la duración de la animación
+    }, 4000);
 
     // Remover el event listener para evitar clics adicionales
     button.removeEventListener('click', handleClick);
