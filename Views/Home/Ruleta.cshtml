@@ -133,7 +133,7 @@ function ObtenerPersonajes(){
         type: 'GET',
         success: function(response){
             console.log(response);
-            let categorias = ["arte","ciencia","deportes","entretenimiento","geografia","historia"];
+            let categorias = ["historia","arte","ciencia","deportes","entretenimiento","geografia"];
             for(let i=0;i<6;i++){
                 if (response.usuario1[i]=="1"){
                     let fotoCat = $("#"+categorias[i]);

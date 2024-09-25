@@ -248,9 +248,9 @@ public class HomeController : Controller
         ViewBag.CantParaCorona= Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida);
         if(Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==3){
             ViewBag.PersonajesNombre=2;
-            string[] listaFotos = {"/personajesCategorias/arte.png", "/personajesCategorias/ciencia.png", "/personajesCategorias/deportes.png", "/personajesCategorias/entretenimiento.png","/personajesCategorias/geografia.png","/personajesCategorias/historia.png"};
+            string[] listaFotos = {"/personajesCategorias/historia.png","/personajesCategorias/arte.png", "/personajesCategorias/ciencia.png", "/personajesCategorias/deportes.png", "/personajesCategorias/entretenimiento.png","/personajesCategorias/geografia.png"};
             ViewBag.PersonajesFoto=listaFotos;
-            string [] listaNombres = {"arte","ciencia","deportes","entretenimiento","geografia","historia"};
+            string [] listaNombres = {"historia","arte","ciencia","deportes","entretenimiento","geografia"};
             ViewBag.PersonajesNombres=listaNombres;
 
             return View("Corona");
