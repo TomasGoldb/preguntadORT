@@ -264,6 +264,7 @@ public class HomeController : Controller
         ViewBag.PersonajesFoto=listaFotos;
         string [] listaNombres = {"arte","ciencia","deportes","entretenimiento","geografia","historia"};
         ViewBag.PersonajesNombres=listaNombres;
+        ViewBag.PersonajesConseguidos=Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida).Split("/");;
         return View("Corona");
     }
     public IActionResult PostCorona(string opcion){
