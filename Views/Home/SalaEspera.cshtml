@@ -1,7 +1,5 @@
 @{
     ViewData["Title"] = "Home Page";
-
-    string jugador2 = "";
 }
 
 <main class="pagina-login-register">
@@ -18,7 +16,7 @@
 
 <script>
 
-let buclenombre, bubleinicio;
+let buclenombre, bucleinicio;
 document.addEventListener('DOMContentLoaded', function() {
                 ChequearNombres();
                 buclenombre=setInterval(ChequearNombres,3000);
@@ -39,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         $('.contenedor-jugadores').append('<div><p>' + data.jug1 + '</p></div>');
                         if(data.jug2 != "")
                         {
-                            jugador2 = data.jug2;
                             $('.contenedor-jugadores').append('<div><p>' + data.jug2 + '</p></div>');
+                            if(@ViewBag.jugador.IdJugador == 1)
                             $('.contenedor-boton').append('<button class="login-boton" style="margin-top: 4%" onclick=Iniciar()>Iniciar</button>');
                         }
                     },
