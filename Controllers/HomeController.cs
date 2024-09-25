@@ -266,7 +266,7 @@ public class HomeController : Controller
         ViewBag.PersonajesNombres=listaNombres;
         List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
         foreach(JugadorEnJuego jug in jugadores){
-            if(jug.idUsuario==Sesion.userActual.IdUsuario){
+            if(jug.IdUsuario==Sesion.userActual.idUsuario){
                 ViewBag.PersonajesConseguidos=jug.PersonajesConseguidos.Split("/");
             }
         }
@@ -310,8 +310,6 @@ public class HomeController : Controller
     }
     [HttpGet]
     public JsonResult ObtenerPersonajesConseguidos(){
-
-//FALTA HACER BIEN ESTO CUANDO YA VINCULEMOS PARTIDA CON EL JUEGO
 
         List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdPartida);
         string[] personajes1 = jugadores[0].PersonajesConseguidos.Split("/");
