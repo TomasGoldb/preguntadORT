@@ -40,7 +40,7 @@
     </div>
     <div class="wheel-container">
         <img src="/img/ruleta bien.png" alt="Ruleta" id="wheel" class="wheel">
-        <img id="head" class="ruleta-centro" src="/img/ruleta centro.png" onclick=handleClick(@Convert.ToInt32(ViewBag.girarNehuen))>
+        <img id="spin" class="ruleta-centro" src="/img/ruleta centro.png" onclick=handleClick(@Convert.ToInt32(ViewBag.girarNehuen))>
     </div>
     <!--- reveer lo de corona --->
     <div class="cantidad-para-corona">
@@ -70,7 +70,6 @@ function handleClick() {
                     success: function(data){
                         const button = document.getElementById('spin');
     const wheel = document.getElementById('wheel');
-    const head = documet.getElementById('head');
     if (data.giro == 1)
     {
         wheel = document.getElementById('spin');
@@ -78,7 +77,7 @@ function handleClick() {
     const rotation = Math.floor(Math.random() * 3600) + 360; // Gira entre 360 y 3960 grados
 
     if (@ViewBag.GirarNehuen) {
-       head.style.transform = `rotate(${rotation}deg)`;
+       button.style.transform = `rotate(${rotation}deg)`;
     } else {
        wheel.style.transform = `rotate(${rotation}deg)`; 
     }
