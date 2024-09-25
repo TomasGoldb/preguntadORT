@@ -68,15 +68,19 @@ function handleClick() {
                     type: 'GET',
                     data: {},
                     success: function(data){
-                        const button = document.getElementById('spin');
-    const wheel = document.getElementById('wheel');
-    if (data.giro == 1)
-    {
-        wheel = document.getElementById('spin');
-    }
-    const rotation = Math.floor(Math.random() * 3600) + 360; // Gira entre 360 y 3960 grados
+    const button = document.getElementById('spin');
+    let wheel;
 
-    wheel.style.transform = `rotate(${rotation}deg)`;
+    // Determine which element to spin based on ViewBag.GirarNehuen
+    if (ViewBag.GirarNehuen) {
+        wheel = document.getElementById('spin'); // Assuming this is one image
+    } else {
+        wheel = document.getElementById('wheel'); // Assuming this is another image
+    }
+
+    const rotation = Math.floor(Math.random() * 3600) + 360; // Rotate between 360 and 3960 degrees
+
+    wheel.style.transform = `rotate(${rotation}deg)`; 
 
     // Calcular el ángulo final (en un rango de 0 a 360 grados)
     const finalAngle = rotation % 360;
