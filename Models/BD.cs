@@ -200,7 +200,6 @@ class BD
             string sql="SP_ListarUsuariosXIDPartida";
             listaJug = db.Query<JugadorEnJuego>(sql, new{ @IdPartida = idPartida }).ToList();
         }
-        Console.WriteLine(listaJug[0].IdUsuario);
         return listaJug;
     }
 }

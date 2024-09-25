@@ -87,16 +87,12 @@ static class Juego
     }
     public static void AgregarPersonaje(int idPregunta){
         List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdJugador);
-        Console.WriteLine(jugadores.Count);
         foreach (JugadorEnJuego jug in jugadores){
-            Console.WriteLine(jug.IdUsuario==Sesion.userActual.idUsuario);
             if(jug.IdUsuario==Sesion.userActual.idUsuario){
-                Console.WriteLine("a");
                 string[] personajes = Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdJugador)[0].PersonajesConseguidos.Split("/");
                 for(int i=0;i<6;i++){
                     if(Juego.ObtenerPregunta(idPregunta).IdCategoria==i+1){
                         personajes[i]="1";
-                        Console.WriteLine(string.Join("/",personajes));
                         BD.ActualizarPersonajes(Sesion.jugadorActual.IdJugador, string.Join("/",personajes));
                     }
                 }
