@@ -252,7 +252,12 @@ public class HomeController : Controller
             ViewBag.PersonajesFoto=listaFotos;
             string [] listaNombres = {"historia","arte","ciencia","deportes","entretenimiento","geografia"};
             ViewBag.PersonajesNombres=listaNombres;
-
+            List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
+            foreach(JugadorEnJuego jug in jugadores){
+                if(jug.IdUsuario==Sesion.userActual.idUsuario){
+                    ViewBag.PersonajesConseguidos=jug.PersonajesConseguidos.Split("/");
+                }
+            }
             return View("Corona");
         }
         ViewBag.GirarNehuen = Sesion.partidaActual.GirarNehuen;
@@ -290,6 +295,11 @@ public class HomeController : Controller
             return View("setearfotoperfil");
         }
         
+    }
+
+    public IActionResult setearFotoPerfil(){
+        ViewBag.FotoPerfil = Usuario.FotoPerfil;
+        return View();
     }
 
     public IActionResult login()
