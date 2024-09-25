@@ -252,8 +252,8 @@ public class HomeController : Controller
             ViewBag.PersonajesFoto=listaFotos;
             string [] listaNombres = {"historia","arte","ciencia","deportes","entretenimiento","geografia"};
             ViewBag.PersonajesNombres=listaNombres;
-            List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
-            foreach(JugadorEnJuego jug in jugadores){
+            List<JugadorEnJuego> jugadore = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
+            foreach(JugadorEnJuego jug in jugadore){
                 if(jug.IdUsuario==Sesion.userActual.idUsuario){
                     ViewBag.PersonajesConseguidos=jug.PersonajesConseguidos.Split("/");
                 }
@@ -298,7 +298,7 @@ public class HomeController : Controller
     }
 
     public IActionResult setearFotoPerfil(){
-        ViewBag.FotoPerfil = Usuario.FotoPerfil;
+        ViewBag.FotoPerfil = Sesion.userActual.FotoPerfil;
         return View();
     }
 
