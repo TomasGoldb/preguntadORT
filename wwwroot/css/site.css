@@ -687,3 +687,9 @@ input[type=number] {
   margin-bottom: 10px;
   border-radius: 50px;
 }
+
+.boton-fotoperfil{
+  position: absolute;
+  right: 17%;
+  width: 12%;
+}
