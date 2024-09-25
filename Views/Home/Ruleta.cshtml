@@ -11,12 +11,12 @@
                 <h3>@ViewBag.jugador1.Nombre</h3>
             </div>
             <div class="personajes">
+            <img src="/personajesCategorias/historia.png" class="personaje-no-conseguido" id="historia">
             <img src="/personajesCategorias/arte.png" class="personaje-no-conseguido" id="arte">
             <img src="/personajesCategorias/ciencia.png" class="personaje-no-conseguido" id="ciencia">
             <img src="/personajesCategorias/deportes.png" class="personaje-no-conseguido" id="deportes">
             <img src="/personajesCategorias/entretenimiento.png" class="personaje-no-conseguido" id="entretenimiento">
             <img src="/personajesCategorias/geografia.png" class="personaje-no-conseguido" id="geografia">
-            <img src="/personajesCategorias/historia.png" class="personaje-no-conseguido" id="historia">
             </div>
         </div>
         <div class="vs">
@@ -29,12 +29,12 @@
                 <h3>@ViewBag.jugador2.Nombre</h3>
             </div>
             <div class="personajes reversa">
+            <img src="/personajesCategorias/historia.png" class="personaje-no-conseguido" id="historia2">
             <img src="/personajesCategorias/arte.png" class="personaje-no-conseguido" id="arte2">
             <img src="/personajesCategorias/ciencia.png" class="personaje-no-conseguido" id="ciencia2">
             <img src="/personajesCategorias/deportes.png" class="personaje-no-conseguido" id="deportes2">
             <img src="/personajesCategorias/entretenimiento.png" class="personaje-no-conseguido" id="entretenimiento2">
             <img src="/personajesCategorias/geografia.png" class="personaje-no-conseguido" id="geografia2">
-            <img src="/personajesCategorias/historia.png" class="personaje-no-conseguido" id="historia2">
             </div>
         </div>
     </div>
@@ -138,7 +138,7 @@ function ObtenerPersonajes(){
         type: 'GET',
         success: function(response){
             console.log(response);
-            let categorias = ["arte","ciencia","deportes","entretenimiento","geografia","historia"];
+            let categorias = ["historia","arte","ciencia","deportes","entretenimiento","geografia"];
             for(let i=0;i<6;i++){
                 if (response.usuario1[i]=="1"){
                     let fotoCat = $("#"+categorias[i]);

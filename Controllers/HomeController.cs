@@ -45,7 +45,7 @@ public class HomeController : Controller
         ViewBag.Pregunta = Juego.ObtenerPregunta(idPregunta);
         if(esCorrecta==true){
             Juego.SumarParaCorona(Sesion.jugadorActual.IdJugador);
-            if (Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==3||Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==4){
+            if (Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==4){
             Juego.ReiniciarCorona(Sesion.jugadorActual.IdJugador);
             Juego.AgregarPersonaje(idPregunta);
         }
