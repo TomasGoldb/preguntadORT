@@ -77,8 +77,8 @@ function handleClick() {
                     type: 'GET',
                     data: {},
                     success: function(data){
-    const button = document.getElementById('spin');
-    const wheel = document.getElementById('wheel');
+    let button = document.getElementById('spin');
+    let wheel = document.getElementById('wheel');
     if (data.giro == 1)
     {
         wheel = document.getElementById('spin');
