@@ -264,8 +264,12 @@ public class HomeController : Controller
         ViewBag.PersonajesFoto=listaFotos;
         string [] listaNombres = {"historia","arte","ciencia","deportes","entretenimiento","geografia"};
         ViewBag.PersonajesNombres=listaNombres;
-        ViewBag.PersonajesConseguidos=Juego.ObtenerPersonajesConseguidos(Sesion.jugadorActual.IdJugador).Split("/");;
-
+        List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
+        foreach(JugadorEnJuego jug in jugadores){
+            if(jug.idUsuario==Sesion.userActual.IdUsuario){
+                ViewBag.PersonajesConseguidos=jug.PersonajesConseguidos.Split("/");
+            }
+        }
         return View("Corona");
     }
     public IActionResult PostCorona(string opcion){
