@@ -255,6 +255,7 @@ public class HomeController : Controller
 
             return View("Corona");
         }
+        ViewBag.GirarNehuen = Sesion.partidaActual.GirarNehuen;
         return View();
     }
     public IActionResult Corona(){
