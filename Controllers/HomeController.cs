@@ -242,7 +242,7 @@ public class HomeController : Controller
     public IActionResult Ruleta(){
         List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
         foreach(JugadorEnJuego jug in jugadores){
-            if(jug.IdUsuario==1){
+            if(jug.IdJugador==1){
                 ViewBag.jugador1 = jug;
             } else{
                 ViewBag.jugador2 = jug;
@@ -261,7 +261,7 @@ public class HomeController : Controller
                     ViewBag.PersonajesConseguidos = jug.PersonajesConseguidos.Split("/");
                 }
             }
-            
+
             return View("Corona");
         }
         ViewBag.GirarNehuen = Sesion.partidaActual.GirarNehuen;
