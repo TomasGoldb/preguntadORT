@@ -66,11 +66,11 @@ static class Juego
     public static Partida ObtenerPartidaPorID(int idPartida){
         return BD.ObtenerPartidaPorID(idPartida);
     }
-    public static void SumarParaCorona(int idJugador){
-        BD.AgregarCantidadCorona(idJugador);
+    public static void SumarParaCorona(int idUsuario){
+        BD.AgregarCantidadCorona(idUsuario);
     }
-    public static void ReiniciarCorona(int idJugador){
-        BD.ReiniciarCantidadCorona(idJugador);
+    public static void ReiniciarCorona(int idUsuario){
+        BD.ReiniciarCantidadCorona(idUsuario);
     }
     public static bool PartidaGanada(){
         List<JugadorEnJuego> part=Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
@@ -90,15 +90,15 @@ static class Juego
         string[] personajes = new string[6];
         foreach (JugadorEnJuego jug in jugadores){
             if(jug.IdUsuario==Sesion.userActual.idUsuario){
-                personajes = Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdJugador)[0].PersonajesConseguidos.Split("/");
+                personajes = Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdUsuario)[0].PersonajesConseguidos.Split("/");
                 personajes[Juego.ObtenerPregunta(idPregunta).IdCategoria - 1]="1";
             }
-             BD.ActualizarPersonajes(Sesion.jugadorActual.IdJugador, string.Join("/",personajes));
+             BD.ActualizarPersonajes(Sesion.jugadorActual.IdUsuario, string.Join("/",personajes));
         }
        
     }
     public static void Setear3Coronas(){
-        BD.SetearEn3Corona(Sesion.jugadorActual.IdJugador);
+        BD.SetearEn3Corona(Sesion.jugadorActual.IdUsuario);
     }
     public static Categorias ObtenerCategoriaPorNombre(string nombre){
         return  BD.ObtenerIDDeCategoria(nombre);

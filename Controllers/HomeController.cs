@@ -44,14 +44,14 @@ public class HomeController : Controller
         ViewBag.Respuestas = BD.ObtenerRespuestas(idPregunta);
         ViewBag.Pregunta = Juego.ObtenerPregunta(idPregunta);
         if(esCorrecta==true){
-            Juego.SumarParaCorona(Sesion.jugadorActual.IdJugador);
+            Juego.SumarParaCorona(Sesion.jugadorActual.IdUsuario);
             if (Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==4){
-                Juego.ReiniciarCorona(Sesion.jugadorActual.IdJugador);
+                Juego.ReiniciarCorona(Sesion.jugadorActual.IdUsuario);
                 Juego.AgregarPersonaje(idPregunta);
             }
         }
         else{
-            Juego.ReiniciarCorona(Sesion.jugadorActual.IdJugador);
+            Juego.ReiniciarCorona(Sesion.jugadorActual.IdUsuario);
         }
         return View("RespuestaCorrecta");
     }

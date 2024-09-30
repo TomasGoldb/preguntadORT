@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Data;
 class BD
 {
-    private static string _connectionString = @"Server = A-PHZ2-CIDI-21; Database = PreguntadORT; Trusted_Connection = True;";
+    private static string _connectionString = @"Server = A-PHZ2-CIDI-23; Database = PreguntadORT; Trusted_Connection = True;";
     public static List<Categorias> ObtenerCategorias(){
         List<Categorias> categoriasList;
         using (SqlConnection db = new SqlConnection(_connectionString))
@@ -113,32 +113,32 @@ class BD
         }
         return idUsuario;
     }
-    public static void ReiniciarCantidadCorona(int idJugador){
+    public static void ReiniciarCantidadCorona(int idUsuario){
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SP_ReiniciarCantidadCorona";
-            db.Execute(sql, new {IdJugador=idJugador});
+            db.Execute(sql, new {@IdUsuario=idUsuario});
         }
     }
-    public static void SetearEn3Corona(int idJugador){
+    public static void SetearEn3Corona(int idUsuario){
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SP_SetearCoronasEn3";
-            db.Execute(sql, new {IdJugador=idJugador});
+            db.Execute(sql, new {@IdUsuario=idUsuario});
         }
     }
-    public static void ActualizarPersonajes(int idJugador, string personajes){
+    public static void ActualizarPersonajes(int idUsuario, string personajes){
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SP_ActualizarPersonajes";
-            db.Execute(sql, new {@IdJugador=idJugador, @Personajes=personajes});
+            db.Execute(sql, new {@IdUsuario=idUsuario, @Personajes=personajes});
         }
     }
-    public static void AgregarCantidadCorona(int idJugador){
+    public static void AgregarCantidadCorona(int idUsuario){
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SP_SumarCantidadCorona";
-            db.Execute(sql, new {@IdJugador=idJugador});
+            db.Execute(sql, new {@IdUsuario=idUsuario});
         }
     }
 
