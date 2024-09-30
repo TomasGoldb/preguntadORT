@@ -41,7 +41,8 @@ public class HomeController : Controller
         bool esCorrecta = Juego.VerificarRespuesta(idPregunta, opcion);
         ViewBag.IsCorrect = esCorrecta;
         ViewBag.Opcion = opcion;
-        ViewBag.Respuestas = Juego.ordenRespuestas;
+        ViewBag.Respuestas = Juego.ObtenerProximasRespuestas(idPregunta);
+        ViewBag.orden=Juego.ordenRespuestas;
         ViewBag.Pregunta = Juego.ObtenerPregunta(idPregunta);
         if(esCorrecta==true){
             Juego.SumarParaCorona(Sesion.jugadorActual.IdUsuario);
@@ -132,7 +133,7 @@ public class HomeController : Controller
         int[] orden = {0, 1, 2, 3};
         orden = orden.OrderBy(x => Guid.NewGuid()).ToArray();
         Juego.ordenRespuestas=orden;
-        ViewBag.orden=orden;
+        ViewBag.orden=Juego.ordenRespuestas;
         ViewBag.Respuestas = Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
         ViewBag.tiempoMax = Sesion.partidaActual.TiempoMax;
         return View("Pregunta");
