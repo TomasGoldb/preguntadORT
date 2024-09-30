@@ -1,3 +1,6 @@
+using FirebaseAdmin;
+using FirebaseAdmin.Auth;
+using Google.Apis.Auth.OAuth2;
 using System;  
 using System.Collections.Generic;  
 using System.Linq;  
@@ -6,6 +9,10 @@ using System.Web;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using preguntadORT.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Threading.Tasks;
+
 
 namespace preguntadORT.Controllers;
 
@@ -56,29 +63,25 @@ public class HomeController : Controller
         }
         return View("RespuestaCorrecta");
     }
+
+    
     public RedirectToActionResult CoronaOpcion(){
         Juego.Setear3Coronas();
         return RedirectToAction("Corona");
     }
     public IActionResult Ganar(bool ganado){
         List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
-            if(Sesion.jugadorActual.IdJugador == 1){
-                if(ganado){
-                    ViewBag.jug1=jugadores[0];
-                    ViewBag.jug2=jugadores[1];
-                } else{
-                    ViewBag.jug1=jugadores[1];
-                    ViewBag.jug2=jugadores[0];
-                }
-            } else{
-                if(ganado){
-                    ViewBag.jug1=jugadores[1];
-                    ViewBag.jug2=jugadores[0];
-                } else{
-                    ViewBag.jug1=jugadores[0];
-                    ViewBag.jug2=jugadores[1];
-                }
-            }
+        int indiceGanador = Sesion.jugadorActual.IdJugador == 1 ? 0 : 1;
+        int indicePerdedor = 1 - indiceGanador;
+
+        if (ganado) {
+            ViewBag.jug1 = jugadores[indiceGanador];
+            ViewBag.jug2 = jugadores[indicePerdedor];
+        } else {
+            ViewBag.jug1 = jugadores[indicePerdedor];
+            ViewBag.jug2 = jugadores[indiceGanador];
+        }
+
         
         return View();
     }
