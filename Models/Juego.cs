@@ -97,7 +97,7 @@ static class Juego
                 personajes = Juego.ObtenerJugadoresEnJuego(Sesion.jugadorActual.IdPartida)[0].PersonajesConseguidos.Split("/");
                 personajes[Juego.ObtenerPregunta(idPregunta).IdCategoria - 1]="1";
             }
-             BD.ActualizarPersonajes(Sesion.jugadorActual.IdUsuario, string.Join("/",personajes), idPartida);
+             BD.ActualizarPersonajes(Sesion.jugadorActual.IdJugador, string.Join("/",personajes), idPartida);
         }
        
     }

@@ -62,7 +62,7 @@ public class HomeController : Controller
     }
     public IActionResult Ganar(bool ganado){
         List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
-            if(jugadores[0].IdUsuario==Sesion.userActual.idUsuario){
+            if(Sesion.jugadorActual.IdJugador == 1){
                 if(ganado){
                     ViewBag.jug1=jugadores[0];
                     ViewBag.jug2=jugadores[1];
@@ -242,7 +242,7 @@ public class HomeController : Controller
     public IActionResult Ruleta(){
         List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
         foreach(JugadorEnJuego jug in jugadores){
-            if(jug.IdUsuario==1){
+            if(jug.IdJugador==1){
                 ViewBag.jugador1 = jug;
             } else{
                 ViewBag.jugador2 = jug;
