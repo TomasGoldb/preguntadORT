@@ -6,6 +6,7 @@ static class Juego
     private static List<Preguntas> preguntas {get; set;}
     private static List<Respuestas> respuestas {get; set;}
     private static bool[] personajesConseguidos = new bool[6];
+    public static int[] ordenRespuestas {get;set;}
 
     public static List<Categorias> ObtenerCategorias()
     {
