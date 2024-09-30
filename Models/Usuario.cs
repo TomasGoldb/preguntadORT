@@ -15,12 +15,12 @@ namespace preguntadORT.Models{
         public Usuario(){}
 
         public Usuario(string nombre, string nick,string contrasena, string mail){
-            this.Nombre=nombre;
-            this.Nick=nick;
-            this.Contrasena=contrasena;
-            this.Mail=mail;
-            this.FotoPerfil="/fotosPerfil/fotoDefault.png";
-            CodigoRecuperacion=-1;
+            this.Nombre = nombre;
+            this.Nick = nick;
+            this.Contrasena = contrasena;
+            this.Mail = mail;
+            this.FotoPerfil = "/fotosPerfil/fotoDefault.png";
+            CodigoRecuperacion = -1;
         }
         public bool CheckContra (string contrasenaPosible){
             if (contrasenaPosible==this.Contrasena){
