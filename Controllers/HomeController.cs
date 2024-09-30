@@ -261,7 +261,6 @@ public class HomeController : Controller
                     ViewBag.PersonajesConseguidos = jug.PersonajesConseguidos.Split("/");
                 }
             }
-            
             return View("Corona");
         }
         ViewBag.GirarNehuen = Sesion.partidaActual.GirarNehuen;
