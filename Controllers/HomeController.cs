@@ -261,6 +261,7 @@ public class HomeController : Controller
                     ViewBag.PersonajesConseguidos = jug.PersonajesConseguidos.Split("/");
                 }
             }
+            
             return View("Corona");
         }
         ViewBag.GirarNehuen = Sesion.partidaActual.GirarNehuen;
@@ -280,13 +281,8 @@ public class HomeController : Controller
         }
         return View("Corona");
     }
-    public IActionResult PostCorona(string opcion){
-        
-        Preguntas pregunta= Juego.ObtenerProximaPregunta(Juego.ObtenerCategoriaPorNombre(opcion).IdCategoria);
-        ViewBag.tiempoMax = Sesion.partidaActual.TiempoMax;
-        ViewBag.Pregunta = pregunta;
-        ViewBag.Respuestas = Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
-        return View("Pregunta");
+    public RedirectToActionResult PostCorona(string opcion){
+        return RedirectToAction("Pregunta", new {idCategoria=Juego.ObtenerCategoriaPorNombre(opcion).IdCategoria});
     }
     public IActionResult ActualizarFotoPerfil(IFormFile archivo){
         bool seCambio=Sesion.userActual.CambiarFoto(archivo, Environment);
