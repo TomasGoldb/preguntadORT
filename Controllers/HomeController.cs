@@ -41,17 +41,17 @@ public class HomeController : Controller
         bool esCorrecta = Juego.VerificarRespuesta(idPregunta, opcion);
         ViewBag.IsCorrect = esCorrecta;
         ViewBag.Opcion = opcion;
-        ViewBag.Respuestas = BD.ObtenerRespuestas(idPregunta);
+        ViewBag.Respuestas = Juego.ordenRespuestas;
         ViewBag.Pregunta = Juego.ObtenerPregunta(idPregunta);
         if(esCorrecta==true){
-            Juego.SumarParaCorona(Sesion.jugadorActual.IdJugador);
+            Juego.SumarParaCorona(Sesion.jugadorActual.IdUsuario);
             if (Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==4){
-                Juego.ReiniciarCorona(Sesion.jugadorActual.IdJugador);
+                Juego.ReiniciarCorona(Sesion.jugadorActual.IdUsuario);
                 Juego.AgregarPersonaje(idPregunta);
             }
         }
         else{
-            Juego.ReiniciarCorona(Sesion.jugadorActual.IdJugador);
+            Juego.ReiniciarCorona(Sesion.jugadorActual.IdUsuario);
         }
         return View("RespuestaCorrecta");
     }
@@ -129,6 +129,10 @@ public class HomeController : Controller
         ViewBag.categoria = categoria;
         Preguntas pregunta = Juego.ObtenerProximaPregunta(idCategoria);
         ViewBag.Pregunta = pregunta;
+        int[] orden = {0, 1, 2, 3};
+        orden = orden.OrderBy(x => Guid.NewGuid()).ToArray();
+        Juego.ordenRespuestas=orden;
+        ViewBag.orden=orden;
         ViewBag.Respuestas = Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
         ViewBag.tiempoMax = Sesion.partidaActual.TiempoMax;
         return View("Pregunta");
