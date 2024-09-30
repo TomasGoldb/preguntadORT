@@ -113,32 +113,32 @@ class BD
         }
         return idUsuario;
     }
-    public static void ReiniciarCantidadCorona(int idUsuario){
+    public static void ReiniciarCantidadCorona(int idUsuario, int idPartida){
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SP_ReiniciarCantidadCorona";
-            db.Execute(sql, new {@IdUsuario=idUsuario});
+            db.Execute(sql, new {@IdUsuario=idUsuario, @IdPartida = idPartida});
         }
     }
-    public static void SetearEn3Corona(int idUsuario){
+    public static void SetearEn3Corona(int idUsuario, int idPartida){
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SP_SetearCoronasEn3";
-            db.Execute(sql, new {@IdUsuario=idUsuario});
+            db.Execute(sql, new {@IdUsuario=idUsuario, @IdPartida = idPartida});
         }
     }
-    public static void ActualizarPersonajes(int idUsuario, string personajes){
+    public static void ActualizarPersonajes(int idUsuario, string personajes, int idPartida){
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SP_ActualizarPersonajes";
-            db.Execute(sql, new {@IdUsuario=idUsuario, @Personajes=personajes});
+            db.Execute(sql, new {@IdUsuario=idUsuario, @IdPartida = idPartida, @Personajes=personajes});
         }
     }
-    public static void AgregarCantidadCorona(int idUsuario){
+    public static void AgregarCantidadCorona(int idUsuario, int idPartida){
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SP_SumarCantidadCorona";
-            db.Execute(sql, new {@IdUsuario=idUsuario});
+            db.Execute(sql, new {@IdUsuario=idUsuario, @IdPartida = idPartida});
         }
     }
 
