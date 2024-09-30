@@ -132,8 +132,8 @@ public class HomeController : Controller
         ViewBag.Pregunta = pregunta;
         int[] orden = {0, 1, 2, 3};
         orden = orden.OrderBy(x => Guid.NewGuid()).ToArray();
-        Juego.ordenRespuestas=orden;
-        ViewBag.orden=Juego.ordenRespuestas;
+        Juego.ordenRespuestas = orden;
+        ViewBag.orden = Juego.ordenRespuestas;
         ViewBag.Respuestas = Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
         ViewBag.tiempoMax = Sesion.partidaActual.TiempoMax;
         return View("Pregunta");
