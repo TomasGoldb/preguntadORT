@@ -248,17 +248,17 @@ public class HomeController : Controller
                 ViewBag.jugador2 = jug;
             }
         }
-        ViewBag.CantParaCorona= Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida);
-        if(Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida)==3){
-            ViewBag.PersonajesNombre=2;
+        ViewBag.CantParaCorona = Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida);
+        if(Juego.ObtenerCantidadParaCorona(Sesion.partidaActual.IdPartida) == 3){
+            ViewBag.PersonajesNombre = 2;
             string[] listaFotos = {"/personajesCategorias/historia.png","/personajesCategorias/arte.png", "/personajesCategorias/ciencia.png", "/personajesCategorias/deportes.png", "/personajesCategorias/entretenimiento.png","/personajesCategorias/geografia.png"};
-            ViewBag.PersonajesFoto=listaFotos;
-            string [] listaNombres = {"historia","arte","ciencia","deportes","entretenimiento","geografia"};
-            ViewBag.PersonajesNombres=listaNombres;
+            ViewBag.PersonajesFoto = listaFotos;
+            string[] listaNombres = {"historia","arte","ciencia","deportes","entretenimiento","geografia"};
+            ViewBag.PersonajesNombres = listaNombres;
             List<JugadorEnJuego> jugadore = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
             foreach(JugadorEnJuego jug in jugadore){
-                if(jug.IdUsuario==Sesion.userActual.idUsuario){
-                    ViewBag.PersonajesConseguidos=jug.PersonajesConseguidos.Split("/");
+                if(jug.IdUsuario == Sesion.userActual.idUsuario){
+                    ViewBag.PersonajesConseguidos = jug.PersonajesConseguidos.Split("/");
                 }
             }
             return View("Corona");
@@ -269,12 +269,12 @@ public class HomeController : Controller
     public IActionResult Corona(){
         ViewBag.PersonajesNombre=2;
         string[] listaFotos = {"/personajesCategorias/historia.png","/personajesCategorias/arte.png", "/personajesCategorias/ciencia.png", "/personajesCategorias/deportes.png", "/personajesCategorias/entretenimiento.png","/personajesCategorias/geografia.png"};
-        ViewBag.PersonajesFoto=listaFotos;
+        ViewBag.PersonajesFoto = listaFotos;
         string [] listaNombres = {"historia","arte","ciencia","deportes","entretenimiento","geografia"};
-        ViewBag.PersonajesNombres=listaNombres;
+        ViewBag.PersonajesNombres = listaNombres;
         List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
         foreach(JugadorEnJuego jug in jugadores){
-            if(jug.IdUsuario==Sesion.userActual.idUsuario){
+            if(jug.IdUsuario == Sesion.userActual.idUsuario){
                 ViewBag.PersonajesConseguidos=jug.PersonajesConseguidos.Split("/");
             }
         }
