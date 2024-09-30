@@ -127,11 +127,11 @@ class BD
             db.Execute(sql, new {@IdUsuario=idUsuario, @IdPartida = idPartida});
         }
     }
-    public static void ActualizarPersonajes(int idUsuario, string personajes, int idPartida){
+    public static void ActualizarPersonajes(int idJugador, string personajes, int idPartida){
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SP_ActualizarPersonajes";
-            db.Execute(sql, new {@IdUsuario=idUsuario, @IdPartida = idPartida, @Personajes=personajes});
+            db.Execute(sql, new {@IdJugador=idJugador, @IdPartida = idPartida, @Personajes=personajes});
         }
     }
     public static void AgregarCantidadCorona(int idUsuario, int idPartida){
