@@ -13,10 +13,8 @@
 <h1 class="titulo-pregunta">@ViewBag.Pregunta.Enunciado</h1>
 <div class="respuestas">
 @{
-    int[] orden = {0, 1, 2, 3};
-    orden = orden.OrderBy(x => Guid.NewGuid()).ToArray();
     for(int i=0;i<4;i++){
-    <a asp-action="VerificarRespuesta" asp-controller="Home" asp-route-idPregunta="@ViewBag.Pregunta.IdPregunta" asp-route-opcion="@orden[i]">@ViewBag.Respuestas[orden[i]].Contenido</a>
+    <a asp-action="VerificarRespuesta" asp-controller="Home" asp-route-idPregunta="@ViewBag.Pregunta.IdPregunta" asp-route-opcion="@ViewBag.orden[i]">@ViewBag.Respuestas[ViewBag.orden[i]].Contenido</a>
     }
 }
 </div>
