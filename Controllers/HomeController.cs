@@ -82,6 +82,24 @@ public class HomeController : Controller
             ViewBag.jug2 = jugadores[indiceGanador];
         }
 
+
+        if(ganado){
+            if(jugadores[0].IdUsuario==Sesion.userActual.idUsuario){
+                ViewBag.jug1 = jugadores[0];
+                ViewBag.jug2 = jugadores[1];
+            } else {
+                ViewBag.jug1 = jugadores[1];
+                ViewBag.jug2 = jugadores[0];
+            }
+        } else{
+            if(jugadores[0].IdUsuario==Sesion.userActual.idUsuario){
+                ViewBag.jug1 = jugadores[1];
+                ViewBag.jug2 = jugadores[0];
+            } else {
+                ViewBag.jug1 = jugadores[0];
+                ViewBag.jug2 = jugadores[1];
+            }
+        }
         
         return View();
     }
