@@ -85,6 +85,12 @@ static class Juego
         }
         return seGano;
     }
+    /*public static int PosicionGanada(){
+        List<JugadorEnJuego> part=Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
+        for(int i=0;i<=1;i++){
+            if part[i].PersonajesConseguidos=="1/1/1/1/1/1";
+        }
+    }*/
     public static Preguntas ObtenerPregunta(int idPregunta){
         return BD.ObtenerPreguntaPorID(idPregunta);
     }

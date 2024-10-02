@@ -71,18 +71,6 @@ public class HomeController : Controller
     }
     public IActionResult Ganar(bool ganado){
         List<JugadorEnJuego> jugadores = Juego.ObtenerJugadoresEnJuego(Sesion.partidaActual.IdPartida);
-        int indiceGanador = Sesion.jugadorActual.IdJugador == 1 ? 0 : 1;
-        int indicePerdedor = 1 - indiceGanador;
-
-        if (ganado) {
-            ViewBag.jug1 = jugadores[indiceGanador];
-            ViewBag.jug2 = jugadores[indicePerdedor];
-        } else {
-            ViewBag.jug1 = jugadores[indicePerdedor];
-            ViewBag.jug2 = jugadores[indiceGanador];
-        }
-
-
         if(ganado){
             if(jugadores[0].IdUsuario==Sesion.userActual.idUsuario){
                 ViewBag.jug1 = jugadores[0];
